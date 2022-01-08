@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import { useGoogleLogin } from "react-google-login";
-// refresh token
-import { refreshTokenSetup } from "../../utils/refreshToken";
-import { LOGIN_MUTATION } from "../../api/graphql/querys/login";
-import { clientGraphql } from "../../config/client-graphql";
-import Navbar from "../../components/molecules/navbar";
+import GoogleLogin, { useGoogleLogin } from "react-google-login";
+import { LOGIN_MUTATION } from "../../../api/graphql/querys/login";
+import { clientGraphql } from "../../../config/client-graphql";
+import { ButtonStyled } from "./styles";
+import LoginIcon from "@mui/icons-material/Login";
+import IconButton from "@mui/material/IconButton";
 
-function LoginHooks({ clientId }) {
+export const GoogleButton = ({ clientId }: { clientId?: string }) => {
   const onSuccess = async (res: any) => {
     const { googleId, tokenId, profileObj } = res;
     console.log("Login Success: currentUser:", profileObj, res);
@@ -28,13 +28,12 @@ function LoginHooks({ clientId }) {
     // refreshTokenSetup(res);
   };
 
-  const onFailure = (res) => {
+  const onFailure = (res: any) => {
     console.log("Login failed: res:", res);
     alert(
       `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
     );
   };
-
   const { signIn } = useGoogleLogin({
     onSuccess,
     onFailure,
@@ -46,15 +45,18 @@ function LoginHooks({ clientId }) {
   });
 
   return (
-    <>
-      <Navbar />
-      <button onClick={signIn} className="button">
-        <Image src="/google.svg" alt="google login" width={72} height={16} />
-        <span className="buttonText">Sign in with Google</span>
-      </button>
-    </>
+    <IconButton
+      size="large"
+      edge="end"
+      aria-label="account of current user"
+      aria-haspopup="true"
+      onClick={signIn}
+      color="inherit"
+    >
+      <LoginIcon onClick={signIn} />
+    </IconButton>
   );
-}
+};
 
 export async function getStaticProps() {
   const clientId = process.env.OAUTH_GOOGLE_ID;
@@ -66,4 +68,3 @@ export async function getStaticProps() {
   };
   // ...
 }
-export default LoginHooks;
