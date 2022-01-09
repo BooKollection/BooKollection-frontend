@@ -1,13 +1,12 @@
 import React from "react";
-import Image from "next/image";
-import GoogleLogin, { useGoogleLogin } from "react-google-login";
+import { useGoogleLogin } from "react-google-login";
 import { LOGIN_MUTATION } from "../../../api/graphql/querys/login";
 import { clientGraphql } from "../../../config/client-graphql";
-import { ButtonStyled } from "./styles";
 import LoginIcon from "@mui/icons-material/Login";
 import IconButton from "@mui/material/IconButton";
 
-export const GoogleButton = ({ clientId }: { clientId?: string }) => {
+export const GoogleButton = () => {
+  const clientId = process.env.OAUTH_GOOGLE_ID;
   const onSuccess = async (res: any) => {
     const { googleId, tokenId, profileObj } = res;
     console.log("Login Success: currentUser:", profileObj, res);
@@ -38,10 +37,8 @@ export const GoogleButton = ({ clientId }: { clientId?: string }) => {
     onSuccess,
     onFailure,
     clientId,
-    // uxMode: "popup",
     isSignedIn: false,
     accessType: "offline",
-    // redirectUri: "http://localhost:3001/auth/google/redirect",
   });
 
   return (
@@ -53,18 +50,7 @@ export const GoogleButton = ({ clientId }: { clientId?: string }) => {
       onClick={signIn}
       color="inherit"
     >
-      <LoginIcon onClick={signIn} />
+      <LoginIcon />
     </IconButton>
   );
 };
-
-export async function getStaticProps() {
-  const clientId = process.env.OAUTH_GOOGLE_ID;
-
-  return {
-    props: {
-      clientId: clientId,
-    },
-  };
-  // ...
-}
