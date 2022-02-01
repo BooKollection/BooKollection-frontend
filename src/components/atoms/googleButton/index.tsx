@@ -44,11 +44,11 @@ export const GoogleButton = () => {
   return (
     <IconButton
       size="large"
-      edge="end"
       aria-label="account of current user"
+      aria-controls="primary-search-account-menu"
       aria-haspopup="true"
-      onClick={signIn}
       color="inherit"
+      onClick={signIn}
     >
       <LoginIcon />
     </IconButton>

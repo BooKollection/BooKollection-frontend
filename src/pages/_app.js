@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Navbar } from "../components/molecules/navbar";
 import "../styles/globals.css";
 const theme = createTheme({
   overrides: {
@@ -14,7 +15,9 @@ const theme = createTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />;
+      <Navbar>
+        <Component {...pageProps} />
+      </Navbar>
     </ThemeProvider>
   );
 }
