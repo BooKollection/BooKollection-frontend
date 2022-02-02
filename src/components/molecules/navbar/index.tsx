@@ -1,24 +1,19 @@
 import * as React from "react";
-import { alpha, styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import {
+  Toolbar,
+  CssBaseline,
+  Typography,
+  IconButton,
+  Box,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Drawer } from "../../atoms/drawer";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { Drawer, drawerWidth } from "../../atoms/drawer";
 import { SearchBar } from "../searchBar";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import Badge from "@mui/material/Badge";
-import { GoogleButton } from "../../atoms/googleButton";
-import { Menu } from "@mui/material";
 import { MenuI } from "../../atoms/menu";
 import { CustomModal } from "../../atoms/modal";
+import { StyledButton } from "../../atoms/button";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -26,10 +21,13 @@ interface AppBarProps extends MuiAppBarProps {
 export const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   width: "100%",
-  padding: "1rem",
   justifyContent: "space-between",
 }));
-
+const SandwichIcon = styled(IconButton)(({ theme }) => ({
+  [theme.breakpoints.up("sm")]: {
+    display: "none",
+  },
+}));
 export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -38,7 +36,16 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
+const ButtonsBox = styled("div")(({ theme }) => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,8em)",
+  gap: "1em",
+  width: "100%",
+  justifyContent: "center",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+}));
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
@@ -48,8 +55,8 @@ const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    marginLeft: 240,
-    width: `calc(100% - ${240}px)`,
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -80,7 +87,7 @@ const Navbar = ({ children }) => {
               alignItems: "center",
             }}
           >
-            <IconButton
+            <SandwichIcon
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
@@ -90,11 +97,17 @@ const Navbar = ({ children }) => {
               }}
             >
               <MenuIcon />
-            </IconButton>
+            </SandwichIcon>
+
             <Typography variant="h6" component="div">
               CTT
             </Typography>
           </div>
+          <ButtonsBox>
+            <StyledButton>Inicio</StyledButton>
+            <StyledButton>Sua coleção</StyledButton>
+            <StyledButton>Obras</StyledButton>
+          </ButtonsBox>
           <CustomModal>
             <SearchBar />
           </CustomModal>

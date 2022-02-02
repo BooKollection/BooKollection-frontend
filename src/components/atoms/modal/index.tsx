@@ -1,10 +1,7 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import { Box, Modal } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { alpha, InputBase, styled } from "@mui/material";
+import { StyledButton } from "../button";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,16 +14,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const StyledButton = styled(Button)(({ theme }) => ({
-  margin: "0px 5px",
-  width: "10em",
-  //   backgroundColor: theme.palette.common.white,
-  color: theme.palette.common.white,
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-}));
 
 const CustomModal = ({ children }) => {
   const [open, setOpen] = React.useState(false);
