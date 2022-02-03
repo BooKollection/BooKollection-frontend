@@ -14,6 +14,7 @@ import { SearchBar } from "../searchBar";
 import { MenuI } from "../../atoms/menu";
 import { CustomModal } from "../../atoms/modal";
 import { StyledButton } from "../../atoms/button";
+import { CustomText } from "../../atoms/text";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -99,9 +100,9 @@ const Navbar = ({ children }) => {
               <MenuIcon />
             </SandwichIcon>
 
-            <Typography variant="h6" component="div">
+            <CustomText variant="h6">
               CTT
-            </Typography>
+            </CustomText>
           </div>
           <ButtonsBox>
             <StyledButton>Inicio</StyledButton>
@@ -115,9 +116,11 @@ const Navbar = ({ children }) => {
         </CustomToolbar>
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
+      <Box style={{ width: "100%" }} component="main">
         <DrawerHeader />
-        <div style={{ width: "100%" }}>{children}</div>
+        <div style={{ width: "100%", height: "100%", minHeight: "100vh" }}>
+          {children}
+        </div>
       </Box>
     </Box>
   );

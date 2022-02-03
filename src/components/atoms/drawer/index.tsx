@@ -12,9 +12,6 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-} from "@mui/icons-material";
-
-import {
   MenuBook as MenuBookIcon,
   Home as HomeIcon,
   LibraryBooks as LibraryBooksIcon,
@@ -28,6 +25,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
+  background: theme.palette.primary.main,
   overflowX: "hidden",
 });
 
@@ -54,6 +52,7 @@ const DrawerUI = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
+  background: theme.palette.primary.main,
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
@@ -69,7 +68,9 @@ const DrawerUI = styled(MuiDrawer, {
     display: "none",
   },
 }));
-
+const ListDrawer = styled(List)(({ theme }) => ({
+  height: "100%",
+}));
 export const Drawer = ({
   open,
   handleDrawerClose,
@@ -91,10 +92,10 @@ export const Drawer = ({
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <List>
+      <ListDrawer>
         <ListItem button>
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon color="primary" />
           </ListItemIcon>
           <ListItemText primary={"Inicio"} />
         </ListItem>
@@ -110,7 +111,7 @@ export const Drawer = ({
           </ListItemIcon>
           <ListItemText primary={"Obras"} />
         </ListItem>
-      </List>
+      </ListDrawer>
     </DrawerUI>
   );
 };

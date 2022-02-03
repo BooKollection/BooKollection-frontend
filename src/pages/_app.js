@@ -2,11 +2,31 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Navbar } from "../components/molecules/navbar";
 import "../styles/globals.css";
 const theme = createTheme({
-  overrides: {
-    MuiSelect: {
-      select: {
-        "&:focus": {
-          background: "$labelcolor",
+  palette: {
+    primary: {
+      main: "#140030",
+      light: "#FFFFFF",
+    },
+  },
+  components: {
+    MuiPaper:{
+      styleOverrides: {
+        root: {
+          background: "none",
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
         },
       },
     },
