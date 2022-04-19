@@ -1,91 +1,84 @@
-import * as React from "react";
-import {
-  Toolbar,
-  CssBaseline,
-  Typography,
-  IconButton,
-  Box,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import MenuIcon from "@mui/icons-material/Menu";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { Drawer, drawerWidth } from "../../atoms/drawer";
-import { SearchBar } from "../searchBar";
-import { MenuI } from "../../atoms/menu";
-import { CustomModal } from "../../atoms/modal";
-import { StyledButton } from "../../atoms/button";
-import { CustomText } from "../../atoms/text";
+import * as React from 'react'
+import { Toolbar, CssBaseline, IconButton, Box } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import MenuIcon from '@mui/icons-material/Menu'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import { Drawer, drawerWidth } from '../../atoms/drawer'
+import { SearchBar } from '../searchBar'
+import { MenuI } from '../../atoms/menu'
+import { CustomModal } from '../../atoms/modal'
+import { StyledButton } from '../../atoms/button'
+import { CustomText } from '../../atoms/text'
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open?: boolean
 }
-export const CustomToolbar = styled(Toolbar)(({ theme }) => ({
-  display: "flex",
-  width: "100%",
-  justifyContent: "space-between",
-}));
+export const CustomToolbar = styled(Toolbar)(() => ({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between'
+}))
 const SandwichIcon = styled(IconButton)(({ theme }) => ({
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
-}));
-export const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
+  [theme.breakpoints.up('sm')]: {
+    display: 'none'
+  }
+}))
+export const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-const ButtonsBox = styled("div")(({ theme }) => ({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit,8em)",
-  gap: "1em",
-  width: "100%",
-  justifyContent: "center",
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
-  },
-}));
+  ...theme.mixins.toolbar
+}))
+const ButtonsBox = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit,8em)',
+  gap: '1em',
+  width: '100%',
+  justifyContent: 'center',
+  [theme.breakpoints.down('sm')]: {
+    display: 'none'
+  }
+}))
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
+  shouldForwardProp: prop => prop !== 'open'
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
+  transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    duration: theme.transitions.duration.leavingScreen
   }),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+      duration: theme.transitions.duration.enteringScreen
+    })
+  })
+}))
 
 const Navbar = ({ children }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <CustomToolbar>
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-betweeen",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'space-betweeen',
+              alignItems: 'center'
             }}
           >
             <SandwichIcon
@@ -94,15 +87,13 @@ const Navbar = ({ children }) => {
               onClick={handleDrawerOpen}
               edge="start"
               sx={{
-                ...(open && { display: "none" }),
+                ...(open && { display: 'none' })
               }}
             >
               <MenuIcon />
             </SandwichIcon>
 
-            <CustomText variant="h6">
-              CTT
-            </CustomText>
+            <CustomText variant="h6">BooKollection</CustomText>
           </div>
           <ButtonsBox>
             <StyledButton>Inicio</StyledButton>
@@ -116,14 +107,14 @@ const Navbar = ({ children }) => {
         </CustomToolbar>
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-      <Box style={{ width: "100%" }} component="main">
+      <Box style={{ width: '100%' }} component="main">
         <DrawerHeader />
-        <div style={{ width: "100%", height: "100%", minHeight: "100vh" }}>
+        <div style={{ width: '100%', height: '100%', minHeight: '100vh' }}>
           {children}
         </div>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export { Navbar };
+export { Navbar }

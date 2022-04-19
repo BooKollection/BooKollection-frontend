@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
-import React from "react";
+import { Typography } from '@mui/material'
+import React from 'react'
 
 function LoginHooks({}) {
   return (
@@ -33,6 +33,6 @@ function LoginHooks({}) {
         aliquam ultrices sagittis orci a.
       </Typography>
     </>
-  );
+  )
 }
-export default LoginHooks;
+export default LoginHooks
