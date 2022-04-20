@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { CssBaseline, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Drawer } from '../../atoms/drawer'
@@ -17,10 +17,18 @@ import {
   MainBox,
   ChildrenMainBox
 } from './style'
+import { GoogleButton } from '../../atoms/googleButton'
 
 const Navbar = ({ children }) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
 
+  useEffect(() => {
+    const token = localStorage.getItem('tokenTop')
+    console.log(!!token);
+    
+    setIsLogged(!!token)
+  }, [])
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -50,13 +58,13 @@ const Navbar = ({ children }) => {
           </LogoBox>
           <ButtonsBox>
             <StyledButton>Inicio</StyledButton>
-            <StyledButton>Sua coleção</StyledButton>
+            <StyledButton disabled={!isLogged}>Sua coleção</StyledButton>
             <StyledButton>Obras</StyledButton>
           </ButtonsBox>
           <CustomModal>
             <SearchBar />
           </CustomModal>
-          <MenuI />
+          {isLogged ? <MenuI /> : <GoogleButton />}
         </CustomToolbar>
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />

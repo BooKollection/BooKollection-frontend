@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -9,10 +8,11 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import Logout from '@mui/icons-material/Logout'
 import { CustomText } from '../text'
-import { boxStyle, paperStyle } from './style'
+import { BoxStyled, paperStyle } from './style'
 
 export const MenuI = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -22,7 +22,7 @@ export const MenuI = () => {
   }
   return (
     <React.Fragment>
-      <Box sx={boxStyle}>
+      <BoxStyled>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -35,7 +35,7 @@ export const MenuI = () => {
             <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
           </IconButton>
         </Tooltip>
-      </Box>
+      </BoxStyled>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"

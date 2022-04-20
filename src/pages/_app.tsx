@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles'
+import { storeWrapper } from "../store";
 import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'
@@ -13,4 +14,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default storeWrapper.withRedux(MyApp)

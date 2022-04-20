@@ -1,3 +1,5 @@
+import { Box, styled } from '@mui/material'
+
 export const paperStyle = {
   elevation: 0,
   sx: {
@@ -26,8 +28,8 @@ export const paperStyle = {
   }
 }
 
-export const boxStyle = {
+export const BoxStyled = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   textAlign: 'center'
-}
+}))

@@ -14,14 +14,18 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
+    "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "graphql": "^16.2.0",
     "next": "^12.1.5",
+    "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",
+    "react-redux": "^8.0.0",
+    "redux": "^4.2.0",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
@@ -36,6 +40,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-standard": "^5.0.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
