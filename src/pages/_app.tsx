@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles'
-import { storeWrapper } from "../store";
+import { storeWrapper } from '../store'
 import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'

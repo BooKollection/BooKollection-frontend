@@ -19,14 +19,14 @@ import {
   MainBox,
   ChildrenMainBox
 } from './style'
-import { buttonTitles } from '../../../shared/i18n/navbar'
+import { navbarButtonTitles } from '../../../shared/i18n/navbar'
 import Link from 'next/link'
 
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
   const { locale } = useRouter()
-  const { titles } = buttonTitles[locale]
+  const { titles } = navbarButtonTitles[locale]
 
   useEffect(() => {
     const token = localStorage.getItem('tokenTop')

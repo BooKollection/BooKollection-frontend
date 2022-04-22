@@ -20,7 +20,7 @@ const CardGrid = ({
     padding={'24px'}
     width={'100%'}
     container
-    gap={2}
+    gap='0.8em'
     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
   >
     {isVolume

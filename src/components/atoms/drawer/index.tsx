@@ -15,7 +15,7 @@ import {
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { DrawerHeader, DrawerUI, ListDrawer } from './style'
-import { buttonTitles } from '../../../shared/i18n/navbar'
+import { navbarButtonTitles } from '../../../shared/i18n'
 
 export const drawerWidth = 180
 
@@ -29,7 +29,7 @@ export const Drawer = ({
   const theme = useTheme()
   const { locale } = useRouter()
 
-  const { titles } = buttonTitles[locale]
+  const { titles } = navbarButtonTitles[locale]
 
   return (
     <DrawerUI variant="permanent" open={open}>
@@ -53,7 +53,7 @@ export const Drawer = ({
             }: { label: string; link: string; icon: SvgIconComponent },
             index: number
           ) => (
-            <Link key={'navbar' + index} href={link} locale={locale}>
+            <Link key={'navbar' + index} passHref href={link} locale={locale}>
               <ListItem>
                 <ListItemIcon>{icon}</ListItemIcon>
                 <ListItemText primary={label} />

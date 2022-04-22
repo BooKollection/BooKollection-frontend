@@ -1,6 +1,6 @@
 import { Box, IconButton, styled, Toolbar } from '@mui/material'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
-import { Drawer, drawerWidth } from '../../atoms/drawer'
+import { drawerWidth } from '../../atoms/drawer'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean

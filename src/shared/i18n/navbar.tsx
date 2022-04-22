@@ -6,7 +6,7 @@ import {
   SvgIconComponent
 } from '@mui/icons-material'
 
-export const buttonTitles = {
+export const navbarButtonTitles = {
   'pt-BR': {
     titles: [
       { label: 'Inicio', link: '', icon: <HomeIcon color="primary" /> },
