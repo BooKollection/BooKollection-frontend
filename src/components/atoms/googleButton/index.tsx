@@ -50,7 +50,7 @@ export const GoogleButton = () => {
       color="inherit"
       onClick={signIn}
     >
-      <LoginIcon />
+      <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>Entrar</p>
     </IconButton>
   )
 }

@@ -24,7 +24,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 export const ButtonsBox = styled('div')(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit,8em)',
+  gridTemplateColumns: 'repeat(auto-fit,minmax(8em, 12em))',
   gap: '1em',
   width: '100%',
   justifyContent: 'center',

@@ -6,6 +6,10 @@ const { parsed: myEnv } = require('dotenv').config({
 
 module.exports = {
   reactStrictMode: true,
+  i18n: {
+    locales: ['pt-BR', 'en-US', 'fr-FR', 'es-ES'],
+    defaultLocale: 'pt-BR'
+  },
   webpack(config) {
     config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
     return config
