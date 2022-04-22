@@ -45,5 +45,11 @@
     "husky": "^7.0.4",
     "prettier": "^2.6.2",
     "redux-devtools-extension": "^2.13.9"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "npm run lint --fix",
+      "git add"
+    ]
   }
 }
