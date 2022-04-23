@@ -1,6 +1,6 @@
 import { Box, IconButton, styled, Toolbar } from '@mui/material'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
-import { Drawer, drawerWidth } from '../../atoms/drawer'
+import { drawerWidth } from '../../atoms/drawer'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean
@@ -24,7 +24,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 export const ButtonsBox = styled('div')(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit,8em)',
+  gridTemplateColumns: 'repeat(auto-fit,minmax(8em, 12em))',
   gap: '1em',
   width: '100%',
   justifyContent: 'center',

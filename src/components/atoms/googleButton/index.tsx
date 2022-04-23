@@ -2,11 +2,15 @@ import React from 'react'
 import { useGoogleLogin } from 'react-google-login'
 import { LOGIN_MUTATION } from '../../../api/graphql/querys/login'
 import { clientGraphql } from '../../../config/client-graphql'
-import LoginIcon from '@mui/icons-material/Login'
 import IconButton from '@mui/material/IconButton'
+import { useRouter } from 'next/router'
+import { googleButtonLabel } from '../../../shared/i18n/googleButton'
 
 export const GoogleButton = () => {
   const clientId = process.env.OAUTH_GOOGLE_ID
+  const { locale } = useRouter()
+  const { label } = googleButtonLabel[locale]
+
   const onSuccess = async res => {
     const { googleId, tokenId, profileObj } = res
     console.log('Login Success: currentUser:', profileObj, res)
@@ -50,7 +54,7 @@ export const GoogleButton = () => {
       color="inherit"
       onClick={signIn}
     >
-      <LoginIcon />
+      <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>{label}</p>
     </IconButton>
   )
 }

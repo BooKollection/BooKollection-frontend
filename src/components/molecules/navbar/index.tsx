@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { GoogleButton } from '../../atoms/googleButton'
+import { useRouter } from 'next/router'
 import { CssBaseline, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Drawer } from '../../atoms/drawer'
@@ -17,16 +19,18 @@ import {
   MainBox,
   ChildrenMainBox
 } from './style'
-import { GoogleButton } from '../../atoms/googleButton'
+import { navbarButtonTitles } from '../../../shared/i18n/navbar'
+import Link from 'next/link'
 
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
+  const { locale } = useRouter()
+  const { titles } = navbarButtonTitles[locale]
 
   useEffect(() => {
     const token = localStorage.getItem('tokenTop')
-    console.log(!!token);
-    
+
     setIsLogged(!!token)
   }, [])
   const handleDrawerOpen = () => {
@@ -57,9 +61,21 @@ const Navbar = ({ children }) => {
             <CustomText variant="h6">BooKollection</CustomText>
           </LogoBox>
           <ButtonsBox>
-            <StyledButton>Inicio</StyledButton>
-            <StyledButton disabled={!isLogged}>Sua coleção</StyledButton>
-            <StyledButton>Obras</StyledButton>
+            {titles.map(
+              (
+                { label, link }: { label: string; link: string },
+                index: number
+              ) => (
+                <StyledButton
+                  disabled={index === 1 && !isLogged}
+                  key={'navbar' + index}
+                >
+                  <Link href={link} locale={locale}>
+                    {label}
+                  </Link>
+                </StyledButton>
+              )
+            )}
           </ButtonsBox>
           <CustomModal>
             <SearchBar />
