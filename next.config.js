@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
 
 const { parsed: myEnv } = require('dotenv').config({
@@ -8,7 +9,7 @@ module.exports = {
   reactStrictMode: true,
   i18n: {
     locales: ['pt-BR', 'en-US', 'fr-FR', 'es-ES'],
-    defaultLocale: 'pt-BR'
+    defaultLocale: 'en-US'
   },
   webpack(config) {
     config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
