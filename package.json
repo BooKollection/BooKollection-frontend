@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.6",
     "@commitlint/config-conventional": "^16.2.1",
+    "@djpfs/react-vlibras": "^2.0.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
