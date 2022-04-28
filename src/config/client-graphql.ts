@@ -1,10 +1,9 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-console.log(process.env.BACKEND_URI);
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 export const clientGraphql = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  uri: process.env.BACKEND_URI,
   cache: new InMemoryCache(),
   typeDefs: [
-    "type LoginInput {  reqEmail: String!  reqGoogleId: String!reqTokenId: String!}",
-  ],
-});
+    'type LoginInput {  reqEmail: String!  reqGoogleId: String!reqTokenId: String!}'
+  ]
+})
