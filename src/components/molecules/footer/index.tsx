@@ -1,23 +1,27 @@
 import React from 'react';
-import { Rodape, RodapeContainer, BotaoScroll, Titulo, Subtitulo} from './style';
+import { FooterElements, FooterContainer, ButtonScroll, Title, Subtitle} from './style';
+import { useRouter } from 'next/router'
+import { cttVersions, buttonScrollVersions } from '../../../shared/i18n/footer';
 
 const Footer = () => {
-    const topo = () => {
+    const { locale } = useRouter()
+    const { cttVersion } = cttVersions[locale]
+    const { buttonScrollVersion } = buttonScrollVersions[locale]
+
+    const scrollFunction = () => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
     }; 
     return(
-        <>
-            <RodapeContainer>
-                <Rodape>
-                    <Titulo> BooKollection </Titulo>
-                    <Subtitulo> versão 0.1 </Subtitulo>
-                </Rodape>
-                <BotaoScroll onClick={topo}> voltar para o topo </BotaoScroll>
-            </RodapeContainer>
-        </>
+        <FooterContainer>
+            <FooterElements>
+                <Title> BooKollection </Title>
+                <Subtitle> {cttVersion} 0.1 </Subtitle>
+            </FooterElements>
+            <ButtonScroll onClick={scrollFunction}> {buttonScrollVersion} </ButtonScroll>
+        </FooterContainer>
     );
 };
 
