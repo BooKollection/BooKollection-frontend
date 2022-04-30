@@ -2,22 +2,21 @@ import * as React from 'react'
 import {
   MenuBook as MenuBookIcon,
   Home as HomeIcon,
-  LibraryBooks as LibraryBooksIcon,
-  SvgIconComponent
+  LibraryBooks as LibraryBooksIcon
 } from '@mui/icons-material'
 
 export const navbarButtonTitles = {
   'pt-BR': {
     titles: [
-      { label: 'Inicio', link: '', icon: <HomeIcon color="primary" /> },
+      { label: 'Inicio', link: '/', icon: <HomeIcon color="primary" /> },
       {
         label: 'Sua coleção',
-        link: '',
+        link: '/collection',
         icon: <MenuBookIcon color="primary" />
       },
       {
         label: 'Obras literárias',
-        link: '',
+        link: '/literaryWorks',
         icon: <LibraryBooksIcon color="primary" />
       }
     ]
@@ -27,12 +26,12 @@ export const navbarButtonTitles = {
       { label: 'home', link: '', icon: <HomeIcon color="primary" /> },
       {
         label: 'your Collection',
-        link: '',
+        link: '/collection',
         icon: <MenuBookIcon color="primary" />
       },
       {
         label: 'literary works',
-        link: '',
+        link: '/literaryWorks',
         icon: <LibraryBooksIcon color="primary" />
       }
     ]

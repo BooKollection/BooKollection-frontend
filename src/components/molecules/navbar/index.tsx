@@ -70,7 +70,7 @@ const Navbar = ({ children }) => {
                   disabled={index === 1 && !isLogged}
                   key={'navbar' + index}
                 >
-                  <Link href={link} locale={locale}>
+                  <Link href={{ pathname: link }} locale={locale}>
                     {label}
                   </Link>
                 </StyledButton>

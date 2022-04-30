@@ -9,31 +9,36 @@ const CardGrid = ({
 }: {
   isVolume?: boolean
   itens: {
+    id: string
     name: string
     imgSrc: string
     edition: string
     publisher: string
     number?: number
+    owned: boolean
   }[]
 }) => (
   <Grid
-    padding={'24px'}
+    padding={'1em'}
     width={'100%'}
     container
-    gap='0.8em'
-    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+    gap="1em"
+    columnSpacing={{ xs: 1, sm: 1, md: 1 }}
   >
     {isVolume
-      ? itens.map(({ name, imgSrc, edition, publisher, number }, index) => (
-          <VolumeCard
-            key={index}
-            name={name}
-            imgSrc={imgSrc}
-            edition={edition}
-            publisher={publisher}
-            number={number}
-          />
-        ))
+      ? itens.map(
+          ({ name, imgSrc, edition, publisher, number, owned }, index) => (
+            <VolumeCard
+              key={index}
+              name={name}
+              imgSrc={imgSrc}
+              edition={edition}
+              publisher={publisher}
+              number={number}
+              owned={owned}
+            />
+          )
+        )
       : itens.map(({ name, imgSrc, edition, publisher }, index) => (
           <EditionCard
             key={index}

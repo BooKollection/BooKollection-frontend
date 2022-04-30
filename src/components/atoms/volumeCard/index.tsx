@@ -12,7 +12,8 @@ export const VolumeCard = ({
   edition,
   publisher,
   status,
-  number
+  number,
+  owned
 }: {
   name: string
   imgSrc: string
@@ -20,8 +21,9 @@ export const VolumeCard = ({
   publisher: string
   status?: boolean
   number?: number
+  owned: boolean
 }) => (
-  <Card>
+  <Card owned={owned}>
     <Image
       loader={myLoader}
       src={imgSrc}
