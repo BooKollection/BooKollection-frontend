@@ -2,10 +2,9 @@ import * as React from 'react'
 import { Box, Modal } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
-import { StyledButton } from '../button'
+import { StyledButton } from '../../atoms/button'
 import { searchModalLabel } from '../../../shared/i18n'
 import { style } from './styles'
-
 
 const CustomModal = ({ children }) => {
   const [open, setOpen] = React.useState(false)

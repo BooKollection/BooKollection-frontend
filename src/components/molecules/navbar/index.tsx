@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { Drawer } from '../../atoms/drawer'
 import { SearchBar } from '../searchBar'
 import { MenuI } from '../../atoms/menu'
-import { CustomModal } from '../../atoms/modal'
+import { CustomModal } from '../modal'
 import { StyledButton } from '../../atoms/button'
 import { CustomText } from '../../atoms/text'
 import {
