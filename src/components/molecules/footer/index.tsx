@@ -11,7 +11,7 @@ const Footer = () => {
     const scrollFunction = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth"
+            behavior: 'smooth'
         });
     }; 
     return(
@@ -22,7 +22,7 @@ const Footer = () => {
             </FooterElements>
             <ButtonScroll onClick={scrollFunction}> {buttonScrollVersion} </ButtonScroll>
         </FooterContainer>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer

@@ -1,4 +1,5 @@
 import {styled} from '@mui/material';
+import { theme } from '../../../styles/theme';
 
 export const FooterContainer = styled('div')(() => ({
     display: 'flex',
@@ -9,12 +10,11 @@ export const FooterContainer = styled('div')(() => ({
     position: 'absolute',
     width: '100%',
     height: '76px',
-    background: '#3E1F69'
+    background: theme.palette.secondary.main
   }))
 
-
 export const FooterElements = styled('div')(() => ({
-    color: '#FFFFFF'
+    color: theme.palette.primary.light
 }))
 
 export const ButtonScroll = styled('button')(() => ({
@@ -29,8 +29,8 @@ export const ButtonScroll = styled('button')(() => ({
     fontSize: '16px',
     lineHeight: '19px',
     textDecorationLine: 'underline',
-    color: '#FFFFFF',
-    backgroundColor: '#3E1F69',
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.main,
     border: 'none',
     '&:hover': {
         cursor: 'pointer'
