@@ -1,5 +1,7 @@
+import { EN_US, PT_BR } from "../constants";
+
 export const editionTitles = {
-  'pt-BR': {
+  [PT_BR]: {
     edition: 'Edição',
     status: 'Status',
     publisher: 'Editora',
@@ -35,7 +37,7 @@ export const editionTitles = {
     },
     addToCollection: 'Adicionar a coleção'
   },
-  'en-US': {
+  [EN_US]: {
     edition: 'Edition',
     status: 'Status',
     publisher: 'Publisher',

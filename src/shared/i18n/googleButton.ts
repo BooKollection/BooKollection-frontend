@@ -1,8 +1,10 @@
+import { PT_BR, EN_US } from "../constants";
+
 export const googleButtonLabel = {
-  'pt-BR': {
+  [PT_BR]: {
     label: 'Entrar'
   },
-  'en-US': {
+  [EN_US]: {
     label: 'Sign in'
   }
 }

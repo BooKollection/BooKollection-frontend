@@ -1,19 +1,21 @@
+import { PT_BR, EN_US } from "../constants"
+
 type languageHomepageTitles = {
   addVolumes: string
   literaryWorksAdd: string
 }
 
 type homepageTitlesType = {
-  'pt-BR': languageHomepageTitles
-  'en-US': languageHomepageTitles
+  [PT_BR]: languageHomepageTitles
+  [EN_US]: languageHomepageTitles
 }
 
 export const homepageTitles: homepageTitlesType = {
-  'pt-BR': {
+  [PT_BR]: {
     addVolumes: 'Volumes adicionados',
     literaryWorksAdd: 'Obras Adicionadas'
   },
-  'en-US': {
+  [EN_US]: {
     addVolumes: 'Added Volumes',
     literaryWorksAdd: 'Added literary works'
   }

@@ -1,17 +1,19 @@
+import { PT_BR, EN_US } from "../constants"
+
 export const cttVersions = {
-    'pt-BR': {
+    [PT_BR]: {
         cttVersion: 'versão'
       },
-    'en-US': {
+    [EN_US]: {
         cttVersion: 'version'
       }
 }
 
 export const buttonScrollVersions = {
-  'pt-BR': {
+  [PT_BR]: {
       buttonScrollVersion: 'voltar para o topo'
   },
-  'en-US': {
+  [EN_US]: {
       buttonScrollVersion: 'back to top'
   }
 }

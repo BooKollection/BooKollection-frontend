@@ -16,6 +16,7 @@ const CardGrid = ({
     publisher: string
     number?: number
     owned?: boolean
+    editionId: string
   }[]
 }) => (
   <Grid
@@ -27,8 +28,12 @@ const CardGrid = ({
   >
     {isVolume
       ? itens.map(
-          ({ name, imgSrc, edition, publisher, number, owned }, index) => (
+          (
+            { id, name, imgSrc, edition, publisher, number, owned, editionId },
+            index
+          ) => (
             <VolumeCard
+              id={id}
               key={index}
               name={name}
               imgSrc={imgSrc}
@@ -36,6 +41,7 @@ const CardGrid = ({
               publisher={publisher}
               number={number}
               owned={owned}
+              editionId={editionId}
             />
           )
         )

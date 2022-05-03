@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react'
 import { GoogleButton } from '../../atoms/googleButton'
 import { useRouter } from 'next/router'
 import { CssBaseline, Box } from '@mui/material'
+import {
+  MenuBook as MenuBookIcon,
+  Home as HomeIcon,
+  LibraryBooks as LibraryBooksIcon
+} from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Drawer } from '../../atoms/drawer'
 import { SearchBar } from '../searchBar'
@@ -21,7 +26,11 @@ import {
 } from './style'
 import { navbarButtonTitles } from '../../../shared/i18n/navbar'
 import Link from 'next/link'
-
+const iconList = [
+  <HomeIcon color="primary" />,
+  <MenuBookIcon color="primary" />,
+  <LibraryBooksIcon color="primary" />
+]
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
@@ -70,6 +79,9 @@ const Navbar = ({ children }) => {
                   disabled={index === 1 && !isLogged}
                   key={'navbar' + index}
                 >
+                  <div style={{ marginRight: index === 1 ? '10px' : '5px' }}>
+                    {iconList[index]}
+                  </div>
                   <Link href={{ pathname: link }} locale={locale}>
                     {label}
                   </Link>

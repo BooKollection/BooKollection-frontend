@@ -1,8 +1,10 @@
+import { PT_BR, EN_US } from '../constants'
+
 export const searchModalLabel = {
-  'pt-BR': {
+  [PT_BR]: {
     label: 'Buscar'
   },
-  'en-US': {
+  [EN_US]: {
     label: 'Search'
   }
 }

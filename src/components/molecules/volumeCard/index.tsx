@@ -7,10 +7,6 @@ import { CustomPopper } from '../../atoms/customPopper'
 import { CenterText, CustomText } from '../../atoms/text'
 import { Card } from './style'
 
-const myLoader = ({ src }) => {
-  return src
-}
-
 export const VolumeCard = ({
   id,
   name,
@@ -42,7 +38,7 @@ export const VolumeCard = ({
   return (
     <Card owned={owned} onClick={handleClick}>
       <Image
-        loader={myLoader}
+        unoptimized={true}
         src={imgSrc}
         alt="Picture of the author"
         width={150}
