@@ -16,5 +16,5 @@ export const Card = styled('div', {
   boxShadow: '0px 4px 24px -1px rgba(71, 62, 62, 0.25)',
   backdropFilter: 'blur(40px)',
   borderRadius: '10px',
-  ...(!owned && { opacity: 0.8 })
+  ...(owned !== undefined && owned !== null && !owned && { opacity: 0.8 })
 }))

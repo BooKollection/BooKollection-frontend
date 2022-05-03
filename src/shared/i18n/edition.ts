@@ -32,7 +32,8 @@ export const editionTitles = {
       chamois: 'Chamois',
       couche: 'Couché',
       pollen: 'Polén'
-    }
+    },
+    addToCollection: 'Adicionar a coleção'
   },
   'en-US': {
     edition: 'Edition',
@@ -67,6 +68,7 @@ export const editionTitles = {
       chamois: 'Chamois',
       couche: 'CouchE',
       pollen: 'Pollen'
-    }
+    },
+    addToCollection: 'Add to collection'
   }
 }
