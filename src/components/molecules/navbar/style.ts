@@ -65,5 +65,6 @@ export const MainBox = styled(Box)(() => ({
 export const ChildrenMainBox = styled('div')(() => ({
   width: '100%',
   height: '100%',
-  minHeight: 'calc(100vh - 140px)'
+  minHeight: 'calc(100vh - 140px)',
+  minWidth: '100vw '
 }))

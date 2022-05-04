@@ -7,32 +7,26 @@ import { editionTitles } from '../../../shared/i18n/edition'
 import { CustomPopper } from '../../atoms/customPopper'
 import { StyledButton } from '../../atoms/button'
 
-export const EditionCard = ({
-  id,
-  name,
-  imgSrc,
-  edition,
-  publisher,
-  status
-}: {
+export const EditionCard = (data: {
   id: string
   name: string
-  imgSrc: string
+  imageUrl: string
   edition: string
   publisher: string
   status?: boolean
 }) => {
   const { locale, push } = useRouter()
+  const [openPopper, setOpenPopper] = useState(false)
   const { details } = editionTitles[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-
+  const { id, name, imageUrl, edition, publisher, status } = data
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
   return (
     <Card onClick={handleClick}>
       <Image
-        src={imgSrc}
+        src={imageUrl}
         alt="Picture of the author"
         width={150}
         height={200}
@@ -42,7 +36,11 @@ export const EditionCard = ({
       <CenterText>{edition}</CenterText>
       <CustomText>{status}</CustomText>
       <CustomText>{publisher}</CustomText>
-      <CustomPopper anchorEl={anchorEl} placement="right">
+      <CustomPopper
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        placement="right"
+      >
         <StyledButton
           onClick={() => {
             push('/edition?id=' + id)

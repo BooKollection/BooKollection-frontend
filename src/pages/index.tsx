@@ -17,7 +17,7 @@ const mock = [
   {
     id: '',
     name: 'bleach',
-    imgSrc:
+    imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/51ZGgDM2q+L._SX631_BO1,204,203,200_.jpg',
     edition: 'Remix',
     publisher: 'Panini',
@@ -27,7 +27,7 @@ const mock = [
   {
     id: '',
     name: 'Soul Eater',
-    imgSrc:
+    imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/41aVXhlE+4L._SX351_BO1,204,203,200_.jpg',
     edition: 'Perfect Edition',
     publisher: 'JBC',
@@ -37,7 +37,7 @@ const mock = [
   {
     id: '',
     name: 'One Piece',
-    imgSrc:
+    imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/51CG5TGY59L._SX322_BO1,204,203,200_.jpg',
     edition: '3 em 1',
     publisher: 'Panini',

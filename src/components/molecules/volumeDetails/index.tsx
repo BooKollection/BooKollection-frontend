@@ -1,40 +1,33 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Grid, Tabs } from '@mui/material'
-import { BoxContainer } from '../../components/atoms/boxContainer'
-import { CenterText, CustomText } from '../../components/atoms/text'
-import { volumeDetailsTitles } from '../../shared/i18n'
-import { GridContainer } from './style'
+import { Grid, Rating, Tabs } from '@mui/material'
+import { BoxContainer } from '../../atoms/boxContainer'
+import { CenterText, CustomText } from '../../atoms/text'
+import { volumeDetailsTitles } from '../../../shared/i18n'
+import { BoxContainerDetails, GridContainer } from './style'
 
 type volumeDetaisType = {
+  id: string
   name: string
   edition: string
   publisher: string
-  price: string
+  price: number
+  number: number
   language: string
   synopsis: string
-  releaseDate: string
+  releaseDate: Date
   acquisitionDifficulty: number
   acquisitionDifficultyAverage: number
   imageUrl: string
 }
-const VolumeDetails = () => {
+const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
   const { locale } = useRouter()
-  const [data, setData] = useState<volumeDetaisType>({
-    name: '',
-    edition: '',
-    publisher: '',
-    price: '',
-    language: '',
-    synopsis: '',
-    releaseDate: '',
-    acquisitionDifficulty: 0,
-    acquisitionDifficultyAverage: 0,
-    imageUrl: ''
-  })
+  const [userAcquisitionDifficulty, setUserAcquisitionDifficulty] = useState(
+    data.acquisitionDifficulty
+  )
 
   return (
-    <BoxContainer>
+    <BoxContainerDetails>
       <GridContainer>
         <div></div>
         <Grid width={'100%'} container gap="0.8em" paddingX={1} columns={13}>
@@ -55,7 +48,6 @@ const VolumeDetails = () => {
                 </Grid>
               )
             })}
-          <Grid item xs={3} />
           <Grid item xs={7}>
             <CenterText>{volumeDetailsTitles[locale].synopsis}</CenterText>
             <CenterText
@@ -66,10 +58,15 @@ const VolumeDetails = () => {
               {data.synopsis}
             </CenterText>
           </Grid>
-          <Grid item xs={3} />
+          <Grid item xs={3}>
+            <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+          </Grid>
+          <Grid item xs={3}>
+            <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+          </Grid>
         </Grid>
       </GridContainer>
-    </BoxContainer>
+    </BoxContainerDetails>
   )
 }
 

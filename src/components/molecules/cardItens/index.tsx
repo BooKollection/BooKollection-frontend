@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 import { EditionCard } from '../editionCard'
-import { VolumeCard } from '../volumeCard'
+import { VolumeCard, VolumeType } from '../volumeCard'
 
 const CardGrid = ({
   isVolume,
@@ -11,7 +11,7 @@ const CardGrid = ({
   itens: {
     id: string
     name: string
-    imgSrc: string
+    imageUrl: string
     edition: string
     publisher: string
     number?: number
@@ -27,30 +27,15 @@ const CardGrid = ({
     columnSpacing={{ xs: 1, sm: 1, md: 1 }}
   >
     {isVolume
-      ? itens.map(
-          (
-            { id, name, imgSrc, edition, publisher, number, owned, editionId },
-            index
-          ) => (
-            <VolumeCard
-              id={id}
-              key={index}
-              name={name}
-              imgSrc={imgSrc}
-              edition={edition}
-              publisher={publisher}
-              number={number}
-              owned={owned}
-              editionId={editionId}
-            />
-          )
-        )
-      : itens.map(({ id, name, imgSrc, edition, publisher }, index) => (
+      ? itens.map((data: VolumeType, index) => (
+          <VolumeCard key={index} data={data} />
+        ))
+      : itens.map(({ id, name, imageUrl, edition, publisher }, index) => (
           <EditionCard
             id={id}
             key={index}
             name={name}
-            imgSrc={imgSrc}
+            imageUrl={imageUrl}
             edition={edition}
             publisher={publisher}
           />

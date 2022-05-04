@@ -32,7 +32,7 @@ const mock = {
     {
       id: '',
       name: 'one piece',
-      imgSrc: 'https://m.media-amazon.com/images/I/51W1ij6OH3L.jpg',
+      imageUrl: 'https://m.media-amazon.com/images/I/51W1ij6OH3L.jpg',
       publisher: 'Panini',
       number: 1,
       owned: true
@@ -40,7 +40,7 @@ const mock = {
     {
       id: '',
       name: 'one piece',
-      imgSrc: 'https://m.media-amazon.com/images/I/51YYphO2LLL.jpg',
+      imageUrl: 'https://m.media-amazon.com/images/I/51YYphO2LLL.jpg',
       publisher: 'Panini',
       number: 2,
       owned: true
@@ -48,7 +48,7 @@ const mock = {
     {
       id: '',
       name: 'one piece',
-      imgSrc: 'https://m.media-amazon.com/images/I/51IX7sqtQPL.jpg',
+      imageUrl: 'https://m.media-amazon.com/images/I/51IX7sqtQPL.jpg',
       publisher: 'Panini',
       number: 3,
       owned: true
@@ -56,7 +56,7 @@ const mock = {
     {
       id: '',
       name: 'one piece',
-      imgSrc: 'https://m.media-amazon.com/images/I/51+238nhs9L._SY346_.jpg',
+      imageUrl: 'https://m.media-amazon.com/images/I/51+238nhs9L._SY346_.jpg',
       publisher: 'Panini',
       number: 4,
       owned: false
