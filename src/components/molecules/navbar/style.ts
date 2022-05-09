@@ -1,4 +1,4 @@
-import { Box, IconButton, styled, Toolbar } from '@mui/material'
+import { Box, Container, IconButton, styled, Toolbar } from '@mui/material'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import { drawerWidth } from '../../atoms/drawer'
 
@@ -57,14 +57,11 @@ export const LogoBox = styled('div')(() => ({
   justifyContent: 'space-betweeen',
   alignItems: 'center'
 }))
-
-export const MainBox = styled(Box)(() => ({
-  width: '100%'
-}))
-
-export const ChildrenMainBox = styled('div')(() => ({
+export const MainBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
   width: '100%',
-  height: '100%',
-  minHeight: 'calc(100vh - 140px)',
-  minWidth: '100vw '
+  [theme.breakpoints.up('md')]: {
+    height: '100%'
+  }
 }))

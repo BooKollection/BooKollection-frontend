@@ -4,7 +4,6 @@ import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'
 import VLibras from '@djpfs/react-vlibras'
-import Footer from '../components/molecules/footer'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +12,6 @@ function MyApp({ Component, pageProps }) {
         <VLibras />
         <Component {...pageProps} />
       </Navbar>
-      <Footer />
     </ThemeProvider>
   )
 }

@@ -11,9 +11,9 @@ export const GridContainer = styled(Box)(() => ({
 export const BoxContainerDetails = styled('div')(({ theme }) => ({
   background: theme.palette.primary.main,
   position: 'absolute',
-  top: '3%',
+  top: '0%',
   padding: '2em 1em',
   width: '100%',
-  height: '97%',
+  minHeight: '100vh',
   justifyContent: 'center'
 }))

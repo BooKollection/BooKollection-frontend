@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { GoogleButton } from '../../atoms/googleButton'
 import { useRouter } from 'next/router'
 import { CssBaseline, Box } from '@mui/material'
+import { GoogleButton } from '../../atoms/googleButton'
+import Footer from '../footer'
+
 import {
   MenuBook as MenuBookIcon,
   Home as HomeIcon,
@@ -22,8 +24,7 @@ import {
   SandwichIcon,
   ButtonsBox,
   DrawerHeader,
-  MainBox,
-  ChildrenMainBox
+  MainBox
 } from './style'
 import { i18n } from '../../../shared/i18n'
 const iconList = [
@@ -51,9 +52,9 @@ const Navbar = ({ children }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+    <MainBox >
       <AppBar position="fixed" open={open}>
+        <CssBaseline />
         <CustomToolbar>
           <LogoBox>
             <SandwichIcon
@@ -96,11 +97,10 @@ const Navbar = ({ children }) => {
         </CustomToolbar>
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-      <MainBox component="main">
-        <DrawerHeader />
-        <ChildrenMainBox>{children}</ChildrenMainBox>
-      </MainBox>
-    </Box>
+      <DrawerHeader />
+      {children}
+      <Footer />
+    </MainBox>
   )
 }
 
