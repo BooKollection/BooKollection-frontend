@@ -12,6 +12,7 @@ export const BoxContainerDetails = styled('div')(({ theme }) => ({
   background: theme.palette.primary.main,
   position: 'absolute',
   top: '0%',
+  marginTop: '1em',
   padding: '2em 1em',
   width: '100%',
   minHeight: '100vh',

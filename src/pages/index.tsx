@@ -18,9 +18,10 @@ const mock = [
     id: '',
     name: 'bleach',
     imageUrl:
-      'https://images-na.ssl-images-amazon.com/images/I/51ZGgDM2q+L._SX631_BO1,204,203,200_.jpg',
+    'https://images-na.ssl-images-amazon.com/images/I/51ZGgDM2q+L._SX631_BO1,204,203,200_.jpg',
     edition: 'Remix',
     publisher: 'Panini',
+    coverPrice: 'R$59,00',
     synopsis:
       'Ichigo Kurosaki, 15 anos. Ocupação: Colegial. E então... O ataque violento de um espírito maligno chamado "Hollow" faz suas irmãs caírem uma após a outra... A única forma de salvá-las é se tornar um Shinigami e lutar! Diante da morte iminente, o colegial Ichigo Kurosaki precisará tomar uma decisão que poderá mudar seu destino...!!',
     number: 1,
@@ -40,6 +41,7 @@ const mock = [
   },
   {
     id: '',
+    coverPrice: 'R$59,00',
     name: 'Soul Eater',
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/41aVXhlE+4L._SX351_BO1,204,203,200_.jpg',
@@ -63,6 +65,7 @@ const mock = [
   },
   {
     id: '',
+    coverPrice: 'R$59,00',
     name: 'One Piece',
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/51CG5TGY59L._SX322_BO1,204,203,200_.jpg',

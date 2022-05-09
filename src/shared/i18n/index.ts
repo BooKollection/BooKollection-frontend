@@ -61,7 +61,8 @@ export const i18n = {
     search: 'Buscar',
     signIn: 'Entrar',
     cttVersion: 'Versão',
-    buttonScrollVersion: 'Voltar para o topo'
+    buttonScrollVersion: 'Voltar para o topo',
+    coverPrice: 'Preço de capa'
   },
   [EN_US]: {
     edition: 'Edition',
@@ -123,6 +124,7 @@ export const i18n = {
     search: 'Search',
     signIn: 'Sign In',
     cttVersion: 'Version',
-    buttonScrollVersion: 'Back to top'
+    buttonScrollVersion: 'Back to top',
+    coverPrice: 'Cover Price'
   }
 }
