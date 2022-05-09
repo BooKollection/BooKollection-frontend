@@ -15,7 +15,8 @@ export const editionTitles = {
     country: 'País de origem',
     synopsis: 'Sinopse',
     paperType: 'Tipo de papel',
-    acquisitionDifficulty: 'Dificuldade de aquisição',
+    acquisitionDifficulty: 'Dificuldade de aquisição (Sua nota)',
+    acquisitionDifficultyAverage: 'Dificuldade de aquisição (público)',
     price: 'Preço',
     releaseDate: 'Data de publicação',
     observations: 'Observações',
@@ -35,7 +36,9 @@ export const editionTitles = {
       couche: 'Couché',
       pollen: 'Polén'
     },
-    addToCollection: 'Adicionar a coleção'
+    addToCollection: 'Adicionar a coleção',
+    dimensions: 'Dimensões',
+    readingAge: 'Classificação Etária'
   },
   [EN_US]: {
     edition: 'Edition',
@@ -51,7 +54,8 @@ export const editionTitles = {
     country: 'Country',
     synopsis: 'Synopsis',
     paperType: 'Paper Type',
-    acquisitionDifficulty: 'Acquisition Difficulty',
+    acquisitionDifficulty: 'Acquisition Difficulty (Your Rating)',
+    acquisitionDifficultyAverage: 'Acquisition Difficulty (public)',
     price: 'Price',
     releaseDate: 'Release Date',
     observations: 'Observations',
@@ -71,6 +75,8 @@ export const editionTitles = {
       couche: 'CouchE',
       pollen: 'Pollen'
     },
-    addToCollection: 'Add to collection'
+    addToCollection: 'Add to collection',
+    dimensions: 'Dimensions',
+    readingAge: 'reading Age'
   }
 }

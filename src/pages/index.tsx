@@ -29,7 +29,14 @@ const mock = [
     acquisitionDifficulty: 5,
     acquisitionDifficultyAverage: 5,
     language: 'PT-BR',
-    numberOfPages: 552
+    numberOfPages: 552,
+    bagShape: '15 x 25 cm',
+    checkList: 'maio/2022',
+    readingAge: '12+',
+    isbn10: 'xxxxxxxxxxxxxxxx',
+    isbn13: 'xxxxxxxxxxxxxxxx',
+    author: 'xxxxxx',
+    gifts: 'xxxxx'
   },
   {
     id: '',
@@ -45,7 +52,14 @@ const mock = [
     acquisitionDifficulty: 5,
     acquisitionDifficultyAverage: 5,
     language: 'PT-BR',
-    numberOfPages: 200
+    numberOfPages: 200,
+    bagShape: '15 x 25 cm',
+    checkList: 'maio/2022',
+    readingAge: '12+',
+    isbn10: 'xxxxxxxxxxxxxxxx',
+    isbn13: 'xxxxxxxxxxxxxxxx',
+    author: 'xxxxxx',
+    gifts: 'xxxxx'
   },
   {
     id: '',
@@ -61,7 +75,15 @@ const mock = [
     acquisitionDifficulty: 5,
     acquisitionDifficultyAverage: 5,
     language: 'PT-BR',
-    numberOfPages: 200
+    checkList: 'maio/2022',
+    numberOfPages: 200,
+    bagShape: '15 x 25 cm',
+    dimensions: '13.7 x 15.3 x 20 cm',
+    readingAge: '12+',
+    isbn10: 'xxxxxxxxxxxxxxxx',
+    isbn13: 'xxxxxxxxxxxxxxxx',
+    author: 'xxxxxx',
+    gifts: 'xxxxx'
   }
 ]
 const Index = () => {

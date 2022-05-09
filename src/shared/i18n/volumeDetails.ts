@@ -8,26 +8,35 @@ const propsList: string[] = [
   'price',
   'language',
   'synopsis',
-  'releaseDate'
+  'releaseDate',
+  'bagShape',
+  'dimensions',
+  'readingAge',
+  'acquisitionDifficulty',
+  'acquisitionDifficultyAverage'
 ]
 
 export const volumeDetailsTitles = {
   [PT_BR]: {
     name: 'nome',
+    author: 'Autor',
+    gifts: 'Brindes',
     volume: 'Volume',
     number: 'Número',
+    checkList: 'Check list',
     numberOfPages: 'Número de páginas',
-    acquisitionDifficulty: 'Dificuldade de aquisição',
-    acquisitionDifficultyAverage: 'Dificuldade de aquisição (publico)',
+
     ...getI18nRequiredProps(editionTitles, propsList, PT_BR)
   },
   [EN_US]: {
     name: 'name',
     volume: 'Volume',
+    gifts: 'Gifts',
+    author: 'Author',
     number: 'Number',
+    checkList: 'Check list',
     numberOfPages: 'Number of pages',
-    acquisitionDifficulty: 'Acquisition difficulty',
-    acquisitionDifficultyAverage: 'Acquisition difficulty (public)',
+
     ...getI18nRequiredProps(editionTitles, propsList, EN_US)
   }
 }

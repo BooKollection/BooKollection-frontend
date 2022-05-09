@@ -29,24 +29,27 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
 
   return (
     <BoxContainerDetails>
-      <GridContainer flexWrap={'wrap'}>
-        <Box style={{ marginTop: '1em', width: '100%' }}>
-          <Image
-            src={data.imageUrl}
-            alt="Picture of the author"
-            width={400}
-            height={450}
-            objectFit="contain"
-            unoptimized={true}
-          />
-        </Box>
+      <GridContainer>
+        <Image
+          src={data.imageUrl}
+          alt="Picture of the author"
+          width={300}
+          height={300}
+          objectFit="contain"
+          unoptimized={true}
+          style={{ flexBasis: '300px', flexGrow: '1' }}
+        />
 
         <Grid
           height={'100%'}
           container
           gap="10px"
-          paddingY={10}
+          paddingY={5}
+          paddingX={2}
           columns={{ xs: 10, sm: 12, md: 13 }}
+          flexGrow={2}
+          flexBasis={'440px'}
+          justifyContent="center"
         >
           {Object.entries(data)
             .filter(
@@ -68,8 +71,15 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
               const editionTitle = volumeDetailsTitles[locale][atribute]
               const title = editionTitle ? editionTitle : atribute
               return (
-                <Grid item sm={2} md={3} xs={4} key={'details' + index}>
-                  <CenterText>{title}</CenterText>
+                <Grid
+                  item
+                  sm={2}
+                  md={3}
+                  xs={4}
+                  minWidth={150}
+                  key={'details' + index}
+                >
+                  <CenterText fontWeight={'bold'}>{title}</CenterText>
                   {atribute.includes('acquisition') ? (
                     <Box style={{ textAlign: 'center' }}>
                       <Rating
@@ -86,7 +96,9 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
               )
             })}
           <Grid item xs={12}>
-            <CenterText>{volumeDetailsTitles[locale].synopsis}</CenterText>
+            <CenterText fontWeight={'bold'}>
+              {volumeDetailsTitles[locale].synopsis}
+            </CenterText>
             <CenterText
               style={{
                 textAlign: 'justify'
