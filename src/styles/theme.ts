@@ -31,6 +31,16 @@ export const theme = createTheme({
           color: '#FFFFFF'
         }
       }
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          margin: 0,
+          '& > .MuiGrid-item': {
+            padding: 0
+          }
+        }
+      }
     }
   }
 })

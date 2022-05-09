@@ -15,6 +15,8 @@ export const volumeDetailsTitles = {
   [PT_BR]: {
     name: 'nome',
     volume: 'Volume',
+    number: 'Número',
+    numberOfPages: 'Número de páginas',
     acquisitionDifficulty: 'Dificuldade de aquisição',
     acquisitionDifficultyAverage: 'Dificuldade de aquisição (publico)',
     ...getI18nRequiredProps(editionTitles, propsList, PT_BR)
@@ -22,6 +24,8 @@ export const volumeDetailsTitles = {
   [EN_US]: {
     name: 'name',
     volume: 'Volume',
+    number: 'Number',
+    numberOfPages: 'Number of pages',
     acquisitionDifficulty: 'Acquisition difficulty',
     acquisitionDifficultyAverage: 'Acquisition difficulty (public)',
     ...getI18nRequiredProps(editionTitles, propsList, EN_US)

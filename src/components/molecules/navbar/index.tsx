@@ -27,9 +27,9 @@ import {
 import { navbarButtonTitles } from '../../../shared/i18n/navbar'
 import Link from 'next/link'
 const iconList = [
-  <HomeIcon color="primary" />,
-  <MenuBookIcon color="primary" />,
-  <LibraryBooksIcon color="primary" />
+  <HomeIcon key="iconList1" color="primary" />,
+  <MenuBookIcon key="iconList2" color="primary" />,
+  <LibraryBooksIcon key="iconList2" color="primary" />
 ]
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)

@@ -1,4 +1,4 @@
-import { EN_US, PT_BR } from "../constants";
+import { EN_US, PT_BR } from '../constants'
 
 export const editionTitles = {
   [PT_BR]: {

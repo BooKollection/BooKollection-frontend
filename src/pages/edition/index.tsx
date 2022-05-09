@@ -13,6 +13,7 @@ const mock = {
   id: '',
   name: 'One piece',
   details: {
+    id: '',
     edition: 'Luxo',
     status: 'Em andamento',
     publisher: 'Panini',
@@ -35,6 +36,9 @@ const mock = {
       imageUrl: 'https://m.media-amazon.com/images/I/51W1ij6OH3L.jpg',
       publisher: 'Panini',
       number: 1,
+      releaseDate: '',
+      acquisitionDifficulty: 5,
+      language: '',
       owned: true
     },
     {
@@ -43,6 +47,9 @@ const mock = {
       imageUrl: 'https://m.media-amazon.com/images/I/51YYphO2LLL.jpg',
       publisher: 'Panini',
       number: 2,
+      acquisitionDifficulty: 5,
+      releaseDate: '',
+      language: '',
       owned: true
     },
     {
@@ -51,6 +58,9 @@ const mock = {
       imageUrl: 'https://m.media-amazon.com/images/I/51IX7sqtQPL.jpg',
       publisher: 'Panini',
       number: 3,
+      releaseDate: '',
+      language: '',
+      acquisitionDifficulty: 5,
       owned: true
     },
     {
@@ -59,6 +69,9 @@ const mock = {
       imageUrl: 'https://m.media-amazon.com/images/I/51+238nhs9L._SY346_.jpg',
       publisher: 'Panini',
       number: 4,
+      releaseDate: '',
+      acquisitionDifficulty: 5,
+      language: '',
       owned: false
     }
   ]

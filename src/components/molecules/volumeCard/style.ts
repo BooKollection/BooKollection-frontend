@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { AppBar, styled } from '@mui/material'
 
 export const Card = styled('div', {
   shouldForwardProp: prop => prop !== 'owned'
@@ -17,4 +17,8 @@ export const Card = styled('div', {
   backdropFilter: 'blur(40px)',
   borderRadius: '10px',
   ...(owned !== undefined && owned !== null && !owned && { opacity: 0.8 })
+}))
+
+export const VolumeAppBar = styled(AppBar)(({ theme }) => ({
+  background: theme.palette.secondary.main
 }))

@@ -1,4 +1,4 @@
-import { PT_BR, EN_US } from "../constants"
+import { PT_BR, EN_US } from '../constants'
 
 type languageHomepageTitles = {
   addVolumes: string

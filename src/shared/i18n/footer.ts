@@ -1,19 +1,19 @@
-import { PT_BR, EN_US } from "../constants"
+import { PT_BR, EN_US } from '../constants'
 
 export const cttVersions = {
-    [PT_BR]: {
-        cttVersion: 'versão'
-      },
-    [EN_US]: {
-        cttVersion: 'version'
-      }
+  [PT_BR]: {
+    cttVersion: 'versão'
+  },
+  [EN_US]: {
+    cttVersion: 'version'
+  }
 }
 
 export const buttonScrollVersions = {
   [PT_BR]: {
-      buttonScrollVersion: 'voltar para o topo'
+    buttonScrollVersion: 'voltar para o topo'
   },
   [EN_US]: {
-      buttonScrollVersion: 'back to top'
+    buttonScrollVersion: 'back to top'
   }
 }

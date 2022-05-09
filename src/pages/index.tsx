@@ -21,8 +21,15 @@ const mock = [
       'https://images-na.ssl-images-amazon.com/images/I/51ZGgDM2q+L._SX631_BO1,204,203,200_.jpg',
     edition: 'Remix',
     publisher: 'Panini',
+    synopsis:
+      'Ichigo Kurosaki, 15 anos. Ocupação: Colegial. E então... O ataque violento de um espírito maligno chamado "Hollow" faz suas irmãs caírem uma após a outra... A única forma de salvá-las é se tornar um Shinigami e lutar! Diante da morte iminente, o colegial Ichigo Kurosaki precisará tomar uma decisão que poderá mudar seu destino...!!',
     number: 1,
-    editionId: ''
+    editionId: '',
+    releaseDate: '13/05/2022',
+    acquisitionDifficulty: 5,
+    acquisitionDifficultyAverage: 5,
+    language: 'PT-BR',
+    numberOfPages: 552
   },
   {
     id: '',
@@ -30,9 +37,15 @@ const mock = [
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/41aVXhlE+4L._SX351_BO1,204,203,200_.jpg',
     edition: 'Perfect Edition',
+    synopsis: '',
     publisher: 'JBC',
     number: 1,
-    editionId: ''
+    editionId: '',
+    releaseDate: '',
+    acquisitionDifficulty: 5,
+    acquisitionDifficultyAverage: 5,
+    language: 'PT-BR',
+    numberOfPages: 200
   },
   {
     id: '',
@@ -40,9 +53,15 @@ const mock = [
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/51CG5TGY59L._SX322_BO1,204,203,200_.jpg',
     edition: '3 em 1',
+    synopsis: '',
     publisher: 'Panini',
     number: 1,
-    editionId: ''
+    editionId: '',
+    releaseDate: '',
+    acquisitionDifficulty: 5,
+    acquisitionDifficultyAverage: 5,
+    language: 'PT-BR',
+    numberOfPages: 200
   }
 ]
 const Index = () => {

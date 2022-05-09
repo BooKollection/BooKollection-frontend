@@ -1,14 +1,25 @@
-import { Modal } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, IconButton, Slide, Toolbar, Typography } from '@mui/material'
+import Dialog from '@mui/material/Dialog'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { editionTitles } from '../../../shared/i18n'
 import { StyledButton } from '../../atoms/button'
 import { CustomPopper } from '../../atoms/customPopper'
 import { CenterText, CustomText } from '../../atoms/text'
 import VolumeDetails from '../volumeDetails'
-import { Card } from './style'
+import { Card, VolumeAppBar } from './style'
+import { TransitionProps } from '@mui/material/transitions'
+import CloseIcon from '@mui/icons-material/Close'
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />
+})
 export type VolumeType = {
   id: string
   name: string
@@ -70,24 +81,41 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           anchorEl={anchorEl}
           placement="right"
         >
-          <>
+          <Box>
             <StyledButton
-              sx={{ maxWidth: '100%' }}
               onClick={() => {
                 push('/edition?id=' + editionId)
               }}
             >
               {addToCollection}
             </StyledButton>
-            <StyledButton sx={{ maxWidth: '100%' }} onClick={handleOpen}>
-              {details}
-            </StyledButton>
-          </>
+            <StyledButton onClick={handleOpen}>{details}</StyledButton>
+          </Box>
         </CustomPopper>
       </Card>
-      <Modal open={open} onClose={handleClose}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <VolumeAppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Detalhes
+            </Typography>
+          </Toolbar>
+        </VolumeAppBar>
         <VolumeDetails data={data} />
-      </Modal>
+      </Dialog>
     </>
   )
 }
