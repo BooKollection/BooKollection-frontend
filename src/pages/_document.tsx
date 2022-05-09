@@ -23,7 +23,9 @@ export default class MyDocument extends Document {
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
         })
 
-      const initialProps: DocumentInitialProps = await Document.getInitialProps(ctx)
+      const initialProps: DocumentInitialProps = await Document.getInitialProps(
+        ctx
+      )
       return {
         ...initialProps,
         styles: (
@@ -31,7 +33,7 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        ),
+        )
       }
     } finally {
       sheet.seal()

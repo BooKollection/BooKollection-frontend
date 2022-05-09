@@ -2,30 +2,24 @@ import * as React from 'react'
 import { Box, Modal } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
-import { StyledButton } from '../button'
-import { searchModalLabel } from '../../../shared/i18n'
+import { StyledButton } from '../../atoms/button'
+import { i18n } from '../../../shared/i18n'
 import { style } from './styles'
-
 
 const CustomModal = ({ children }) => {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const { locale } = useRouter()
-  const { label } = searchModalLabel[locale]
+  const { search } = i18n[locale]
 
   return (
     <div>
       <StyledButton onClick={handleOpen}>
         <SearchIcon />
-        {label}
+        {search}
       </StyledButton>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>{children}</Box>
       </Modal>
     </div>

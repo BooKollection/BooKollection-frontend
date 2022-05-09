@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react'
-import { GoogleButton } from '../../atoms/googleButton'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { CssBaseline, Box } from '@mui/material'
+import { GoogleButton } from '../../atoms/googleButton'
+import Footer from '../footer'
+
+import {
+  MenuBook as MenuBookIcon,
+  Home as HomeIcon,
+  LibraryBooks as LibraryBooksIcon
+} from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Drawer } from '../../atoms/drawer'
 import { SearchBar } from '../searchBar'
 import { MenuI } from '../../atoms/menu'
-import { CustomModal } from '../../atoms/modal'
+import { CustomModal } from '../modal'
 import { StyledButton } from '../../atoms/button'
 import { CustomText } from '../../atoms/text'
 import {
@@ -16,17 +24,19 @@ import {
   SandwichIcon,
   ButtonsBox,
   DrawerHeader,
-  MainBox,
-  ChildrenMainBox
+  MainBox
 } from './style'
-import { navbarButtonTitles } from '../../../shared/i18n/navbar'
-import Link from 'next/link'
-
+import { i18n } from '../../../shared/i18n'
+const iconList = [
+  <HomeIcon key="iconList1" color="primary" />,
+  <MenuBookIcon key="iconList2" color="primary" />,
+  <LibraryBooksIcon key="iconList2" color="primary" />
+]
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
   const { locale } = useRouter()
-  const { titles } = navbarButtonTitles[locale]
+  const { titles } = i18n[locale]
 
   useEffect(() => {
     const token = localStorage.getItem('tokenTop')
@@ -42,9 +52,9 @@ const Navbar = ({ children }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+    <MainBox >
       <AppBar position="fixed" open={open}>
+        <CssBaseline />
         <CustomToolbar>
           <LogoBox>
             <SandwichIcon
@@ -70,7 +80,10 @@ const Navbar = ({ children }) => {
                   disabled={index === 1 && !isLogged}
                   key={'navbar' + index}
                 >
-                  <Link href={link} locale={locale}>
+                  <div style={{ marginRight: index === 1 ? '10px' : '5px' }}>
+                    {iconList[index]}
+                  </div>
+                  <Link href={{ pathname: link }} locale={locale}>
                     {label}
                   </Link>
                 </StyledButton>
@@ -84,11 +97,10 @@ const Navbar = ({ children }) => {
         </CustomToolbar>
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-      <MainBox component="main">
-        <DrawerHeader />
-        <ChildrenMainBox>{children}</ChildrenMainBox>
-      </MainBox>
-    </Box>
+      <DrawerHeader />
+      {children}
+      <Footer />
+    </MainBox>
   )
 }
 

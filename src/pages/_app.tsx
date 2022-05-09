@@ -3,17 +3,15 @@ import { storeWrapper } from '../store'
 import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'
-import VLibras from '@djpfs/react-vlibras';
-import Footer from '../components/molecules/footer'
+import VLibras from '@djpfs/react-vlibras'
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <Navbar>
+        <VLibras />
         <Component {...pageProps} />
-        <VLibras/>
       </Navbar>
-      <Footer/>
     </ThemeProvider>
   )
 }
