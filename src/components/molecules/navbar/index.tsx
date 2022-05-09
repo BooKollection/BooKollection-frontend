@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { GoogleButton } from '../../atoms/googleButton'
 import { useRouter } from 'next/router'
 import { CssBaseline, Box } from '@mui/material'
@@ -24,8 +25,7 @@ import {
   MainBox,
   ChildrenMainBox
 } from './style'
-import { navbarButtonTitles } from '../../../shared/i18n/navbar'
-import Link from 'next/link'
+import { i18n } from '../../../shared/i18n'
 const iconList = [
   <HomeIcon key="iconList1" color="primary" />,
   <MenuBookIcon key="iconList2" color="primary" />,
@@ -35,7 +35,7 @@ const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
   const { locale } = useRouter()
-  const { titles } = navbarButtonTitles[locale]
+  const { titles } = i18n[locale]
 
   useEffect(() => {
     const token = localStorage.getItem('tokenTop')

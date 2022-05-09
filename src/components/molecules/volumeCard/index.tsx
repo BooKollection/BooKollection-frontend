@@ -3,7 +3,7 @@ import { Box, IconButton, Slide, Toolbar, Typography } from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { editionTitles } from '../../../shared/i18n'
+import { i18n } from '../../../shared/i18n'
 import { StyledButton } from '../../atoms/button'
 import { CustomPopper } from '../../atoms/customPopper'
 import { CenterText, CustomText } from '../../atoms/text'
@@ -39,7 +39,7 @@ export type VolumeType = {
 }
 export const VolumeCard = ({ data }: { data: VolumeType }) => {
   const { locale, push } = useRouter()
-  const { addToCollection, details } = editionTitles[locale]
+  const { addToCollection, details } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
   const {

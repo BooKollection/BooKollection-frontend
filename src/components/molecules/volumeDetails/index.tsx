@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { Box, Grid, Rating, Tabs } from '@mui/material'
 import Image from 'next/image'
 import { CenterText, CustomText } from '../../atoms/text'
-import { volumeDetailsTitles } from '../../../shared/i18n'
+import { i18n } from '../../../shared/i18n'
 import { BoxContainerDetails, GridContainer } from './style'
-import { BoxContainer } from '../../atoms/boxContainer'
+import { getI18nRequiredProps } from '../../../utils/getI18nProps'
 
 type volumeDetaisType = {
   id: string
@@ -68,7 +68,7 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
               ]
             ])
             .map(([atribute, value], index) => {
-              const editionTitle = volumeDetailsTitles[locale][atribute]
+              const editionTitle = i18n[locale][atribute]
               const title = editionTitle ? editionTitle : atribute
               return (
                 <Grid
@@ -96,9 +96,7 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
               )
             })}
           <Grid item xs={12}>
-            <CenterText fontWeight={'bold'}>
-              {volumeDetailsTitles[locale].synopsis}
-            </CenterText>
+            <CenterText fontWeight={'bold'}>{i18n[locale].synopsis}</CenterText>
             <CenterText
               style={{
                 textAlign: 'justify'

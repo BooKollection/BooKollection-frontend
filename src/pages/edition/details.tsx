@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { editionTitles } from '../../shared/i18n'
 import { Grid } from '@mui/material'
+import { i18n } from '../../shared/i18n'
 import { CenterText } from '../../components/atoms/text'
 
 type details = {
@@ -27,7 +27,7 @@ const EditionDetails = ({ details }: { details: details }) => {
       {Object.entries(details)
         .filter(([atribute]) => atribute !== 'synopsis')
         .map(([atribute, value], index) => {
-          const editionTitle = editionTitles[locale][atribute]
+          const editionTitle = i18n[locale][atribute]
           const title = editionTitle ? editionTitle : atribute
           return (
             <Grid item xs={3} key={'details' + index}>
@@ -38,7 +38,7 @@ const EditionDetails = ({ details }: { details: details }) => {
         })}
       <Grid item xs={3} />
       <Grid item xs={7}>
-        <CenterText>{editionTitles[locale].synopsis}</CenterText>
+        <CenterText>{i18n[locale].synopsis}</CenterText>
         <CenterText
           style={{
             textAlign: 'justify'

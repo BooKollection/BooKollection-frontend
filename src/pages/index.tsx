@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import { CardGrid } from '../components/molecules/cardItens'
 import { CustomText } from '../components/atoms/text'
 import { useRouter } from 'next/router'
-import { homepageTitles } from '../shared/i18n'
+import { i18n } from '../shared/i18n'
 
 const BoxContainer = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.main,
@@ -88,7 +88,7 @@ const mock = [
 ]
 const Index = () => {
   const { locale } = useRouter()
-  const { addVolumes, literaryWorksAdd } = homepageTitles[locale]
+  const { addVolumes, literaryWorksAdd } = i18n[locale]
   return (
     <BoxContainer>
       <CustomText variant="h6">{addVolumes}</CustomText>

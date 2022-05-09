@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { CenterText, CustomText } from '../../atoms/text'
 import { Card } from './style'
-import { editionTitles } from '../../../shared/i18n/edition'
+import { i18n } from '../../../shared/i18n'
 import { CustomPopper } from '../../atoms/customPopper'
 import { StyledButton } from '../../atoms/button'
 
@@ -16,13 +16,14 @@ export const EditionCard = (data: {
   status?: boolean
 }) => {
   const { locale, push } = useRouter()
-  const [openPopper, setOpenPopper] = useState(false)
-  const { details } = editionTitles[locale]
+  const { details } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { id, name, imageUrl, edition, publisher, status } = data
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
+  
   return (
     <Card onClick={handleClick}>
       <Image

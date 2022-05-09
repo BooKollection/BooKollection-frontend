@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import { Tabs } from '@mui/material'
 import { EditionDetails } from './details'
 import { EditionVolume } from './volume'
 import { BoxContainer } from '../../components/atoms/boxContainer'
 import { CustomText } from '../../components/atoms/text'
-import { Tabs } from '@mui/material'
-import { editionTitles } from '../../shared/i18n'
-import { useRouter } from 'next/router'
+import { i18n } from '../../shared/i18n'
 import { CustomTab } from '../../components/atoms/tabItem'
 import { StyledBox } from './style'
 
@@ -85,7 +85,7 @@ function a11yProps(index: number) {
 const Edition = () => {
   const [tabSelected, setTabSelected] = useState(0)
   const { locale } = useRouter()
-  const { details, volumes } = editionTitles[locale]
+  const { details, volumes } = i18n[locale]
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
