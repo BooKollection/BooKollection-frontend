@@ -62,7 +62,11 @@ export const i18n = {
     signIn: 'Entrar',
     cttVersion: 'Versão',
     buttonScrollVersion: 'Voltar para o topo',
-    coverPrice: 'Preço de capa'
+    coverPrice: 'Preço de capa',
+    totalLiteraryWork: 'Total de obras',
+    collectionValue: 'Valor da coleção',
+    completeLiteraryWork: 'Obras completas',
+    memberSince: 'Membro desde'
   },
   [EN_US]: {
     edition: 'Edition',
@@ -125,6 +129,10 @@ export const i18n = {
     signIn: 'Sign In',
     cttVersion: 'Version',
     buttonScrollVersion: 'Back to top',
-    coverPrice: 'Cover Price'
+    coverPrice: 'Cover Price',
+    totalLiteraryWork: 'Total Literary Work',
+    collectionValue: 'Collection Value',
+    completeLiteraryWork: 'Complete Literary Work',
+    memberSince: 'Member Since'
   }
 }

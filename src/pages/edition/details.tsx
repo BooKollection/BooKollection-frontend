@@ -23,21 +23,27 @@ const EditionDetails = ({ details }: { details: details }) => {
   const { locale } = useRouter()
   const { synopsis } = details
   return (
-    <Grid width={'100%'} container gap="0.8em" paddingX={1} columns={13}>
+    <Grid
+      width={'100%'}
+      container
+      gap="0.8em"
+      paddingX={1}
+      columns={13}
+      justifyContent="center"
+    >
       {Object.entries(details)
-        .filter(([atribute]) => atribute !== 'synopsis')
+        .filter(([atribute]) => atribute !== 'synopsis' && atribute !== 'id')
         .map(([atribute, value], index) => {
           const editionTitle = i18n[locale][atribute]
           const title = editionTitle ? editionTitle : atribute
           return (
-            <Grid item xs={3} key={'details' + index}>
+            <Grid item minWidth={100} xs={3} key={'details' + index}>
               <CenterText>{title}</CenterText>
               <CenterText>{value}</CenterText>
             </Grid>
           )
         })}
-      <Grid item xs={3} />
-      <Grid item xs={7}>
+      <Grid item xs={13}>
         <CenterText>{i18n[locale].synopsis}</CenterText>
         <CenterText
           style={{
@@ -47,7 +53,6 @@ const EditionDetails = ({ details }: { details: details }) => {
           {synopsis}
         </CenterText>
       </Grid>
-      <Grid item xs={3} />
     </Grid>
   )
 }

@@ -117,7 +117,12 @@ const Edition = () => {
         />
       </Tabs>
       <StyledBox
-        sx={{ border: 2, borderColor: 'primary.light', width: '100%' }}
+        sx={{
+          border: 2,
+          borderColor: 'primary.light',
+          width: '100%',
+          height: 'calc(100% - 64px)'
+        }}
       >
         {tabSelected === 0 ? (
           <EditionDetails details={mock.details} />

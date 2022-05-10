@@ -22,6 +22,7 @@
     "dotenv": "^10.0.0",
     "graphql": "^16.2.0",
     "i18n-next": "^0.0.4",
+    "moment": "^2.29.3",
     "next": "^12.1.5",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",

@@ -22,6 +22,7 @@ const CardGrid = ({
   <Grid
     padding={'1em'}
     width={'100%'}
+    height={'100%'}
     container
     gap="1em"
     columnSpacing={{ xs: 1, sm: 1, md: 1 }}
