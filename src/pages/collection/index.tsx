@@ -4,7 +4,6 @@ import { Tabs } from '@mui/material'
 import { MyCollectionDetails } from './details'
 import { MyCollectionVolume } from './volume'
 import { BoxContainer } from '../../components/atoms/boxContainer'
-import { CustomText } from '../../components/atoms/text'
 import { i18n } from '../../shared/i18n'
 import { CustomTab } from '../../components/atoms/tabItem'
 import { StyledBox } from './style'
@@ -95,7 +94,7 @@ const MyCollection = () => {
   return (
     <>
       {memberSince && (
-        <BoxContainer>
+        <BoxContainer padding={2}>
           <Tabs
             value={tabSelected}
             style={{ marginLeft: '0.6em' }}
@@ -117,14 +116,7 @@ const MyCollection = () => {
               {...a11yProps(1)}
             />
           </Tabs>
-          <StyledBox
-            sx={{
-              border: 2,
-              borderColor: 'primary.light',
-              width: '100%',
-              height: 'calc(100% - 64px)'
-            }}
-          >
+          <StyledBox>
             {tabSelected === 0 ? (
               <MyCollectionDetails
                 details={{

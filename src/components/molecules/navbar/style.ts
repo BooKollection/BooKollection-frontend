@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   CSSObject,
   IconButton,
   styled,
@@ -42,8 +41,8 @@ export const LogoBox = styled('div')(() => ({
 }))
 export const MainBox = styled(Box)(({ theme }) => ({
   display: 'flex',
+  minHeight: '-webkit-fill-available',
   width: '100%',
-  height: 'calc(100% - 76px)',
   background: theme.palette.primary.main
 }))
 

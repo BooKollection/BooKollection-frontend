@@ -6,7 +6,6 @@ import { theme } from '../styles/theme'
 import VLibras from '@djpfs/react-vlibras'
 import { useRouter } from 'next/router'
 import moment from 'moment'
-import Footer from '../components/molecules/footer'
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
@@ -18,7 +17,6 @@ function MyApp({ Component, pageProps }) {
         <VLibras />
         <Component {...pageProps} />
       </Navbar>
-      <Footer />
     </ThemeProvider>
   )
 }

@@ -91,7 +91,7 @@ const Edition = () => {
   }
 
   return (
-    <BoxContainer>
+    <BoxContainer padding={2}>
       <CustomText variant="h6" marginRight={2} marginBottom={2}>
         {mock.name}
       </CustomText>
@@ -121,7 +121,7 @@ const Edition = () => {
           border: 2,
           borderColor: 'primary.light',
           width: '100%',
-          height: 'calc(100% - 64px)'
+          height: '100%'
         }}
       >
         {tabSelected === 0 ? (

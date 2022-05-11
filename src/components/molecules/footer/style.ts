@@ -9,7 +9,13 @@ export const FooterContainer = styled('div')(() => ({
   padding: '13px',
   width: '100%',
   height: '76px',
-  background: theme.palette.secondary.main
+  background: theme.palette.secondary.main,
+  position: 'fixed',
+  left: '0',
+  bottom: '0',
+  color: 'white',
+  zIndex: '1201',
+  textAlign: 'center'
 }))
 
 export const FooterElements = styled('div')(() => ({

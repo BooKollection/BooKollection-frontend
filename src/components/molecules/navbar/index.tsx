@@ -25,10 +25,10 @@ import {
   Home as HomeIcon,
   LibraryBooks as LibraryBooksIcon
 } from '@mui/icons-material'
-import { MenuI } from '../../atoms/menu'
+import { Footer } from '../footer'
 import { CustomModal } from '../modal'
 import { SearchBar } from '../searchBar'
-const drawerWidth = 240
+import { drawerWidth } from '../../atoms/drawer'
 
 const iconList = [
   <HomeIcon key="iconList1" color="primary" />,
@@ -79,7 +79,7 @@ export const Navbar = ({ children }) => {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   const [isLogged, setIsLogged] = React.useState(false)
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
   const { titles } = i18n[locale]
 
   React.useEffect(() => {
@@ -96,9 +96,13 @@ export const Navbar = ({ children }) => {
   }
 
   return (
-    <MainBox sx={{ display: 'flex' }}>
+    <MainBox sx={{ display: 'flex', background: theme.palette.primary.main }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        open={open}
+        sx={{ background: theme.palette.secondary.main }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -131,7 +135,14 @@ export const Navbar = ({ children }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        sx={{
+          background: theme.palette.secondary.main,
+          filter: 'brightness(1.1)'
+        }}
+        variant="permanent"
+        open={open}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
@@ -162,6 +173,9 @@ export const Navbar = ({ children }) => {
                       mr: open ? 3 : 'auto',
                       justifyContent: 'center'
                     }}
+                    onClick={() => {
+                      push(link)
+                    }}
                   >
                     {iconList[index]}
                   </ListItemIcon>
@@ -175,9 +189,16 @@ export const Navbar = ({ children }) => {
           )}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          padding: '0px',
+          margin: '64px 0px 76px 0px'
+        }}
+      >
         {children}
+        <Footer />
       </Box>
     </MainBox>
   )
