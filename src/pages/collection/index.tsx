@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tabs } from '@mui/material'
 import { MyCollectionDetails } from './details'
-import { MyCollectionVolume } from './volume'
+import { MyCollectionEditions } from './literaryWork'
 import { BoxContainer } from '../../components/atoms/boxContainer'
 import { i18n } from '../../shared/i18n'
 import { CustomTab } from '../../components/atoms/tabItem'
@@ -35,7 +35,7 @@ const MyCollection = () => {
     literaryWorks: []
   })
   const { locale } = useRouter()
-  const { details, volumes } = i18n[locale]
+  const { details, literaryWorksLabel } = i18n[locale]
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
@@ -62,9 +62,9 @@ const MyCollection = () => {
             'https://images-na.ssl-images-amazon.com/images/I/5191HKIfUPL._SX341_BO1,204,203,200_.jpg',
           edition: 'Deluxe',
           publisher: 'Panini',
-          totalVolumes: 1,
+          totalVolumes: 41,
           adquiredVolumes: 40,
-          status: 'not complete',
+          status: 'InProgress',
           amountSpent: 24.9
         }
       ]
@@ -112,11 +112,11 @@ const MyCollection = () => {
             />
             <CustomTab
               isSelected={tabSelected === 1}
-              label={volumes}
+              label={literaryWorksLabel}
               {...a11yProps(1)}
             />
           </Tabs>
-          <StyledBox>
+          <StyledBox padding={3}>
             {tabSelected === 0 ? (
               <MyCollectionDetails
                 details={{
@@ -128,7 +128,7 @@ const MyCollection = () => {
                 }}
               />
             ) : (
-              <MyCollectionVolume data={literaryWorks} />
+              <MyCollectionEditions data={literaryWorks} />
             )}
           </StyledBox>
         </BoxContainer>

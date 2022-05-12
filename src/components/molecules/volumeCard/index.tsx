@@ -4,11 +4,15 @@ import Dialog from '@mui/material/Dialog'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { i18n } from '../../../shared/i18n'
-import { StyledButton } from '../../atoms/button'
-import { CustomPopper } from '../../atoms/customPopper'
-import { CenterText, CustomText } from '../../atoms/text'
+import {
+  StyledButton,
+  CustomPopper,
+  CenterText,
+  CustomText,
+  Card
+} from '../../atoms'
 import VolumeDetails from '../volumeDetails'
-import { Card, VolumeAppBar } from './style'
+import { VolumeAppBar } from './style'
 import { TransitionProps } from '@mui/material/transitions'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -22,11 +26,12 @@ const Transition = React.forwardRef(function Transition(
 })
 export type VolumeType = {
   id: string
+  type: string
   name: string
   imageUrl: string
   edition: string
   publisher: string
-  status: boolean
+  status: string
   number: number
   owned: boolean
   editionId: string
@@ -42,16 +47,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
   const { addToCollection, details } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
-  const {
-    name,
-    imageUrl,
-    edition,
-    publisher,
-    status,
-    number,
-    owned,
-    editionId
-  } = data
+  const { name, imageUrl, edition, publisher, number, owned, editionId } = data
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
@@ -73,7 +69,6 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
         />
         <CenterText>{name}</CenterText>
         <CenterText>{edition}</CenterText>
-        <CustomText>{status}</CustomText>
         <CustomText>{publisher}</CustomText>
         <CustomText> Volume {number}</CustomText>
         <CustomPopper
@@ -84,7 +79,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           <Box>
             <StyledButton
               onClick={() => {
-                push('/edition?id=' + editionId)
+                push({ pathname: '/edition', query: { keyword: editionId } })
               }}
             >
               {addToCollection}

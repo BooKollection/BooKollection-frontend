@@ -10,6 +10,7 @@ const CardGrid = ({
   isVolume?: boolean
   itens: {
     id: string
+    type: string
     name: string
     imageUrl: string
     edition: string
@@ -20,7 +21,6 @@ const CardGrid = ({
   }[]
 }) => (
   <Grid
-    padding={'1em'}
     width={'100%'}
     container
     gap="1em"
@@ -30,16 +30,7 @@ const CardGrid = ({
       ? itens.map((data: VolumeType, index) => (
           <VolumeCard key={index} data={data} />
         ))
-      : itens.map(({ id, name, imageUrl, edition, publisher }, index) => (
-          <EditionCard
-            id={id}
-            key={index}
-            name={name}
-            imageUrl={imageUrl}
-            edition={edition}
-            publisher={publisher}
-          />
-        ))}
+      : itens.map((data, index) => <EditionCard key={index} data={data} />)}
   </Grid>
 )
 

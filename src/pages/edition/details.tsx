@@ -28,18 +28,28 @@ const EditionDetails = ({ details }: { details: details }) => {
       container
       gap="0.8em"
       paddingX={1}
+      paddingY={3}
       columns={13}
       justifyContent="center"
     >
       {Object.entries(details)
-        .filter(([atribute]) => atribute !== 'synopsis' && atribute !== 'id')
+        .filter(
+          ([atribute]) =>
+            atribute !== 'editionId' &&
+            atribute !== 'synopsis' &&
+            atribute !== 'id' &&
+            atribute !== 'imageUrl'
+        )
         .map(([atribute, value], index) => {
-          const editionTitle = i18n[locale][atribute]
+          const editionTitle =
+            atribute === 'type'
+              ? i18n[locale].typeLabelEdition[atribute]
+              : i18n[locale][atribute]
           const title = editionTitle ? editionTitle : atribute
           return (
-            <Grid item minWidth={100} xs={3} key={'details' + index}>
+            <Grid item minWidth={135} xs={3} key={'details' + index}>
               <CenterText>{title}</CenterText>
-              <CenterText>{value}</CenterText>
+              <CenterText flexWrap={'wrap'}>{value}</CenterText>
             </Grid>
           )
         })}

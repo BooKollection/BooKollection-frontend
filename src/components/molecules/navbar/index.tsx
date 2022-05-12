@@ -159,7 +159,14 @@ export const Navbar = ({ children }) => {
               { label, link }: { label: string; link: string },
               index: number
             ) => (
-              <ListItem key={label} disablePadding sx={{ display: 'block' }}>
+              <ListItem
+                key={label}
+                disablePadding
+                sx={{ display: 'block' }}
+                onClick={() => {
+                  push(link)
+                }}
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -172,9 +179,6 @@ export const Navbar = ({ children }) => {
                       minWidth: 0,
                       mr: open ? 3 : 'auto',
                       justifyContent: 'center'
-                    }}
-                    onClick={() => {
-                      push(link)
                     }}
                   >
                     {iconList[index]}

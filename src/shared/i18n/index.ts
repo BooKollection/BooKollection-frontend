@@ -56,6 +56,7 @@ export const i18n = {
         link: '/literaryWorks'
       }
     ],
+    literaryWorksLabel: 'Obras literárias',
     addVolumes: 'Volumes adicionados',
     literaryWorksAdd: 'Obras Adicionadas',
     search: 'Buscar',
@@ -66,7 +67,17 @@ export const i18n = {
     totalLiteraryWork: 'Total de obras',
     collectionValue: 'Valor da coleção',
     completeLiteraryWork: 'Obras completas',
-    memberSince: 'Membro desde'
+    memberSince: 'Membro desde',
+    statusLabelTypes: {
+      Complete: 'Finalizado',
+      InProgress: 'Em andamento',
+      Hiatus: 'Hiato'
+    },
+    typeLabelEdition: {
+      JapaneseComicBook: 'Mangá',
+      ComicBook: 'História em quadrinhos',
+      Book: 'Livro'
+    }
   },
   [EN_US]: {
     edition: 'Edition',
@@ -103,6 +114,7 @@ export const i18n = {
       couche: 'CouchE',
       pollen: 'Pollen'
     },
+    literaryWorksLabel: 'Literary Works',
     addToCollection: 'Add to collection',
     dimensions: 'Dimensions',
     readingAge: 'reading Age',
@@ -133,6 +145,16 @@ export const i18n = {
     totalLiteraryWork: 'Total Literary Work',
     collectionValue: 'Collection Value',
     completeLiteraryWork: 'Complete Literary Work',
-    memberSince: 'Member Since'
+    memberSince: 'Member Since',
+    statusLabelTypes: {
+      Complete: 'Complete',
+      InProgress: 'In Progress',
+      Hiatus: 'Hiatus'
+    },
+    typeLabelEdition: {
+      JapaneseComicBook: 'Japanese comic book',
+      ComicBook: 'Comics',
+      Book: 'Book'
+    }
   }
 }
