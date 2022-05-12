@@ -3,6 +3,7 @@ import { PT_BR, EN_US } from '../constants'
 export const i18n = {
   [PT_BR]: {
     edition: 'Edição',
+    type: 'Tipo',
     status: 'Status',
     publisher: 'Editora',
     totalVolumes: 'Total de volumes',
@@ -81,6 +82,7 @@ export const i18n = {
   },
   [EN_US]: {
     edition: 'Edition',
+    type: 'Type',
     status: 'Status',
     publisher: 'Publisher',
     totalVolumes: 'Total volumes',

@@ -58,6 +58,7 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
                 atribute !== 'imageUrl' &&
                 atribute !== 'id' &&
                 atribute !== 'editionId' &&
+                atribute !== 'volumes' &&
                 !atribute.includes('acquisition')
             )
             .concat([
@@ -90,7 +91,11 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
                       />
                     </Box>
                   ) : (
-                    <CenterText>{value}</CenterText>
+                    <CenterText>
+                      {atribute === 'type'
+                        ? i18n[locale]['typeLabelEdition'][value]
+                        : value}
+                    </CenterText>
                   )}
                 </Grid>
               )
