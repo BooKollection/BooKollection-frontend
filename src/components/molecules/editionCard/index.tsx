@@ -1,29 +1,47 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { CenterText, CustomText } from '../../atoms/text'
-import { Card } from './style'
+import {
+  CenterText,
+  CustomText,
+  Card,
+  CustomPopper,
+  StyledButton
+} from '../../atoms'
 import { i18n } from '../../../shared/i18n'
-import { CustomPopper } from '../../atoms/customPopper'
-import { StyledButton } from '../../atoms/button'
 
-export const EditionCard = (data: {
-  id: string
-  name: string
-  imageUrl: string
-  edition: string
-  publisher: string
-  status?: boolean
+export const EditionCard = ({
+  data
+}: {
+  data: {
+    id: string
+    name: string
+    imageUrl: string
+    edition: string
+    publisher: string
+    status?: string
+    totalVolumes?: number
+    adquiredVolumes?: number
+  }
 }) => {
   const { locale, push } = useRouter()
-  const { details } = i18n[locale]
+  const { details, statusLabelTypes } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const { id, name, imageUrl, edition, publisher, status } = data
+  const {
+    id,
+    name,
+    imageUrl,
+    edition,
+    publisher,
+    status,
+    totalVolumes,
+    adquiredVolumes
+  } = data
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
-  
+
   return (
     <Card onClick={handleClick}>
       <Image
@@ -33,10 +51,30 @@ export const EditionCard = (data: {
         height={200}
         unoptimized={true}
       />
-      <CenterText>{name}</CenterText>
+      <CenterText fontWeight={'bold'}>{name}</CenterText>
       <CenterText>{edition}</CenterText>
-      <CustomText>{status}</CustomText>
       <CustomText>{publisher}</CustomText>
+      {status && (
+        <CustomText
+          padding="1px 7px"
+          borderRadius={1}
+          bgcolor={
+            status === 'Complete'
+              ? '#04C900'
+              : status === 'Hiatus'
+              ? '#838269'
+              : '#faf324be'
+          }
+          textAlign="center"
+        >
+          {statusLabelTypes[status]}
+        </CustomText>
+      )}
+      {totalVolumes && adquiredVolumes && (
+        <CustomText>
+          {adquiredVolumes}/{status !== 'Complete' ? '???' : totalVolumes}
+        </CustomText>
+      )}
       <CustomPopper
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
@@ -44,7 +82,7 @@ export const EditionCard = (data: {
       >
         <StyledButton
           onClick={() => {
-            push('/edition?id=' + id)
+            push({ pathname: '/edition', query: { id: id } })
           }}
         >
           {details}

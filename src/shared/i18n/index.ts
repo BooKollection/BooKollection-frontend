@@ -3,6 +3,7 @@ import { PT_BR, EN_US } from '../constants'
 export const i18n = {
   [PT_BR]: {
     edition: 'Edição',
+    type: 'Tipo',
     status: 'Status',
     publisher: 'Editora',
     totalVolumes: 'Total de volumes',
@@ -56,16 +57,32 @@ export const i18n = {
         link: '/literaryWorks'
       }
     ],
+    literaryWorksLabel: 'Obras literárias',
     addVolumes: 'Volumes adicionados',
     literaryWorksAdd: 'Obras Adicionadas',
     search: 'Buscar',
     signIn: 'Entrar',
     cttVersion: 'Versão',
     buttonScrollVersion: 'Voltar para o topo',
-    coverPrice: 'Preço de capa'
+    coverPrice: 'Preço de capa',
+    totalLiteraryWork: 'Total de obras',
+    collectionValue: 'Valor da coleção',
+    completeLiteraryWork: 'Obras completas',
+    memberSince: 'Membro desde',
+    statusLabelTypes: {
+      Complete: 'Finalizado',
+      InProgress: 'Em andamento',
+      Hiatus: 'Hiato'
+    },
+    typeLabelEdition: {
+      JapaneseComicBook: 'Mangá',
+      ComicBook: 'História em quadrinhos',
+      Book: 'Livro'
+    }
   },
   [EN_US]: {
     edition: 'Edition',
+    type: 'Type',
     status: 'Status',
     publisher: 'Publisher',
     totalVolumes: 'Total volumes',
@@ -99,6 +116,7 @@ export const i18n = {
       couche: 'CouchE',
       pollen: 'Pollen'
     },
+    literaryWorksLabel: 'Literary Works',
     addToCollection: 'Add to collection',
     dimensions: 'Dimensions',
     readingAge: 'reading Age',
@@ -125,6 +143,20 @@ export const i18n = {
     signIn: 'Sign In',
     cttVersion: 'Version',
     buttonScrollVersion: 'Back to top',
-    coverPrice: 'Cover Price'
+    coverPrice: 'Cover Price',
+    totalLiteraryWork: 'Total Literary Work',
+    collectionValue: 'Collection Value',
+    completeLiteraryWork: 'Complete Literary Work',
+    memberSince: 'Member Since',
+    statusLabelTypes: {
+      Complete: 'Complete',
+      InProgress: 'In Progress',
+      Hiatus: 'Hiatus'
+    },
+    typeLabelEdition: {
+      JapaneseComicBook: 'Japanese comic book',
+      ComicBook: 'Comics',
+      Book: 'Book'
+    }
   }
 }

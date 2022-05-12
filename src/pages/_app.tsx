@@ -4,8 +4,13 @@ import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { theme } from '../styles/theme'
 import VLibras from '@djpfs/react-vlibras'
+import { useRouter } from 'next/router'
+import moment from 'moment'
 
 function MyApp({ Component, pageProps }) {
+  const { locale } = useRouter()
+  moment.locale(locale)
+
   return (
     <ThemeProvider theme={theme}>
       <Navbar>

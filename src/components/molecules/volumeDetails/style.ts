@@ -4,17 +4,13 @@ export const GridContainer = styled(Box)(() => ({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '5px',
-  justifyContent: 'center',
-  marginTop: '2em'
+  justifyContent: 'center'
 }))
 
 export const BoxContainerDetails = styled('div')(({ theme }) => ({
   background: theme.palette.primary.main,
-  position: 'absolute',
-  top: '0%',
-  marginTop: '1em',
   padding: '2em 1em',
   width: '100%',
-  minHeight: '100vh',
+  minHeight: '100%',
   justifyContent: 'center'
 }))

@@ -9,7 +9,7 @@ import {
 import { useRouter } from 'next/router'
 import { i18n } from '../../../shared/i18n'
 
-const Footer = () => {
+export const Footer = () => {
   const { locale } = useRouter()
   const { cttVersion, buttonScrollVersion } = i18n[locale]
 
@@ -32,5 +32,3 @@ const Footer = () => {
     </FooterContainer>
   )
 }
-
-export default Footer
