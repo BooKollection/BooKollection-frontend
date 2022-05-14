@@ -17,7 +17,7 @@ import Link from 'next/link'
 import { DrawerHeader, DrawerUI, ListDrawer } from './style'
 import { i18n } from '../../../shared/i18n'
 
-export const drawerWidth = 240
+export const drawerWidth = 200
 
 export const Drawer = ({
   open,
@@ -43,7 +43,7 @@ export const Drawer = ({
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <ListDrawer>
+      <ListDrawer style={{ height: '100%' }}>
         {titles.map(
           (
             {

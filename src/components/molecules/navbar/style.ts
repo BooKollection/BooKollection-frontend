@@ -1,17 +1,22 @@
 import {
   Box,
+  ButtonProps,
   CSSObject,
   IconButton,
   styled,
+  SvgIconProps,
   Theme,
   Toolbar
 } from '@mui/material'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { StyledButton } from '../../atoms'
 import { drawerWidth } from '../../atoms/drawer'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean
 }
+
 export const CustomToolbar = styled(Toolbar)(() => ({
   display: 'flex',
   width: '100%',
@@ -50,6 +55,8 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open'
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  height: '4em !important',
+  minHeight: '4em !important',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -96,4 +103,32 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar
+}))
+
+interface ShowBackToTopProps extends ButtonProps {
+  showBackToTop: boolean
+}
+export const BackToTopButton = styled(StyledButton, {
+  shouldForwardProp: prop => prop !== 'showBackToTop'
+})<ShowBackToTopProps>(({ theme, showBackToTop }) => ({
+  position: 'fixed',
+  bottom: '5%',
+  right: '5%',
+  background: theme.palette.secondary.main,
+  width: showBackToTop ? '50px !important' : '0px !important',
+  minWidth: showBackToTop ? '50px !important' : '0px !important',
+  height: showBackToTop ? '50px !important' : '0px !important',
+  borderRadius: '50%',
+  transform: 'scale(1)',
+  transition: 'all .4s ease-in-out',
+  ...(!showBackToTop && { padding: '0px !important' })
+}))
+
+export const CustomKeyboardArrowUpIcon = styled(KeyboardArrowUpIcon, {
+  shouldForwardProp: prop => prop !== 'showBackToTop'
+})<ShowBackToTopProps>(({ showBackToTop }) => ({
+  width: showBackToTop ? '100% !important' : '0px !important',
+  minWidth: showBackToTop ? '100%  !important' : '0px !important',
+  height: showBackToTop ? '100%  !important' : '0px !important',
+  padding: '0px !important'
 }))

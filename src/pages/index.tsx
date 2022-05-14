@@ -21,7 +21,9 @@ const Index = () => {
     <BoxContainer>
       <CustomText variant="h6">{addVolumes}</CustomText>
       <CardGrid isVolume itens={editionMock} />
-      <CustomText variant="h6">{literaryWorksAdd}</CustomText>
+      <CustomText variant="h6" marginTop="20px">
+        {literaryWorksAdd}
+      </CustomText>
       <CardGrid itens={editionMock} />
     </BoxContainer>
   )

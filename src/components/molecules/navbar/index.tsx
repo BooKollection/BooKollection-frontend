@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import * as React from 'react'
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
@@ -16,7 +17,14 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { closedMixin, DrawerHeader, MainBox, openedMixin } from './style'
+import {
+  BackToTopButton,
+  closedMixin,
+  DrawerHeader,
+  MainBox,
+  openedMixin,
+  CustomKeyboardArrowUpIcon
+} from './style'
 import { useRouter } from 'next/router'
 import { i18n } from '../../../shared/i18n'
 import { GoogleButton } from '../../atoms/googleButton'
@@ -25,11 +33,11 @@ import {
   Home as HomeIcon,
   LibraryBooks as LibraryBooksIcon
 } from '@mui/icons-material'
-import { Footer } from '../footer'
 import { CustomModal } from '../modal'
 import { SearchBar } from '../searchBar'
 import { drawerWidth } from '../../atoms/drawer'
-
+import { CenterText, StyledButton } from '../../atoms'
+import { Button } from '@mui/material'
 const iconList = [
   <HomeIcon key="iconList1" color="primary" />,
   <MenuBookIcon key="iconList2" color="primary" />,
@@ -72,7 +80,10 @@ const Drawer = styled(MuiDrawer, {
   ...(!open && {
     ...closedMixin(theme),
     '& .MuiDrawer-paper': closedMixin(theme)
-  })
+  }),
+  [theme.breakpoints.down('sm')]: {
+    width: open ? drawerWidth : 0
+  }
 }))
 
 export const Navbar = ({ children }) => {
@@ -80,13 +91,23 @@ export const Navbar = ({ children }) => {
   const [open, setOpen] = React.useState(false)
   const [isLogged, setIsLogged] = React.useState(false)
   const { locale, push } = useRouter()
-  const { titles } = i18n[locale]
-
-  React.useEffect(() => {
+  const { titles, cttVersion } = i18n[locale]
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  useEffect(() => {
     const token = localStorage.getItem('tokenTop')
 
     setIsLogged(!!token)
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > window.innerHeight / 3) {
+        if (!showBackToTop) {
+          setShowBackToTop(true)
+        }
+      } else {
+        setShowBackToTop(false)
+      }
+    })
   }, [])
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -110,7 +131,6 @@ export const Navbar = ({ children }) => {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 5,
               ...(open && { display: 'none' })
             }}
           >
@@ -153,7 +173,7 @@ export const Navbar = ({ children }) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List style={{ height: 'calc(100% - 7em)' }}>
           {titles.map(
             (
               { label, link }: { label: string; link: string },
@@ -192,17 +212,28 @@ export const Navbar = ({ children }) => {
             )
           )}
         </List>
+        {open && <CenterText height={'20px'}>{cttVersion} 0.1</CenterText>}
       </Drawer>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           padding: '0px',
-          margin: '64px 0px 76px 0px'
+          marginTop: '3.5em'
         }}
       >
         {children}
-        <Footer />
+        <BackToTopButton
+          showBackToTop={showBackToTop}
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            })
+          }}
+        >
+          <CustomKeyboardArrowUpIcon showBackToTop={showBackToTop} />
+        </BackToTopButton>
       </Box>
     </MainBox>
   )

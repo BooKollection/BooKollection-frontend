@@ -25,6 +25,7 @@ const CardGrid = ({
     container
     gap="1em"
     columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+    marginLeft="0px !important"
   >
     {isVolume
       ? itens.map((data: VolumeType, index) => (
