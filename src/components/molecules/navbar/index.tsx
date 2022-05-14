@@ -36,8 +36,8 @@ import {
 import { CustomModal } from '../modal'
 import { SearchBar } from '../searchBar'
 import { drawerWidth } from '../../atoms/drawer'
-import { CenterText, StyledButton } from '../../atoms'
-import { Button } from '@mui/material'
+import { CenterText } from '../../atoms'
+
 const iconList = [
   <HomeIcon key="iconList1" color="primary" />,
   <MenuBookIcon key="iconList2" color="primary" />,
@@ -106,6 +106,7 @@ export const Navbar = ({ children }) => {
         setShowBackToTop(false)
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleDrawerOpen = () => {

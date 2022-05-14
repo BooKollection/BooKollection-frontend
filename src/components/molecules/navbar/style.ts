@@ -4,7 +4,6 @@ import {
   CSSObject,
   IconButton,
   styled,
-  SvgIconProps,
   Theme,
   Toolbar
 } from '@mui/material'
