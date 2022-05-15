@@ -95,17 +95,28 @@ export const Navbar = ({ children }) => {
   const [showBackToTop, setShowBackToTop] = useState(false)
   useEffect(() => {
     const token = localStorage.getItem('tokenTop')
-
-    setIsLogged(!!token)
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > window.innerHeight / 3) {
-        if (!showBackToTop) {
-          setShowBackToTop(true)
-        }
-      } else {
-        setShowBackToTop(false)
+    function debounce(func, timeout = 300) {
+      let timer: NodeJS.Timeout
+      return (...args: unknown[]) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          func.apply(this, args)
+        }, timeout)
       }
-    })
+    }
+    setIsLogged(!!token)
+    window.addEventListener(
+      'scroll',
+      debounce(() => {
+        if (window.scrollY > window.innerHeight / 3) {
+          if (!showBackToTop) {
+            setShowBackToTop(true)
+          }
+        } else {
+          setShowBackToTop(false)
+        }
+      })
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -118,12 +129,12 @@ export const Navbar = ({ children }) => {
   }
 
   return (
-    <MainBox sx={{ display: 'flex', background: theme.palette.primary.main }}>
+    <MainBox sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         open={open}
-        sx={{ background: theme.palette.secondary.main }}
+        sx={{ background: theme.palette.primary.dark }}
       >
         <Toolbar>
           <IconButton
@@ -158,7 +169,7 @@ export const Navbar = ({ children }) => {
       </AppBar>
       <Drawer
         sx={{
-          background: theme.palette.secondary.main,
+          background: theme.palette.primary.dark,
           filter: 'brightness(1.1)'
         }}
         variant="permanent"
@@ -216,10 +227,9 @@ export const Navbar = ({ children }) => {
         {open && <CenterText height={'20px'}>{cttVersion} 0.1</CenterText>}
       </Drawer>
       <Box
-        component="main"
         sx={{
           flexGrow: 1,
-          padding: '0px',
+          padding: '8px',
           marginTop: '3.5em'
         }}
       >

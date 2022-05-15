@@ -71,7 +71,7 @@ const AppBar = styled(MuiAppBar, {
 }))
 
 export const CustomAppbar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.secondary.main
+  background: theme.palette.primary.main
 }))
 
 export const openedMixin = (theme: Theme): CSSObject => ({
@@ -113,7 +113,7 @@ export const BackToTopButton = styled(StyledButton, {
   position: 'fixed',
   bottom: '5%',
   right: '5%',
-  background: theme.palette.secondary.main,
+  background: theme.palette.primary.light,
   width: showBackToTop ? '50px !important' : '0px !important',
   minWidth: showBackToTop ? '50px !important' : '0px !important',
   height: showBackToTop ? '50px !important' : '0px !important',

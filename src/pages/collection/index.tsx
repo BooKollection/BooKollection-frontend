@@ -41,7 +41,7 @@ const MyCollection = () => {
   }
   useEffect(() => {
     const response = {
-      memberSince: '',
+      memberSince: String(new Date()),
       literaryWorks: [
         {
           id: '',

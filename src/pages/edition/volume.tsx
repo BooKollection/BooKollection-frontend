@@ -5,7 +5,7 @@ import { CardGrid } from '../../components/molecules/cardItens'
 const EditionVolume = ({ data }) => {
   return (
     <Grid width={'100%'} container gap="0.8em" paddingX={1}>
-      <CardGrid isVolume itens={data} />
+      <CardGrid volumes={data} />
     </Grid>
   )
 }

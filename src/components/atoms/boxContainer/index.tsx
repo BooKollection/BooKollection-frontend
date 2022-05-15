@@ -1,11 +1,10 @@
 import { Box, styled } from '@mui/material'
 
-const BoxContainer = styled(Box)(({ theme }) => ({
+const BoxContainer = styled(Box)(({}) => ({
   display: 'flex',
   flexDirection: 'column',
-  background: theme.palette.primary.main,
   height: '100%',
-  width: '100%',
+  width: '100%'
 }))
 
 export { BoxContainer }
