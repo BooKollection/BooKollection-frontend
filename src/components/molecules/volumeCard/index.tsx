@@ -26,21 +26,22 @@ const Transition = React.forwardRef(function Transition(
 })
 export type VolumeType = {
   id: string
-  type: string
+  coverPrice: string
   name: string
   imageUrl: string
   edition: string
   publisher: string
-  status: string
   number: number
   owned: boolean
   editionId: string
-  price: number
   language: string
   synopsis: string
-  releaseDate: Date
+  releaseDate: string
   acquisitionDifficulty: number
   acquisitionDifficultyAverage: number
+  paperBack: number
+  isbn10: string
+  isbn13: string
 }
 export const VolumeCard = ({ data }: { data: VolumeType }) => {
   const { locale, push } = useRouter()

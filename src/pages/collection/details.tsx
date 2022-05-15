@@ -8,7 +8,7 @@ import { i18n } from '../../shared/i18n'
 import { CenterText } from '../../components/atoms/text'
 
 type details = {
-  totalLiteraryWork: number
+  totalLiteraryWorks: number
   totalVolumes: number
   collectionValue: number
   completeLiteraryWork: number
