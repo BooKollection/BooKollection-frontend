@@ -1,24 +1,15 @@
 import { Grid } from '@mui/material'
 import React from 'react'
+import { EditionDetailsType } from '../../../pages/edition/details'
 import { EditionCard } from '../editionCard'
 import { VolumeCard, VolumeType } from '../volumeCard'
 
 const CardGrid = ({
-  isVolume,
-  itens
+  volumes,
+  editions
 }: {
-  isVolume?: boolean
-  itens: {
-    id: string
-    type: string
-    name: string
-    imageUrl: string
-    edition: string
-    publisher: string
-    number?: number
-    owned?: boolean
-    editionId: string
-  }[]
+  volumes?: VolumeType[]
+  editions?: EditionDetailsType[]
 }) => (
   <Grid
     width={'100%'}
@@ -27,11 +18,11 @@ const CardGrid = ({
     columnSpacing={{ xs: 1, sm: 1, md: 1 }}
     marginLeft="0px !important"
   >
-    {isVolume
-      ? itens.map((data: VolumeType, index) => (
+    {volumes
+      ? volumes.map((data: VolumeType, index) => (
           <VolumeCard key={index} data={data} />
         ))
-      : itens.map((data, index) => <EditionCard key={index} data={data} />)}
+      : editions.map((data, index) => <EditionCard key={index} data={data} />)}
   </Grid>
 )
 

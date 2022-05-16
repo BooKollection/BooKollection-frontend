@@ -1,27 +1,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Grid, Rating, Tabs } from '@mui/material'
+import { Box, Grid, Rating } from '@mui/material'
 import Image from 'next/image'
-import { CenterText, CustomText } from '../../atoms/text'
+import { CenterText } from '../../atoms/text'
 import { i18n } from '../../../shared/i18n'
 import { BoxContainerDetails, GridContainer } from './style'
-import { getI18nRequiredProps } from '../../../utils/getI18nProps'
+import { VolumeType } from '../volumeCard'
 
-type volumeDetaisType = {
-  id: string
-  name: string
-  edition: string
-  publisher: string
-  price: number
-  number: number
-  language: string
-  synopsis: string
-  releaseDate: Date
-  acquisitionDifficulty: number
-  acquisitionDifficultyAverage: number
-  imageUrl: string
-}
-const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
+const VolumeDetails = ({ data }: { data: VolumeType }) => {
   const { locale } = useRouter()
   const [userAcquisitionDifficulty, setUserAcquisitionDifficulty] = useState(
     data.acquisitionDifficulty
@@ -59,6 +45,7 @@ const VolumeDetails = ({ data }: { data: volumeDetaisType }) => {
                 atribute !== 'id' &&
                 atribute !== 'editionId' &&
                 atribute !== 'volumes' &&
+                atribute !== 'owned' &&
                 !atribute.includes('acquisition')
             )
             .concat([

@@ -3,8 +3,8 @@ import { alpha, styled } from '@mui/material'
 
 export const StyledButton = styled(Button)(({ theme }) => ({
   width: '100%',
-  color: theme.palette.common.white,
+  color: theme.palette.primary.contrastText,
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    background: alpha(theme.palette.primary.dark, 0.25)
   }
 }))

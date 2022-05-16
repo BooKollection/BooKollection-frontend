@@ -9,7 +9,7 @@ const CustomTab = styled(Tab, {
   background: isSelected
     ? theme.palette.primary.light
     : theme.palette.primary.main,
-  color: isSelected ? theme.palette.primary.main : theme.palette.primary.light,
+  color: isSelected ? '#ffff' : theme.palette.primary.contrastText,
   borderRadius: '10px 10px 0px 0px'
 }))
 

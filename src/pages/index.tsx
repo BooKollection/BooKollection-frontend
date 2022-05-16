@@ -5,10 +5,9 @@ import { CardGrid } from '../components/molecules/cardItens'
 import { CustomText } from '../components/atoms/text'
 import { useRouter } from 'next/router'
 import { i18n } from '../shared/i18n'
-import { editionMock } from '../shared/mocks'
+import { editionMock, editionVolumesMock } from '../shared/mocks'
 
-const BoxContainer = styled(Box)(({ theme }) => ({
-  background: theme.palette.primary.main,
+const BoxContainer = styled(Box)(({}) => ({
   height: '100%',
   width: '100%',
   padding: '1em'
@@ -19,12 +18,14 @@ const Index = () => {
   const { addVolumes, literaryWorksAdd } = i18n[locale]
   return (
     <BoxContainer>
-      <CustomText variant="h6">{addVolumes}</CustomText>
-      <CardGrid isVolume itens={editionMock} />
-      <CustomText variant="h6" marginTop="20px">
+      <CustomText variant="h6" margin="15px 0px">
+        {addVolumes}
+      </CustomText>
+      <CardGrid volumes={editionVolumesMock} />
+      <CustomText variant="h6" margin="25px 0px 15px 0px">
         {literaryWorksAdd}
       </CustomText>
-      <CardGrid itens={editionMock} />
+      <CardGrid editions={editionMock} />
     </BoxContainer>
   )
 }

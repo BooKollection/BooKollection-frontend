@@ -8,7 +8,7 @@ import { CustomText } from '../../components/atoms/text'
 import { i18n } from '../../shared/i18n'
 import { CustomTab } from '../../components/atoms/tabItem'
 import { StyledBox } from './style'
-import { editionMock } from '../../shared/mocks'
+import { editionMock, editionVolumesMock } from '../../shared/mocks'
 
 function a11yProps(index: number) {
   return {
@@ -16,19 +16,32 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`
   }
 }
-const getEdition = (id: string | string[]) =>
-  editionMock.filter(edition => edition.id === id)[0]
+const getEdition = (id: string | string[]) => {
+  const edition = editionMock.filter(edition => edition.id === id)[0]
+  console.log(edition)
 
+  let volumes = []
+  if (edition) {
+    volumes = editionVolumesMock.filter(
+      volume => volume.editionId === edition.id
+    )
+  }
+  return { edition, volumes }
+}
 const Edition = () => {
   const [tabSelected, setTabSelected] = useState(0)
   const [edition, setEdition] = useState(null)
+  const [editionVolumes, setEditionVolumes] = useState([])
   const { locale, query } = useRouter()
   const { details, volumes } = i18n[locale]
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
   useEffect(() => {
-    setEdition(getEdition(query.id))
+    const { edition, volumes } = getEdition(query.id)
+    setEdition(edition)
+    setEditionVolumes(volumes)
+    console.log(getEdition(query.id).volumes)
   }, [])
   return (
     edition && (
@@ -59,8 +72,6 @@ const Edition = () => {
         </Tabs>
         <StyledBox
           sx={{
-            border: 2,
-            borderColor: 'primary.light',
             width: '100%',
             height: '100%'
           }}
@@ -68,7 +79,7 @@ const Edition = () => {
           {tabSelected === 0 ? (
             <EditionDetails details={edition} />
           ) : (
-            <EditionVolume data={edition.volumes} />
+            <EditionVolume data={editionVolumes} />
           )}
         </StyledBox>
       </BoxContainer>

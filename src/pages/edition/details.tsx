@@ -4,14 +4,19 @@ import { Grid } from '@mui/material'
 import { i18n } from '../../shared/i18n'
 import { CenterText } from '../../components/atoms/text'
 
-type details = {
+export type EditionDetailsType = {
+  id: string
+  name: string
+  imageUrl: string
+  adquiredVolumes?: number
   edition: string
   status: string
   publisher: string
-  totalVolumes: string
+  totalVolumes: number
   format: string
-  author: string
-  ageGroup: string
+  illustratorBy: string
+  writterBy: string
+  ageRange: string
   bagShape: string
   categories: string
   language: string
@@ -19,7 +24,7 @@ type details = {
   synopsis: string
   paperType: string
 }
-const EditionDetails = ({ details }: { details: details }) => {
+const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
   const { locale } = useRouter()
   const { synopsis } = details
   return (

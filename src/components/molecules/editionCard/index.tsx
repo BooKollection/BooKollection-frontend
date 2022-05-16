@@ -5,10 +5,11 @@ import {
   CenterText,
   CustomText,
   Card,
-  CustomPopper,
+  CustomPopover,
   StyledButton
 } from '../../atoms'
 import { i18n } from '../../../shared/i18n'
+import { Box } from '@mui/material'
 
 export const EditionCard = ({
   data
@@ -43,7 +44,7 @@ export const EditionCard = ({
   }
 
   return (
-    <Card onClick={handleClick}>
+    <Card open={Boolean(anchorEl)} onClick={handleClick}>
       <Image
         src={imageUrl}
         alt="Picture of the author"
@@ -75,19 +76,17 @@ export const EditionCard = ({
           {adquiredVolumes}/{status !== 'Complete' ? '???' : totalVolumes}
         </CustomText>
       )}
-      <CustomPopper
-        open={Boolean(anchorEl)}
-        anchorEl={anchorEl}
-        placement="right"
-      >
-        <StyledButton
-          onClick={() => {
-            push({ pathname: '/edition', query: { id: id } })
-          }}
-        >
-          {details}
-        </StyledButton>
-      </CustomPopper>
+      <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
+        <Box width="10em">
+          <StyledButton
+            onClick={() => {
+              push({ pathname: '/edition', query: { id: id } })
+            }}
+          >
+            {details}
+          </StyledButton>
+        </Box>
+      </CustomPopover>
     </Card>
   )
 }

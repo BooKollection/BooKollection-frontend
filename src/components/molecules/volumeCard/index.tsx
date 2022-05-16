@@ -6,13 +6,13 @@ import { useRouter } from 'next/router'
 import { i18n } from '../../../shared/i18n'
 import {
   StyledButton,
-  CustomPopper,
+  CustomPopover,
   CenterText,
   CustomText,
   Card
 } from '../../atoms'
 import VolumeDetails from '../volumeDetails'
-import { VolumeAppBar } from './style'
+import { CustomButtonBox, VolumeAppBar } from './style'
 import { TransitionProps } from '@mui/material/transitions'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -26,21 +26,22 @@ const Transition = React.forwardRef(function Transition(
 })
 export type VolumeType = {
   id: string
-  type: string
+  coverPrice: string
   name: string
   imageUrl: string
   edition: string
   publisher: string
-  status: string
   number: number
   owned: boolean
   editionId: string
-  price: number
   language: string
   synopsis: string
-  releaseDate: Date
+  releaseDate: string
   acquisitionDifficulty: number
   acquisitionDifficultyAverage: number
+  paperBack: number
+  isbn10: string
+  isbn13: string
 }
 export const VolumeCard = ({ data }: { data: VolumeType }) => {
   const { locale, push } = useRouter()
@@ -59,7 +60,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
   }
   return (
     <>
-      <Card owned={owned} onClick={handleClick}>
+      <Card open={Boolean(anchorEl)} owned={owned} onClick={handleClick}>
         <Image
           unoptimized={true}
           src={imageUrl}
@@ -71,12 +72,8 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
         <CenterText>{edition}</CenterText>
         <CustomText>{publisher}</CustomText>
         <CustomText> Volume {number}</CustomText>
-        <CustomPopper
-          open={Boolean(anchorEl)}
-          anchorEl={anchorEl}
-          placement="right"
-        >
-          <Box>
+        <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
+          <CustomButtonBox width="12em">
             <StyledButton
               onClick={() => {
                 push({ pathname: '/edition', query: { keyword: editionId } })
@@ -85,8 +82,8 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
               {addToCollection}
             </StyledButton>
             <StyledButton onClick={handleOpen}>{details}</StyledButton>
-          </Box>
-        </CustomPopper>
+          </CustomButtonBox>
+        </CustomPopover>
       </Card>
       <Dialog
         fullScreen

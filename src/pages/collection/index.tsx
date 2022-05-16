@@ -18,7 +18,7 @@ const MyCollection = () => {
   const [tabSelected, setTabSelected] = useState(0)
   const [
     {
-      totalLiteraryWork,
+      totalLiteraryWorks,
       totalVolumes,
       collectionValue,
       completeLiteraryWork,
@@ -27,7 +27,7 @@ const MyCollection = () => {
     },
     setCollectionData
   ] = useState({
-    totalLiteraryWork: 0,
+    totalLiteraryWorks: 0,
     totalVolumes: 0,
     collectionValue: 0,
     completeLiteraryWork: 0,
@@ -41,7 +41,7 @@ const MyCollection = () => {
   }
   useEffect(() => {
     const response = {
-      memberSince: new Date(),
+      memberSince: String(new Date()),
       literaryWorks: [
         {
           id: '',
@@ -69,7 +69,7 @@ const MyCollection = () => {
         }
       ]
     }
-    const newTotalLiteraryWork = response.literaryWorks.length
+    const newtotalLiteraryWorks = response.literaryWorks.length
     const newTotalVolumes = response.literaryWorks.reduce(
       (acc, { totalVolumes }) => (acc = acc + totalVolumes),
       0
@@ -85,7 +85,7 @@ const MyCollection = () => {
 
     setCollectionData({
       ...response,
-      totalLiteraryWork: newTotalLiteraryWork,
+      totalLiteraryWorks: newtotalLiteraryWorks,
       totalVolumes: newTotalVolumes,
       collectionValue: newCollectionValue,
       completeLiteraryWork: newCompleteLiteraryWork
@@ -120,7 +120,7 @@ const MyCollection = () => {
             {tabSelected === 0 ? (
               <MyCollectionDetails
                 details={{
-                  totalLiteraryWork,
+                  totalLiteraryWorks,
                   totalVolumes,
                   collectionValue,
                   completeLiteraryWork,
