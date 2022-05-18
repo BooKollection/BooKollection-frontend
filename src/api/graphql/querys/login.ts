@@ -14,7 +14,7 @@ export const LOGIN_MUTATION = gql`
       }
     ) {
       token
-      roles
+      role
     }
   }
 `
