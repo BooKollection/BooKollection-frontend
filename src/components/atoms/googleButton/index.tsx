@@ -2,22 +2,21 @@ import React from 'react'
 import IconButton from '@mui/material/IconButton'
 import { useRouter } from 'next/router'
 import { useGoogleLogin } from 'react-google-login'
-import { LOGIN_MUTATION } from '../../../api/graphql/querys/login'
+import { LOGIN_MUTATION } from '../../../graphql/mutations/login'
 import { clientGraphql } from '../../../config/client-graphql'
 import { i18n } from '../../../shared/i18n'
+import { useDispatch } from 'react-redux'
+import { USER_UPDATE } from '../../../store/actions'
 
 export const GoogleButton = () => {
   const clientId = process.env.OAUTH_GOOGLE_ID
   const { locale } = useRouter()
   const signInLabel = i18n[locale].signIn
+  const dispatch = useDispatch()
 
   const onSuccess = async res => {
     const { googleId, tokenId, profileObj } = res
-    console.log('Login Success: currentUser:', profileObj, res)
 
-    alert(
-      `Logged in successfully welcome ${profileObj.name} 😍. \n See console for full profile object.`
-    )
     clientGraphql
       .mutate({
         mutation: LOGIN_MUTATION,
@@ -27,7 +26,16 @@ export const GoogleButton = () => {
           reqTokenId: tokenId
         }
       })
-      .then(res => console.log(res))
+      .then(res => {
+        const token = res.data.loginUser.token
+        localStorage.setItem(process.env.tokenName, token)
+        dispatch({
+          type: USER_UPDATE,
+          payload: {
+            token: token
+          }
+        })
+      })
     // refreshTokenSetup(res);
   }
 

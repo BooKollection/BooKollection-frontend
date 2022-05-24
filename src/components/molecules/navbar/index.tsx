@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as React from 'react'
 import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -37,6 +38,9 @@ import { CustomModal } from '../modal'
 import { SearchBar } from '../searchBar'
 import { drawerWidth } from '../../atoms/drawer'
 import { CenterText } from '../../atoms'
+import { IRootState } from '../../../store/reducers'
+import { USER_UPDATE } from '../../../store/actions'
+import { Avatar } from '@mui/material'
 
 const iconList = [
   <HomeIcon key="iconList1" color="primary" />,
@@ -89,12 +93,25 @@ const Drawer = styled(MuiDrawer, {
 export const Navbar = ({ children }) => {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
-  const [isLogged, setIsLogged] = React.useState(false)
   const { locale, push } = useRouter()
   const { titles, cttVersion } = i18n[locale]
+  const { token, name } = useSelector((state: IRootState) => state.user)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const token = localStorage.getItem('tokenTop')
+    const lsToken = localStorage.getItem(process.env.tokenName)
+
+    if (lsToken) {
+      dispatch({
+        type: USER_UPDATE,
+        payload: {
+          token: lsToken
+        }
+      })
+    }
+  }, [token])
+  useEffect(() => {
     function debounce(func, timeout = 300) {
       let timer: NodeJS.Timeout
       return (...args: unknown[]) => {
@@ -104,7 +121,6 @@ export const Navbar = ({ children }) => {
         }, timeout)
       }
     }
-    setIsLogged(!!token)
     window.addEventListener(
       'scroll',
       debounce(() => {
@@ -136,7 +152,7 @@ export const Navbar = ({ children }) => {
         open={open}
         sx={{ background: theme.palette.primary.dark }}
       >
-        <Toolbar>
+        <Toolbar style={{ paddingRight: '10px !important' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -160,10 +176,14 @@ export const Navbar = ({ children }) => {
               marginLeft: '10px'
             }}
           >
+            {token ? (
+              <Avatar>{name ? name.charAt(0) : 'BK'}</Avatar>
+            ) : (
+              <GoogleButton />
+            )}
             <CustomModal>
               <SearchBar />
             </CustomModal>
-            {isLogged ? <MenuIcon /> : <GoogleButton />}
           </div>
         </Toolbar>
       </AppBar>

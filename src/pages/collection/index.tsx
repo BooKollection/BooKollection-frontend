@@ -7,6 +7,8 @@ import { BoxContainer } from '../../components/atoms/boxContainer'
 import { i18n } from '../../shared/i18n'
 import { CustomTab } from '../../components/atoms/tabItem'
 import { StyledBox } from './style'
+import { MY_COLLECTION_QUERY } from '../../graphql'
+import { clientGraphql } from '../../config/client-graphql'
 
 function a11yProps(index: number) {
   return {
@@ -69,27 +71,16 @@ const MyCollection = () => {
         }
       ]
     }
-    const newtotalLiteraryWorks = response.literaryWorks.length
-    const newTotalVolumes = response.literaryWorks.reduce(
-      (acc, { totalVolumes }) => (acc = acc + totalVolumes),
-      0
-    )
-    const newCollectionValue = response.literaryWorks.reduce(
-      (acc, { amountSpent }) => (acc = acc + amountSpent),
-      0
-    )
-    const newCompleteLiteraryWork = response.literaryWorks.reduce(
-      (acc, { status }) => (status === 'complete' ? acc + 1 : acc),
-      0
-    )
-
-    setCollectionData({
-      ...response,
-      totalLiteraryWorks: newtotalLiteraryWorks,
-      totalVolumes: newTotalVolumes,
-      collectionValue: newCollectionValue,
-      completeLiteraryWork: newCompleteLiteraryWork
-    })
+    clientGraphql
+      .mutate({
+        mutation: MY_COLLECTION_QUERY
+      })
+      .then(res => {
+        console.log(res)
+        // setCollectionData({
+        //   ...response
+        // })
+      })
   }, [])
   return (
     <>

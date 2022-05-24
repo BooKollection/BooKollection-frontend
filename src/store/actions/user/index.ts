@@ -4,6 +4,7 @@ export const userUpdate = (user: {
   id?: string
   name?: string
   email?: string
+  token?: string
 }) => ({
   type: USER_UPDATE,
   payload: user

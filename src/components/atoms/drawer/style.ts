@@ -1,6 +1,7 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import { Drawer as MuiDrawer, List } from '@mui/material'
 import { drawerWidth } from '.'
+import MuiLink from 'next/link'
 
 export const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
