@@ -9,9 +9,14 @@ import Tooltip from '@mui/material/Tooltip'
 import Logout from '@mui/icons-material/Logout'
 import { CustomText } from '../text'
 import { BoxStyled, paperStyle } from './style'
+import { useDispatch, useSelector } from 'react-redux'
+import { IRootState } from '../../../store/reducers'
+import { userDelete } from '../../../store/actions/user'
 
 export const MenuI = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const { name } = useSelector((state: IRootState) => state.user)
+  const dispatch = useDispatch()
 
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -19,6 +24,10 @@ export const MenuI = () => {
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+  const logout = () => {
+    localStorage.removeItem(process.env.tokenName)
+    dispatch(userDelete())
   }
   return (
     <React.Fragment>
@@ -32,7 +41,9 @@ export const MenuI = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>
+              {name ? name.charAt(0) : 'BK'}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </BoxStyled>
@@ -47,11 +58,7 @@ export const MenuI = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> <CustomText>Perfil</CustomText>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
+          <ListItemIcon onClick={logout}>
             <Logout fontSize="small" />
           </ListItemIcon>
           <CustomText>Logout</CustomText>

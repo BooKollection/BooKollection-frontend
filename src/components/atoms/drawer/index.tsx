@@ -45,7 +45,6 @@ export const Drawer = ({
 
   const { token } = useSelector((state: IRootState) => state.user)
   const Item = ({ link, index, label, disabled }) => {
-    console.log(link, label)
     const children = (
       <ListItem disabled={disabled}>
         <ListItemIcon>{iconList[index]}</ListItemIcon>

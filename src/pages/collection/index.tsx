@@ -76,7 +76,6 @@ const MyCollection = () => {
         mutation: MY_COLLECTION_QUERY
       })
       .then(res => {
-        console.log(res)
 
         setCollectionData({
           ...response,

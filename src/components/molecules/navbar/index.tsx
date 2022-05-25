@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Avatar } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -21,11 +20,12 @@ import { Drawer } from '../../atoms/drawer'
 import { IRootState } from '../../../store/reducers'
 import { USER_UPDATE } from '../../../store/actions'
 import { debounce } from '../../../utils/bounce'
+import { MenuI } from '../../atoms'
 
 export const Navbar = ({ children }) => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
-  const { token, name } = useSelector((state: IRootState) => state.user)
+  const { token } = useSelector((state: IRootState) => state.user)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const dispatch = useDispatch()
 
@@ -97,11 +97,7 @@ export const Navbar = ({ children }) => {
               marginLeft: '10px'
             }}
           >
-            {token ? (
-              <Avatar>{name ? name.charAt(0) : 'BK'}</Avatar>
-            ) : (
-              <GoogleButton />
-            )}
+            {token ? <MenuI /> : <GoogleButton />}
             <CustomModal>
               <SearchBar />
             </CustomModal>

@@ -18,7 +18,6 @@ function a11yProps(index: number) {
 }
 const getEdition = (id: string | string[]) => {
   const edition = editionMock.filter(edition => edition.id === id)[0]
-  console.log(edition)
 
   let volumes = []
   if (edition) {
@@ -41,7 +40,6 @@ const Edition = () => {
     const { edition, volumes } = getEdition(query.id)
     setEdition(edition)
     setEditionVolumes(volumes)
-    console.log(getEdition(query.id).volumes)
   }, [])
   return (
     edition && (
