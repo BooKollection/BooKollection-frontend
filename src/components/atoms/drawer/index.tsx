@@ -44,16 +44,16 @@ export const Drawer = ({
   ]
 
   const { token } = useSelector((state: IRootState) => state.user)
-  const Item = ({ link, index, icon, label, disabled }) => {
+  const Item = ({ link, index, label, disabled }) => {
     console.log(link, label)
     const children = (
       <ListItem disabled={disabled}>
-        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemIcon>{iconList[index]}</ListItemIcon>
         <ListItemText primary={label} />
       </ListItem>
     )
     if (disabled) {
-      return <span>{children}</span>
+      return <span style={{ opacity: '0.5' }}>{children}</span>
     }
     return (
       <Link key={'navbar' + index} passHref href={link} locale={locale}>
@@ -76,34 +76,17 @@ export const Drawer = ({
       <Divider />
       <List style={{ height: 'calc(100% - 7em)' }}>
         {titles.map(
-          ({ label, link }: { label: string; link: string }, index: number) => (
-            <ListItem
+          (
+            { label, link }: { label: string; link: string; icon: any },
+            index: number
+          ) => (
+            <Item
               key={label}
-              disablePadding
-              sx={{ display: 'block' }}
-              onClick={() => {
-                push(link)
-              }}
-            >
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center'
-                  }}
-                >
-                  {iconList[index]}
-                </ListItemIcon>
-                <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+              link={link}
+              index={index}
+              label={label}
+              disabled={link === '/collection' && !token}
+            />
           )
         )}
       </List>

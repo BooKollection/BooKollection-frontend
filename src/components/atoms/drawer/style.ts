@@ -1,7 +1,6 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import { Drawer as MuiDrawer, List } from '@mui/material'
 import { drawerWidth } from '.'
-import MuiLink from 'next/link'
 
 export const openedMixin = (theme: Theme): CSSObject => ({
   display: 'flex',
@@ -10,7 +9,6 @@ export const openedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen
   }),
-  background: theme.palette.primary.main,
   overflowX: 'hidden'
 })
 
@@ -20,10 +18,7 @@ export const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(9)} + 1px)`
-  }
+  width: `calc(${theme.spacing(7)} + 1px)`
 })
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
@@ -42,7 +37,6 @@ export const DrawerUI = styled(MuiDrawer, {
   left: '0',
   height: '100%',
   zIndex: theme.zIndex.drawer,
-  width: '0px',
   background: theme.palette.primary.dark,
   filter: 'brightness(1.1)',
   flexShrink: 0,
