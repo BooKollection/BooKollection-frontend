@@ -45,30 +45,41 @@ export const LogoBox = styled('div')(() => ({
 }))
 export const MainBox = styled(Box)(({ theme }) => ({
   display: 'flex',
+  position: 'relative',
   minHeight: '-webkit-fill-available',
   width: '100%',
   background: theme.palette.primary.main
 }))
+export const ChildrenBox = styled(Box)(({ theme }) => ({
+  flexGrow: 1,
+  padding: '8px',
+  marginTop: '3.5em',
+  [theme.breakpoints.up('md')]: {
+    marginLeft: '3.5rem'
+  }
+}))
 
-const AppBar = styled(MuiAppBar, {
+export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open'
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  height: '4em !important',
-  minHeight: '4em !important',
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+})<AppBarProps>(({ theme, open }) => {
+  return {
+    zIndex: theme.zIndex.drawer + 1,
+    height: '4em !important',
+    minHeight: '4em !important',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    ...(open && {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      })
     })
-  })
-}))
+  }
+})
 
 export const CustomAppbar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.primary.main
@@ -79,8 +90,7 @@ export const openedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen
-  }),
-  overflowX: 'hidden'
+  })
 })
 
 export const closedMixin = (theme: Theme): CSSObject => ({
@@ -88,7 +98,6 @@ export const closedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
-  overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`

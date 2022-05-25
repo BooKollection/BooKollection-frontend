@@ -77,9 +77,11 @@ const MyCollection = () => {
       })
       .then(res => {
         console.log(res)
-        // setCollectionData({
-        //   ...response
-        // })
+
+        setCollectionData({
+          ...response,
+          ...res.data.myCollection
+        })
       })
   }, [])
   return (

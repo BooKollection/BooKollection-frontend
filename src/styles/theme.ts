@@ -18,6 +18,9 @@ const globalTheme = createTheme({
 
 export const theme = createTheme({
   ...globalTheme,
+  zIndex: {
+    drawer: 1200
+  },
   components: {
     MuiPaper: {
       styleOverrides: {

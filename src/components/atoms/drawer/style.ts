@@ -4,6 +4,7 @@ import { drawerWidth } from '.'
 import MuiLink from 'next/link'
 
 export const openedMixin = (theme: Theme): CSSObject => ({
+  display: 'flex',
   width: drawerWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -35,8 +36,15 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 export const DrawerUI = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open'
 })(({ theme, open }) => ({
-  width: drawerWidth,
-  background: theme.palette.primary.main,
+  display: 'flex',
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  height: '100%',
+  zIndex: theme.zIndex.drawer,
+  width: '0px',
+  background: theme.palette.primary.dark,
+  filter: 'brightness(1.1)',
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
@@ -48,8 +56,8 @@ export const DrawerUI = styled(MuiDrawer, {
     ...closedMixin(theme),
     '& .MuiDrawer-paper': closedMixin(theme)
   }),
-  [theme.breakpoints.up('sm')]: {
-    display: 'none'
+  [theme.breakpoints.down('sm')]: {
+    width: open ? drawerWidth : 0
   }
 }))
 export const ListDrawer = styled(List)(() => ({
