@@ -10,7 +10,7 @@ export const Card = styled('div', {
   justifyContent: 'space-between',
   padding: '1em',
   alignItems: 'center',
-  width: '10em',
+  width: '12em',
   minHeight: '10em',
   background: theme.palette.primary.darkContrast,
   boxShadow: '0px 4px 24px -1px rgba(71, 62, 62, 0.25)',

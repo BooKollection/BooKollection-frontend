@@ -54,7 +54,7 @@ export const ChildrenBox = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   padding: '8px',
   marginTop: '3.5em',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('sm')]: {
     marginLeft: '3.5rem'
   }
 }))

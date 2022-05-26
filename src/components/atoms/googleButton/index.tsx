@@ -27,12 +27,15 @@ export const GoogleButton = () => {
         }
       })
       .then(res => {
-        const token = res.data.loginUser.token
+        const { token, name } = res.data.loginUser
         localStorage.setItem(process.env.tokenName, token)
+        localStorage.setItem('BK_NAME', name)
+
         dispatch({
           type: USER_UPDATE,
           payload: {
-            token: token
+            token: token,
+            name: name
           }
         })
       })

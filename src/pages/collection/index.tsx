@@ -23,7 +23,7 @@ const MyCollection = () => {
       totalLiteraryWorks,
       totalVolumes,
       collectionValue,
-      completeLiteraryWork,
+      completeLiteraryWorks,
       memberSince,
       literaryWorks
     },
@@ -32,7 +32,7 @@ const MyCollection = () => {
     totalLiteraryWorks: 0,
     totalVolumes: 0,
     collectionValue: 0,
-    completeLiteraryWork: 0,
+    completeLiteraryWorks: 0,
     memberSince: null,
     literaryWorks: []
   })
@@ -79,7 +79,8 @@ const MyCollection = () => {
 
         setCollectionData({
           ...response,
-          ...res.data.myCollection
+          ...res.data.myCollection,
+          memberSince: res.data.myCollection.createdAt
         })
       })
   }, [])
@@ -115,7 +116,7 @@ const MyCollection = () => {
                   totalLiteraryWorks,
                   totalVolumes,
                   collectionValue,
-                  completeLiteraryWork,
+                  completeLiteraryWorks,
                   memberSince
                 }}
               />

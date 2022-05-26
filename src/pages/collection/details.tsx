@@ -11,7 +11,7 @@ type details = {
   totalLiteraryWorks: number
   totalVolumes: number
   collectionValue: number
-  completeLiteraryWork: number
+  completeLiteraryWorks: number
   memberSince: Date
 }
 const MyCollectionDetails = ({ details }: { details: details }) => {
@@ -32,7 +32,7 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
           <Grid item xs={3} key={'details' + index}>
             <CenterText>{title}</CenterText>
             <CenterText>
-              {atribute === 'memberSince' ? moment(value).format('LL') : value}
+              {atribute === 'memberSince' ? moment(new Date(value).toISOString()).format('LL') : value}
             </CenterText>
           </Grid>
         )

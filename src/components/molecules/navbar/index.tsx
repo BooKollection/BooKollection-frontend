@@ -31,12 +31,14 @@ export const Navbar = ({ children }) => {
 
   useEffect(() => {
     const lsToken = localStorage.getItem(process.env.tokenName)
+    const name = localStorage.getItem('BK_NAME')
 
     if (lsToken) {
       dispatch({
         type: USER_UPDATE,
         payload: {
-          token: lsToken
+          token: lsToken,
+          name: name
         }
       })
     }
