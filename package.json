@@ -21,7 +21,6 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "graphql": "^16.5.0",
-    "i18n-next": "^0.0.4",
     "moment": "^2.29.3",
     "next": "^12.1.6",
     "next-redux-wrapper": "^7.0.5",
