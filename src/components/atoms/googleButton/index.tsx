@@ -2,11 +2,12 @@ import React from 'react'
 import IconButton from '@mui/material/IconButton'
 import { useRouter } from 'next/router'
 import { useGoogleLogin } from 'react-google-login'
+import { useDispatch } from 'react-redux'
 import { LOGIN_MUTATION } from '../../../graphql/mutations/login'
 import { clientGraphql } from '../../../config/client-graphql'
 import { i18n } from '../../../shared/i18n'
-import { useDispatch } from 'react-redux'
-import { USER_UPDATE } from '../../../store/actions'
+import { loadingUpdate } from '../../../store/actions/loading'
+import { userUpdate } from '../../../store/actions/user'
 
 export const GoogleButton = () => {
   const clientId = process.env.OAUTH_GOOGLE_ID
@@ -30,23 +31,22 @@ export const GoogleButton = () => {
         const { token, name } = res.data.loginUser
         localStorage.setItem(process.env.tokenName, token)
         localStorage.setItem('BK_NAME', name)
-
-        dispatch({
-          type: USER_UPDATE,
-          payload: {
+        dispatch(
+          userUpdate({
             token: token,
             name: name
-          }
-        })
+          })
+        )
+        dispatch(loadingUpdate({ open: false }))
       })
     // refreshTokenSetup(res);
   }
 
   const onFailure = res => {
-    console.log('Login failed: res:', res)
     alert(
       'Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz'
     )
+    dispatch(loadingUpdate({ open: false }))
   }
   const { signIn } = useGoogleLogin({
     onSuccess,
@@ -56,6 +56,16 @@ export const GoogleButton = () => {
     accessType: 'offline'
   })
 
+  const signInLoading = () => {
+    dispatch(
+      loadingUpdate({
+        open: true
+      })
+    )
+
+    signIn()
+  }
+
   return (
     <IconButton
       size="large"
@@ -63,7 +73,7 @@ export const GoogleButton = () => {
       aria-controls="primary-search-account-menu"
       aria-haspopup="true"
       color="inherit"
-      onClick={signIn}
+      onClick={signInLoading}
     >
       <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>{signInLabel}</p>
     </IconButton>

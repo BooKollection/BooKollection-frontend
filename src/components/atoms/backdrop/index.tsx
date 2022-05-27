@@ -1,17 +1,17 @@
 import * as React from 'react'
 import MuiBackdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
-import Button from '@mui/material/Button'
+import { useSelector } from 'react-redux'
+import { IRootState } from '../../../store/reducers'
 
 export const Backdrop = () => {
-    const { name } = useSelector((state: IRootState) => state.user)
+  const { open } = useSelector((state: IRootState) => state.loading)
 
   return (
     <div>
       <MuiBackdrop
-        sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+        sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 2 }}
         open={open}
-        onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </MuiBackdrop>
