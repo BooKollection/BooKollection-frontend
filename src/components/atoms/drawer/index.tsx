@@ -83,10 +83,15 @@ export const Drawer = ({
           ) => {
             const disabled = link === '/collection' && !token
             return (
-              <Tooltip title={open ? '' : label} placement="right">
+              <Tooltip
+                key={'navbar-drawer-' + index}
+                title={open ? '' : label}
+                placement="right"
+              >
                 <ListItem
+                  button
                   onClick={() => {
-                    if (disabled) redirect(link)
+                    if (!disabled) redirect(link)
                   }}
                   style={{
                     cursor: 'pointer',
