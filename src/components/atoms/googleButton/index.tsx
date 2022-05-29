@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import { LOGIN_MUTATION } from '../../../graphql/mutations/login'
 import { clientGraphql } from '../../../config/client-graphql'
 import { i18n } from '../../../shared/i18n'
-import { loadingUpdate } from '../../../store/actions/loading'
 import { userUpdate } from '../../../store/actions/user'
 
 export const GoogleButton = () => {
@@ -37,16 +36,14 @@ export const GoogleButton = () => {
             name: name
           })
         )
-        dispatch(loadingUpdate({ open: false }))
       })
     // refreshTokenSetup(res);
   }
 
-  const onFailure = res => {
+  const onFailure = () => {
     alert(
       'Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz'
     )
-    dispatch(loadingUpdate({ open: false }))
   }
   const { signIn } = useGoogleLogin({
     onSuccess,
@@ -57,12 +54,6 @@ export const GoogleButton = () => {
   })
 
   const signInLoading = () => {
-    dispatch(
-      loadingUpdate({
-        open: true
-      })
-    )
-
     signIn()
   }
 

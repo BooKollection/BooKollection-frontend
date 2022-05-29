@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material'
 import React from 'react'
 import { EditionDetailsType } from '../../../pages/edition/details'
 import { EditionCard } from '../editionCard'
