@@ -1,48 +1,28 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import { EditionCard } from '../../atoms/editionCard'
-import { VolumeCard } from '../../atoms/volumeCard'
+import { EditionDetailsType } from '../../../pages/edition/details'
+import { EditionCard } from '../editionCard'
+import { VolumeCard, VolumeType } from '../volumeCard'
 
 const CardGrid = ({
-  isVolume,
-  itens
+  volumes,
+  editions
 }: {
-  isVolume?: boolean
-  itens: {
-    name: string
-    imgSrc: string
-    edition: string
-    publisher: string
-    number?: number
-  }[]
+  volumes?: VolumeType[]
+  editions?: EditionDetailsType[]
 }) => (
   <Grid
-    padding={'24px'}
     width={'100%'}
     container
-    gap='0.8em'
-    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+    gap="1em"
+    columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+    marginLeft="0px !important"
   >
-    {isVolume
-      ? itens.map(({ name, imgSrc, edition, publisher, number }, index) => (
-          <VolumeCard
-            key={index}
-            name={name}
-            imgSrc={imgSrc}
-            edition={edition}
-            publisher={publisher}
-            number={number}
-          />
+    {volumes
+      ? volumes.map((data: VolumeType, index) => (
+          <VolumeCard key={index} data={data} />
         ))
-      : itens.map(({ name, imgSrc, edition, publisher }, index) => (
-          <EditionCard
-            key={index}
-            name={name}
-            imgSrc={imgSrc}
-            edition={edition}
-            publisher={publisher}
-          />
-        ))}
+      : editions.map((data, index) => <EditionCard key={index} data={data} />)}
   </Grid>
 )
 

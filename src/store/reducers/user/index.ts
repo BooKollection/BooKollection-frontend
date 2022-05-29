@@ -4,7 +4,8 @@ import { USER_UPDATE, USER_DELETE } from '../../actions'
 const initialState = {
   id: null,
   name: null,
-  email: null
+  email: null,
+  token: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ const reducer = (state = initialState, action) => {
       return {
         id: null,
         name: null,
-        email: null
+        email: null,
+        token:null
       }
     default:
       return state

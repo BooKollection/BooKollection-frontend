@@ -3,21 +3,29 @@ import { useTheme } from '@mui/material/styles'
 import {
   Divider,
   IconButton,
+  List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText
 } from '@mui/material'
 import {
   ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  SvgIconComponent
+  ChevronRight as ChevronRightIcon
 } from '@mui/icons-material'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { DrawerHeader, DrawerUI, ListDrawer } from './style'
-import { navbarButtonTitles } from '../../../shared/i18n'
-
-export const drawerWidth = 180
+import { DrawerHeader, DrawerUI } from './style'
+import { i18n } from '../../../shared/i18n'
+import { useSelector } from 'react-redux'
+import { IRootState } from '../../../store/reducers'
+import { CenterText } from '../text'
+import {
+  MenuBook as MenuBookIcon,
+  Home as HomeIcon,
+  LibraryBooks as LibraryBooksIcon
+} from '@mui/icons-material'
+export const drawerWidth = 200
 
 export const Drawer = ({
   open,
@@ -27,9 +35,31 @@ export const Drawer = ({
   handleDrawerClose
 }) => {
   const theme = useTheme()
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
+  const { titles, cttVersion } = i18n[locale]
+  const iconList = [
+    <HomeIcon key="iconList1" color="primary" />,
+    <MenuBookIcon key="iconList2" color="primary" />,
+    <LibraryBooksIcon key="iconList2" color="primary" />
+  ]
 
-  const { titles } = navbarButtonTitles[locale]
+  const { token } = useSelector((state: IRootState) => state.user)
+  const Item = ({ link, index, label, disabled }) => {
+    const children = (
+      <ListItem disabled={disabled}>
+        <ListItemIcon>{iconList[index]}</ListItemIcon>
+        <ListItemText primary={label} />
+      </ListItem>
+    )
+    if (disabled) {
+      return <span style={{ opacity: '0.5' }}>{children}</span>
+    }
+    return (
+      <Link key={'navbar' + index} passHref href={link} locale={locale}>
+        {children}
+      </Link>
+    )
+  }
 
   return (
     <DrawerUI variant="permanent" open={open}>
@@ -43,25 +73,23 @@ export const Drawer = ({
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <ListDrawer>
+      <List style={{ height: 'calc(100% - 7em)' }}>
         {titles.map(
           (
-            {
-              label,
-              link,
-              icon
-            }: { label: string; link: string; icon: SvgIconComponent },
+            { label, link }: { label: string; link: string; icon: any },
             index: number
           ) => (
-            <Link key={'navbar' + index} passHref href={link} locale={locale}>
-              <ListItem>
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText primary={label} />
-              </ListItem>
-            </Link>
+            <Item
+              key={label}
+              link={link}
+              index={index}
+              label={label}
+              disabled={link === '/collection' && !token}
+            />
           )
         )}
-      </ListDrawer>
+      </List>
+      {open && <CenterText height={'20px'}>{cttVersion} 0.1</CenterText>}
     </DrawerUI>
   )
 }
