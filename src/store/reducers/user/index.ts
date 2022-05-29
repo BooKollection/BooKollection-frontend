@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
         id: null,
         name: null,
         email: null,
-        token:null
+        token: null
       }
     default:
       return state
