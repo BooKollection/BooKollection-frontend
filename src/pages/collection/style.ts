@@ -5,5 +5,5 @@ export const StyledBox = styled(Box)(({ theme }) => ({
   padding: '12px',
   borderRadius: '10px',
   height: '100%',
-  background: theme.palette.primary.darkContrast
+  background: theme.palette.primary.dark
 }))
