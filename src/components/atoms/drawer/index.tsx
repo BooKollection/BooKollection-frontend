@@ -5,7 +5,6 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Tooltip
@@ -15,7 +14,6 @@ import {
   ChevronRight as ChevronRightIcon
 } from '@mui/icons-material'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { DrawerHeader, DrawerUI } from './style'
 import { i18n } from '../../../shared/i18n'
 import { useSelector } from 'react-redux'
@@ -46,22 +44,8 @@ export const Drawer = ({
 
   const { token } = useSelector((state: IRootState) => state.user)
   const redirect = (link: string) => {
-    push(link, { locale: locale })
+    push(link)
   }
-  const Item = ({ link, index, label, disabled }) => (
-    <Tooltip title={!open ? '' : label} placement="right">
-      <ListItem
-        onClick={() => {
-          if (disabled) redirect(link)
-        }}
-        style={{ cursor: 'pointer', opacity: !disabled ? '1' : '0.5' }}
-        disabled={disabled}
-      >
-        <ListItemIcon>{iconList[index]}</ListItemIcon>
-        <ListItemText primary={label} />
-      </ListItem>
-    </Tooltip>
-  )
 
   return (
     <DrawerUI variant="permanent" open={open}>
@@ -77,10 +61,7 @@ export const Drawer = ({
       <Divider />
       <List style={{ height: 'calc(100% - 7em)' }}>
         {titles.map(
-          (
-            { label, link }: { label: string; link: string; icon: any },
-            index: number
-          ) => {
+          ({ label, link }: { label: string; link: string }, index: number) => {
             const disabled = link === '/collection' && !token
             return (
               <Tooltip

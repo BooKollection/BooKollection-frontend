@@ -6,6 +6,7 @@ import { IRootState } from '../../../store/reducers'
 
 export const Backdrop = () => {
   const { open } = useSelector((state: IRootState) => state.loading)
+  console.log(open)
 
   return (
     <div>
