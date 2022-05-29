@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { Tabs } from '@mui/material'
 import { MyCollectionDetails } from './details'
@@ -9,6 +10,7 @@ import { CustomTab } from '../../components/atoms/tabItem'
 import { StyledBox } from './style'
 import { MY_COLLECTION_QUERY } from '../../graphql'
 import { clientGraphql } from '../../config/client-graphql'
+import { loadingUpdate } from '../../store/actions/loading'
 
 function a11yProps(index: number) {
   return {
@@ -23,7 +25,7 @@ const MyCollection = () => {
       totalLiteraryWorks,
       totalVolumes,
       collectionValue,
-      completeLiteraryWork,
+      completeLiteraryWorks,
       memberSince,
       literaryWorks
     },
@@ -32,12 +34,14 @@ const MyCollection = () => {
     totalLiteraryWorks: 0,
     totalVolumes: 0,
     collectionValue: 0,
-    completeLiteraryWork: 0,
+    completeLiteraryWorks: 0,
     memberSince: null,
     literaryWorks: []
   })
   const { locale } = useRouter()
   const { details, literaryWorksLabel } = i18n[locale]
+  const dispatch = useDispatch()
+
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
@@ -71,16 +75,22 @@ const MyCollection = () => {
         }
       ]
     }
+    dispatch(loadingUpdate({ open: true }))
+
     clientGraphql
       .mutate({
         mutation: MY_COLLECTION_QUERY
       })
       .then(res => {
-
         setCollectionData({
           ...response,
-          ...res.data.myCollection
+          ...res.data.myCollection,
+          memberSince: res.data.myCollection.createdAt
         })
+        dispatch(loadingUpdate({ open: false }))
+      })
+      .catch(() => {
+        dispatch(loadingUpdate({ open: false }))
       })
   }, [])
   return (
@@ -115,7 +125,7 @@ const MyCollection = () => {
                   totalLiteraryWorks,
                   totalVolumes,
                   collectionValue,
-                  completeLiteraryWork,
+                  completeLiteraryWorks,
                   memberSince
                 }}
               />

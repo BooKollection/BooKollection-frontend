@@ -42,7 +42,7 @@ export const MenuI = () => {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 32, height: 32 }}>
-              {name ? name.charAt(0) : 'BK'}
+              {name ? name.charAt(0).toUpperCase() : 'BK'}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -57,8 +57,8 @@ export const MenuI = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
-          <ListItemIcon onClick={logout}>
+        <MenuItem onClick={logout}>
+          <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           <CustomText>Logout</CustomText>

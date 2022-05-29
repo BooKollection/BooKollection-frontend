@@ -3,6 +3,7 @@ import React from 'react'
 import { EditionDetailsType } from '../../../pages/edition/details'
 import { EditionCard } from '../editionCard'
 import { VolumeCard, VolumeType } from '../volumeCard'
+import { CardGridBox } from './style'
 
 const CardGrid = ({
   volumes,
@@ -11,19 +12,13 @@ const CardGrid = ({
   volumes?: VolumeType[]
   editions?: EditionDetailsType[]
 }) => (
-  <Grid
-    width={'100%'}
-    container
-    gap="1em"
-    columnSpacing={{ xs: 1, sm: 1, md: 1 }}
-    marginLeft="0px !important"
-  >
+  <CardGridBox container>
     {volumes
       ? volumes.map((data: VolumeType, index) => (
           <VolumeCard key={index} data={data} />
         ))
       : editions.map((data, index) => <EditionCard key={index} data={data} />)}
-  </Grid>
+  </CardGridBox>
 )
 
 export { CardGrid }

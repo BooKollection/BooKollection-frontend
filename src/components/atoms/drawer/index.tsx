@@ -7,7 +7,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tooltip
 } from '@mui/material'
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -44,22 +45,23 @@ export const Drawer = ({
   ]
 
   const { token } = useSelector((state: IRootState) => state.user)
-  const Item = ({ link, index, label, disabled }) => {
-    const children = (
-      <ListItem disabled={disabled}>
+  const redirect = (link: string) => {
+    push(link, { locale: locale })
+  }
+  const Item = ({ link, index, label, disabled }) => (
+    <Tooltip title={!open ? '' : label} placement="right">
+      <ListItem
+        onClick={() => {
+          if (disabled) redirect(link)
+        }}
+        style={{ cursor: 'pointer', opacity: !disabled ? '1' : '0.5' }}
+        disabled={disabled}
+      >
         <ListItemIcon>{iconList[index]}</ListItemIcon>
         <ListItemText primary={label} />
       </ListItem>
-    )
-    if (disabled) {
-      return <span style={{ opacity: '0.5' }}>{children}</span>
-    }
-    return (
-      <Link key={'navbar' + index} passHref href={link} locale={locale}>
-        {children}
-      </Link>
-    )
-  }
+    </Tooltip>
+  )
 
   return (
     <DrawerUI variant="permanent" open={open}>
@@ -78,15 +80,31 @@ export const Drawer = ({
           (
             { label, link }: { label: string; link: string; icon: any },
             index: number
-          ) => (
-            <Item
-              key={label}
-              link={link}
-              index={index}
-              label={label}
-              disabled={link === '/collection' && !token}
-            />
-          )
+          ) => {
+            const disabled = link === '/collection' && !token
+            return (
+              <Tooltip
+                key={'navbar-drawer-' + index}
+                title={open ? '' : label}
+                placement="right"
+              >
+                <ListItem
+                  button
+                  onClick={() => {
+                    if (!disabled) redirect(link)
+                  }}
+                  style={{
+                    cursor: 'pointer',
+                    opacity: !disabled ? '1' : '0.5'
+                  }}
+                  disabled={disabled}
+                >
+                  <ListItemIcon>{iconList[index]}</ListItemIcon>
+                  <ListItemText primary={label} />
+                </ListItem>
+              </Tooltip>
+            )
+          }
         )}
       </List>
       {open && <CenterText height={'20px'}>{cttVersion} 0.1</CenterText>}
