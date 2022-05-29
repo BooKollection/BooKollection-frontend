@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, IconButton, Slide, Toolbar, Typography } from '@mui/material'
+import { IconButton, Slide, Toolbar, Typography } from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import Image from 'next/image'
 import { useRouter } from 'next/router'

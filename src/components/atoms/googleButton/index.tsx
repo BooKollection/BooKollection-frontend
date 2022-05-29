@@ -1,14 +1,13 @@
 import React from 'react'
 import IconButton from '@mui/material/IconButton'
 import { useRouter } from 'next/router'
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
 import { LOGIN_MUTATION } from '../../../graphql/mutations/login'
 import { clientGraphql } from '../../../config/client-graphql'
 import { i18n } from '../../../shared/i18n'
-import { loadingUpdate } from '../../../store/actions/loading'
 import { userUpdate } from '../../../store/actions/user'
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/Person'
 import Tooltip from '@mui/material/Tooltip'
 
 export const GoogleButton = () => {
@@ -18,12 +17,6 @@ export const GoogleButton = () => {
 
   const onSuccess = async res => {
     const { access_token } = res
-
-    dispatch(
-      loadingUpdate({
-        open: true
-      })
-    );
 
     clientGraphql
       .mutate({
@@ -42,20 +35,18 @@ export const GoogleButton = () => {
             name: name
           })
         )
-        dispatch(loadingUpdate({ open: false }))
       })
     // refreshTokenSetup(res);
   }
 
-  const onError = res => {
+  const onError = () => {
     alert(
       'Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz'
     )
-    dispatch(loadingUpdate({ open: false }))
   }
   const signIn = useGoogleLogin({
     onSuccess,
-    onError,
+    onError
   })
 
   const signInLoading = () => {

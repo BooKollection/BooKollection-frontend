@@ -28,12 +28,14 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
     >
       {Object.entries(details).map(([atribute, value], index) => {
         const title = i18n[locale][atribute]
+        const info =
+          value instanceof Date
+            ? moment(new Date(value).toISOString()).format('LL')
+            : value
         return (
           <Grid item xs={3} key={'details' + index}>
             <CenterText>{title}</CenterText>
-            <CenterText>
-              {atribute === 'memberSince' ? moment(new Date(value).toISOString()).format('LL') : value}
-            </CenterText>
+            <CenterText>{String(info)}</CenterText>
           </Grid>
         )
       })}

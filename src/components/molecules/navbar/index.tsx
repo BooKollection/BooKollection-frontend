@@ -41,7 +41,7 @@ export const Navbar = ({ children }) => {
         }
       })
     }
-  }, [token])
+  }, [token, dispatch])
   useEffect(() => {
     window.addEventListener(
       'scroll',

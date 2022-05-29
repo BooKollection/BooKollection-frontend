@@ -2,12 +2,13 @@ import { useRouter } from 'next/router'
 import { ThemeProvider } from '@mui/material/styles'
 import moment from 'moment'
 import VLibras from '@djpfs/react-vlibras'
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { theme } from '../styles/theme'
-import { storeWrapper } from '../store'
+import { store } from '../store'
 import { Navbar } from '../components/molecules/navbar'
 import '../styles/globals.css'
 import { Backdrop } from '../components/atoms/backdrop'
+import { Provider } from 'react-redux'
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
@@ -15,15 +16,17 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
-      <ThemeProvider theme={theme}>
-        <Backdrop />
-        <Navbar>
-          <VLibras />
-          <Component {...pageProps} />
-        </Navbar>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Backdrop />
+          <Navbar>
+            <VLibras />
+            <Component {...pageProps} />
+          </Navbar>
+        </ThemeProvider>
+      </Provider>
     </GoogleOAuthProvider>
   )
 }
 
-export default storeWrapper.withRedux(MyApp)
+export default MyApp
