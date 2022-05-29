@@ -28,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
 })
 const formatDateLink = new ApolloLink((operation, forward) => {
   const op = forward(operation).map(response => {
-    console.log(response.data);
+    console.log(response.data)
 
     if (response.data.date) {
       response.data.date = new Date(response.data.date)
@@ -38,7 +38,7 @@ const formatDateLink = new ApolloLink((operation, forward) => {
   store.dispatch(loadingUpdate({ open: false }))
   return op
 })
-const errorLink = onError(({ graphQLErrors, networkError, }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     const filter = graphQLErrors.filter(
       ({ message }) => message === 'Unauthorized'
@@ -49,7 +49,7 @@ const errorLink = onError(({ graphQLErrors, networkError, }) => {
     }
   }
   if (networkError) console.log(`[Network error]: ${networkError}`)
-  return;
+  return
 })
 export const clientGraphql = new ApolloClient({
   link: ApolloLink.from([httpLink, errorLink, formatDateLink, authLink]),
