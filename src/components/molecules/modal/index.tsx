@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { StyledButton } from '../../atoms/button'
 import { i18n } from '../../../shared/i18n'
 import { style } from './styles'
+import Tooltip from '@mui/material/Tooltip'
 
 const CustomModal = ({ children }) => {
   const [open, setOpen] = React.useState(false)
@@ -14,15 +15,16 @@ const CustomModal = ({ children }) => {
   const { search } = i18n[locale]
 
   return (
-    <div>
-      <StyledButton onClick={handleOpen}>
-        <SearchIcon />
-        {search}
-      </StyledButton>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>{children}</Box>
-      </Modal>
-    </div>
+    <Tooltip title={search}>
+      <>
+        <StyledButton onClick={handleOpen}>
+          <SearchIcon />
+        </StyledButton>
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={style}>{children}</Box>
+        </Modal>
+      </>
+    </Tooltip>
   )
 }
 export { CustomModal }

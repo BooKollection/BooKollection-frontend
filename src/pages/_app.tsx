@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { ThemeProvider } from '@mui/material/styles'
 import moment from 'moment'
 import VLibras from '@djpfs/react-vlibras'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { theme } from '../styles/theme'
 import { store } from '../store'
 import { Navbar } from '../components/molecules/navbar'
@@ -14,15 +15,17 @@ function MyApp({ Component, pageProps }) {
   moment.locale(locale)
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Backdrop />
-        <Navbar>
-          <VLibras />
-          <Component {...pageProps} />
-        </Navbar>
-      </ThemeProvider>
-    </Provider>
+    <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Backdrop />
+          <Navbar>
+            <VLibras />
+            <Component {...pageProps} />
+          </Navbar>
+        </ThemeProvider>
+      </Provider>
+    </GoogleOAuthProvider>
   )
 }
 

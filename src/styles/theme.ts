@@ -22,13 +22,6 @@ export const theme = createTheme({
     drawer: 1200
   },
   components: {
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          background: 'none'
-        }
-      }
-    },
     MuiSvgIcon: {
       styleOverrides: {
         root: {
