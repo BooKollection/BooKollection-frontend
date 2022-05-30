@@ -50,6 +50,9 @@ export const DrawerUI = styled(MuiDrawer, {
     ...closedMixin(theme),
     '& .MuiDrawer-paper': closedMixin(theme)
   }),
+  '& .MuiPaper-root': {
+    background: 'none'
+  },
   [theme.breakpoints.down('sm')]: {
     width: open ? drawerWidth : 0
   }

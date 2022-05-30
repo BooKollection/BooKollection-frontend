@@ -18,7 +18,7 @@ const CustomModal = ({ children }) => {
     <Tooltip title={search}>
       <>
         <StyledButton onClick={handleOpen}>
-          <SearchIcon/>
+          <SearchIcon />
         </StyledButton>
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>{children}</Box>

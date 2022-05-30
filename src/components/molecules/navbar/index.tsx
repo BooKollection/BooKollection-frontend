@@ -74,7 +74,13 @@ export const Navbar = ({ children }) => {
         open={open}
         sx={{ background: theme.palette.primary.dark }}
       >
-        <Toolbar style={{ display: 'flex', width: '100%', paddingRight: '10px !important' }}>
+        <Toolbar
+          style={{
+            display: 'flex',
+            width: '100%',
+            paddingRight: '10px !important'
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -99,7 +105,10 @@ export const Navbar = ({ children }) => {
             }}
           >
             {token ? <MenuI /> : <GoogleButton />}
-            <SearchBar drawerOpen={open} handleDrawerClose={handleDrawerClose} />
+            <SearchBar
+              drawerOpen={open}
+              handleDrawerClose={handleDrawerClose}
+            />
           </div>
         </Toolbar>
       </AppBar>
