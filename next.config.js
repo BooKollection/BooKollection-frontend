@@ -7,7 +7,7 @@ const { parsed: myEnv } = require('dotenv').config({
 
 module.exports = {
   images: { domains: ['images-na.ssl-images-amazon.com'] },
-  reactStrictMode: true,
+  reactStrictMode: myEnv.dev === 'true',
   i18n: {
     locales: ['pt-BR', 'en-US', 'fr-FR', 'es-ES'],
     defaultLocale: 'en-US'
