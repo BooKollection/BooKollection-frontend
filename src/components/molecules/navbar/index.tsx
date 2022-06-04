@@ -14,7 +14,6 @@ import {
   ChildrenBox
 } from './style'
 import { GoogleButton } from '../../atoms/googleButton'
-import { CustomModal } from '../modal'
 import { SearchBar } from '../searchBar'
 import { Drawer } from '../../atoms/drawer'
 import { IRootState } from '../../../store/reducers'
