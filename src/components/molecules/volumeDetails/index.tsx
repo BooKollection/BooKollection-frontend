@@ -31,7 +31,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
           container
           gap="10px"
           paddingY={5}
-          paddingX={2}
+          paddingX={0}
           columns={{ xs: 10, sm: 12, md: 13 }}
           flexGrow={2}
           flexBasis={'440px'}
@@ -41,6 +41,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
             .filter(
               ([atribute]) =>
                 atribute !== 'synopsis' &&
+                atribute !== '__typename' &&
                 atribute !== 'imageUrl' &&
                 atribute !== 'id' &&
                 atribute !== 'editionId' &&
@@ -56,15 +57,21 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
               ]
             ])
             .map(([atribute, value], index) => {
-              const editionTitle = i18n[locale][atribute]
-              const title = editionTitle ? editionTitle : atribute
+              const title =
+                i18n[locale][atribute] !== undefined
+                  ? i18n[locale][atribute]
+                  : atribute
+
+              const labelValue =
+                i18n[locale][value] !== undefined ? i18n[locale][value] : value
+
               return (
                 <Grid
                   item
                   sm={2}
                   md={3}
                   xs={4}
-                  minWidth={150}
+                  minWidth={180}
                   key={'details' + index}
                 >
                   <CenterText fontWeight={'bold'}>{title}</CenterText>
@@ -74,15 +81,11 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                         readOnly={atribute === 'acquisitionDifficultyAverage'}
                         name="half-rating"
                         precision={0.5}
-                        value={Number(value)}
+                        value={Number(labelValue)}
                       />
                     </Box>
                   ) : (
-                    <CenterText>
-                      {atribute === 'type'
-                        ? i18n[locale]['typeLabelEdition'][value]
-                        : value}
-                    </CenterText>
+                    <CenterText>{labelValue}</CenterText>
                   )}
                 </Grid>
               )

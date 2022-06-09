@@ -15,15 +15,8 @@ import VolumeDetails from '../volumeDetails'
 import { CustomButtonBox, VolumeAppBar } from './style'
 import { TransitionProps } from '@mui/material/transitions'
 import CloseIcon from '@mui/icons-material/Close'
+import { DialogDetails } from '../dialogDetails'
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
 export type VolumeType = {
   id: string
   coverPrice: string
@@ -54,10 +47,6 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
   }
   const handleOpen = () => setOpen(true)
 
-  const handleClose = () => {
-    setOpen(false)
-    setAnchorEl(null)
-  }
   return (
     <>
       <Card open={Boolean(anchorEl)} owned={owned} onClick={handleClick}>
@@ -85,29 +74,13 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           </CustomButtonBox>
         </CustomPopover>
       </Card>
-      <Dialog
-        fullScreen
+      <DialogDetails
         open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
+        setOpen={setOpen}
+        title={details}
       >
-        <VolumeAppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {details}
-            </Typography>
-          </Toolbar>
-        </VolumeAppBar>
         <VolumeDetails data={data} />
-      </Dialog>
+      </DialogDetails>
     </>
   )
 }

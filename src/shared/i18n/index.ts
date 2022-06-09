@@ -30,16 +30,14 @@ export const i18n = {
     authorInformationLabel: 'Informações do autor',
     literaryWorkInformationLabel: 'Informações da obra literária',
     colletion: 'Coleção',
-    paperTypeEnum: {
-      newsPrint: 'Papel jornal',
-      offset: 'Offset',
-      chamois: 'Chamois',
-      couche: 'Couché',
-      pollen: 'Polén'
-    },
+    newsPrint: 'Papel jornal',
+    offset: 'Offset',
+    chamois: 'Chamois',
+    couche: 'Couché',
+    pollen: 'Polén',
     addToCollection: 'Adicionar a coleção',
     dimensions: 'Dimensões',
-    name: 'nome',
+    name: 'Nome',
     gifts: 'Brindes',
     volume: 'Volume',
     number: 'Número',
@@ -71,16 +69,15 @@ export const i18n = {
     paperBack: 'Número de páginas',
     illustratorBy: 'Arte',
     writterBy: 'Roteiro',
-    statusLabelTypes: {
-      Complete: 'Finalizado',
-      InProgress: 'Em andamento',
-      Hiatus: 'Hiato'
-    },
-    typeLabelEdition: {
-      JapaneseComicBook: 'Mangá',
-      ComicBook: 'História em quadrinhos',
-      Book: 'Livro'
-    }
+    Complete: 'Finalizado',
+    InProgress: 'Em andamento',
+    Hiatus: 'Hiato',
+    japaneseComicBook: 'Mangá',
+    comicBook: 'História em quadrinhos',
+    book: 'Livro',
+    deluxe: 'Luxo',
+    registeredBy: 'Cadastrado por',
+    updatedBy: 'Atualizado por'
   },
   [EN_US]: {
     edition: 'Edition',
@@ -111,17 +108,15 @@ export const i18n = {
     authorInformationLabel: 'Author Information',
     literaryWorkInformationLabel: 'Literary Work Information',
     colletion: 'Colletion',
-    paperTypeEnum: {
-      newsPrint: 'News Print',
-      offset: 'Offset',
-      chamois: 'Chamois',
-      couche: 'CouchE',
-      pollen: 'Pollen'
-    },
+    newsPrint: 'News Print',
+    offset: 'Offset',
+    chamois: 'Chamois',
+    couche: 'CouchE',
+    pollen: 'Pollen',
     literaryWorksLabel: 'Literary Works',
     addToCollection: 'Add to collection',
     dimensions: 'Dimensions',
-    name: 'name',
+    name: 'Name',
     volume: 'Volume',
     gifts: 'Gifts',
     number: 'Number',
@@ -152,15 +147,14 @@ export const i18n = {
     paperBack: 'Paper Back',
     illustratorBy: 'Art',
     writterBy: 'Script',
-    statusLabelTypes: {
-      Complete: 'Complete',
-      InProgress: 'In Progress',
-      Hiatus: 'Hiatus'
-    },
-    typeLabelEdition: {
-      JapaneseComicBook: 'Japanese comic book',
-      ComicBook: 'Comics',
-      Book: 'Book'
-    }
+    Complete: 'Complete',
+    InProgress: 'In Progress',
+    Hiatus: 'Hiatus',
+    japaneseComicBook: 'Japanese comic book',
+    comicBook: 'Comics',
+    book: 'Book',
+    deluxe: 'Deluxe',
+    registeredBy: 'Registered by',
+    updatedBy: 'Updated by'
   }
 }

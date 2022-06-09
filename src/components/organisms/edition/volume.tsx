@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import { CardGrid } from '../../components/molecules/cardItens'
+import { CardGrid } from '../cardItens'
 
 const EditionVolume = ({ data }) => {
   return (

@@ -3,12 +3,11 @@ import { useRouter } from 'next/router'
 import { Tabs } from '@mui/material'
 import { EditionDetails } from './details'
 import { EditionVolume } from './volume'
-import { BoxContainer } from '../../components/atoms/boxContainer'
-import { CustomText } from '../../components/atoms/text'
-import { i18n } from '../../shared/i18n'
-import { CustomTab } from '../../components/atoms/tabItem'
-import { StyledBox } from './style'
-import { editionMock, editionVolumesMock } from '../../shared/mocks'
+import { CustomText } from '../../atoms/text'
+import { i18n } from '../../../shared/i18n'
+import { CustomTab } from '../../atoms/tabItem'
+import { StyledBox, StyledBoxContainer } from './style'
+import { editionMock, editionVolumesMock } from '../../../shared/mocks'
 
 function a11yProps(index: number) {
   return {
@@ -16,37 +15,20 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`
   }
 }
-const getEdition = (id: string | string[]) => {
-  const edition = editionMock.filter(edition => edition.id === id)[0]
 
-  let volumes = []
-  if (edition) {
-    volumes = editionVolumesMock.filter(
-      volume => volume.editionId === edition.id
-    )
-  }
-  return { edition, volumes }
-}
-const Edition = () => {
+const Edition = ({ editionDetails }) => {
   const [tabSelected, setTabSelected] = useState(0)
-  const [edition, setEdition] = useState(null)
+  const [edition, setEdition] = useState(editionDetails)
   const [editionVolumes, setEditionVolumes] = useState([])
   const { locale, query } = useRouter()
   const { details, volumes } = i18n[locale]
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
-  useEffect(() => {
-    const { edition, volumes } = getEdition(query.id)
-    setEdition(edition)
-    setEditionVolumes(volumes)
-  }, [])
+
   return (
     edition && (
-      <BoxContainer padding={2}>
-        <CustomText variant="h6" marginRight={2} marginBottom={2}>
-          {edition.name}
-        </CustomText>
+      <StyledBoxContainer padding={2}>
         <Tabs
           value={tabSelected}
           style={{ marginLeft: '0.6em' }}
@@ -80,9 +62,9 @@ const Edition = () => {
             <EditionVolume data={editionVolumes} />
           )}
         </StyledBox>
-      </BoxContainer>
+      </StyledBoxContainer>
     )
   )
 }
 
-export default Edition
+export { Edition }

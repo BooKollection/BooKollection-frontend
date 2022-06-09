@@ -1,7 +1,7 @@
 import React from 'react'
-import { EditionDetailsType } from '../../../pages/edition/details'
+import { EditionDetailsType } from '../edition/details'
 import { EditionCard } from '../editionCard'
-import { VolumeCard, VolumeType } from '../volumeCard'
+import { VolumeCard, VolumeType } from '../../molecules/volumeCard'
 import { CardGridBox } from './style'
 
 const CardGrid = ({
