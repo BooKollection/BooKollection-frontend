@@ -31,7 +31,7 @@ export const SearchBar = ({
 
   useEffect(() => {
     drawerOpen && open && handleClose()
-  }, [drawerOpen])
+  }, [drawerOpen, open])
 
   return (
     <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
