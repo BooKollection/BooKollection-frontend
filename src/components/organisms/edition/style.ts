@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { Grid, styled } from '@mui/material'
 import { BoxContainer } from '../../atoms'
 
 export const StyledBox = styled('div')(({ theme }) => ({
@@ -11,4 +11,15 @@ export const StyledBox = styled('div')(({ theme }) => ({
 
 export const StyledBoxContainer = styled(BoxContainer)(({ theme }) => ({
   background: theme.palette.primary.main
+}))
+
+export const ImgGridItem = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  maxWidth: '200px',
+  height: '100%',
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '100%'
+  }
 }))

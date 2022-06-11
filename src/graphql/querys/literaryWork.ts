@@ -7,19 +7,28 @@ export const GET_ALL_LITERARY_WORK_QUERY = gql`
     ) {
       id
       name
-      edition
-      paperType
-      type
-      status
-      categories
-      imageUrl
-      publisher
-      bagShape
-      country
       createdAt
       updatedAt
       registeredBy
       updatedBy
+      language
+      synopsis
+      country
+      bagShape
+      publisher
+      dimensions
+      imageUrl
+      status
+      categories
+      edition
+      type
+      paperType
+      ilustratorBy
+      writterBy
+      startOfPublication
+      endOfPublication
+      originalPublisher
+      releaseFrequency
     }
   }
 `

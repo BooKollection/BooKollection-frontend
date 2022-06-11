@@ -10,7 +10,7 @@ import { i18n } from '../shared/i18n'
 export const i18nFormatData = (value: unknown, locale: string): string => {
   let formatedData = value
   const momentDate = moment(value)
-
+  
   if (momentDate.isValid()) {
     formatedData = momentDate.format('LL')
   } else if (i18n[locale][value] !== undefined) {

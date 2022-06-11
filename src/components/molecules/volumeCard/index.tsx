@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { IconButton, Slide, Toolbar, Typography } from '@mui/material'
-import Dialog from '@mui/material/Dialog'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { i18n } from '../../../shared/i18n'
@@ -12,9 +10,7 @@ import {
   Card
 } from '../../atoms'
 import VolumeDetails from '../volumeDetails'
-import { CustomButtonBox, VolumeAppBar } from './style'
-import { TransitionProps } from '@mui/material/transitions'
-import CloseIcon from '@mui/icons-material/Close'
+import { CustomButtonBox } from './style'
 import { DialogDetails } from '../dialogDetails'
 
 export type VolumeType = {
@@ -74,11 +70,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           </CustomButtonBox>
         </CustomPopover>
       </Card>
-      <DialogDetails
-        open={open}
-        setOpen={setOpen}
-        title={details}
-      >
+      <DialogDetails open={open} setOpen={setOpen} title={details}>
         <VolumeDetails data={data} />
       </DialogDetails>
     </>

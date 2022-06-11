@@ -5,7 +5,7 @@ import { CardGrid } from '../components/organisms/cardItens'
 import { CustomText } from '../components/atoms/text'
 import { useRouter } from 'next/router'
 import { i18n } from '../shared/i18n'
-import { editionMock, editionVolumesMock } from '../shared/mocks'
+import { editionVolumesMock } from '../shared/mocks'
 import { clientGraphql } from '../config/client-graphql'
 import { GET_ALL_LITERARY_WORK_QUERY } from '../graphql'
 

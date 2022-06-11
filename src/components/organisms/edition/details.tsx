@@ -1,10 +1,9 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { Grid, useTheme } from '@mui/material'
-import { i18n } from '../../../shared/i18n'
-import { CenterText } from '../../atoms/text'
-import moment from 'moment'
-import { i18nFormatData } from '../../../utils/formatData'
+import { InfoGrid } from '../../molecules'
+import { filterObject } from '../../../utils/filterObject'
+import { ImgGridItem } from './style'
 
 export type EditionDetailsType = {
   id: string
@@ -27,51 +26,72 @@ export type EditionDetailsType = {
   paperType: string
 }
 const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
-  const { locale } = useRouter()
   const theme = useTheme()
   const { synopsis } = details
   return (
     <Grid
-      width={'100%'}
       container
-      gap="0.8em"
-      paddingX={0}
-      paddingY={3}
-      columns={13}
       borderRadius={2}
-      justifyContent="center"
       bgcolor={theme.palette.primary.darkContrast}
+      padding={'1em'}
+      width={'100%'}
+      rowSpacing={1}
     >
-      {Object.entries(details)
-        .filter(
-          ([atribute]) =>
-            atribute !== 'editionId' &&
-            atribute !== 'synopsis' &&
-            atribute !== '__typename' &&
-            atribute !== 'id' &&
-            atribute !== 'imageUrl'
-        )
-        .map(([atribute, value], index) => {
-          const title = i18nFormatData(atribute, locale)
+      <ImgGridItem item xs={12} sm={3} md={3} lg={3}>
+        <Image
+          unoptimized={true}
+          src={details.imageUrl}
+          alt="Picture of the author"
+          width={250}
+          height={350}
+        />
+      </ImgGridItem>
 
-          const labelValue = i18nFormatData(value, locale)
-
-          return (
-            <Grid item minWidth={135} xs={3} key={'details' + index}>
-              <CenterText>{title}</CenterText>
-              <CenterText flexWrap={'wrap'}>{labelValue}</CenterText>
-            </Grid>
-          )
-        })}
-      <Grid item xs={13}>
-        <CenterText>{i18n[locale].synopsis}</CenterText>
-        <CenterText
-          style={{
-            textAlign: 'justify'
+      <Grid item sm={9} md={9} lg={9}>
+        <InfoGrid
+          data={filterObject(details, [
+            'name',
+            'type',
+            'edition',
+            'originalPublisher',
+            'writterBy',
+            'ilustratorBy'
+          ])}
+        />
+        <InfoGrid
+          data={{ synopsis: synopsis }}
+          xs={13}
+          columns={13}
+          labelStyle={{
+            textAlign: synopsis === 'notRegistered' ? 'center' : 'justify',
+            padding: '1em'
           }}
-        >
-          {synopsis}
-        </CenterText>
+        />
+
+        <InfoGrid
+          data={filterObject(details, [
+            'publisher',
+            'country',
+            'language',
+            'status',
+            'releaseFrequency',
+            'categories'
+          ])}
+        />
+
+        <InfoGrid
+          data={filterObject(details, ['bagShape', 'paperType', 'dimensions'])}
+        />
+        <InfoGrid
+          xs={4}
+          md={4}
+          data={filterObject(details, [
+            'startOfPublication',
+            'endOfPublication',
+            'createdAt',
+            'updatedAt'
+          ])}
+        />
       </Grid>
     </Grid>
   )

@@ -15,7 +15,7 @@ import { Edition } from '../edition'
 import { EditionDetailsType } from '../edition/details'
 
 export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
-  const { locale, push } = useRouter()
+  const { locale } = useRouter()
   const { details } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const {
@@ -28,7 +28,6 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
     adquiredVolumes
   } = data
   const [open, setOpen] = useState(false)
-  console.log(data)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
@@ -82,7 +81,7 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
         </CustomPopover>
       </Card>
       <DialogDetails
-        title={details + ' - ' + name + ' ' + edition}
+        title={name + ' ' + edition}
         open={open}
         setOpen={() => setOpen(false)}
       >

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tabs } from '@mui/material'
 import { EditionDetails } from './details'
 import { EditionVolume } from './volume'
-import { CustomText } from '../../atoms/text'
 import { i18n } from '../../../shared/i18n'
 import { CustomTab } from '../../atoms/tabItem'
 import { StyledBox, StyledBoxContainer } from './style'
-import { editionMock, editionVolumesMock } from '../../../shared/mocks'
 
 function a11yProps(index: number) {
   return {
@@ -18,9 +16,9 @@ function a11yProps(index: number) {
 
 const Edition = ({ editionDetails }) => {
   const [tabSelected, setTabSelected] = useState(0)
-  const [edition, setEdition] = useState(editionDetails)
-  const [editionVolumes, setEditionVolumes] = useState([])
-  const { locale, query } = useRouter()
+  const [edition] = useState(editionDetails)
+  const [editionVolumes] = useState([])
+  const { locale } = useRouter()
   const { details, volumes } = i18n[locale]
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)

@@ -1,10 +1,12 @@
 import { Box, styled } from '@mui/material'
 
-const BoxContainer = styled(Box)(({}) => ({
-  display: 'flex', 
+const BoxContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
   flexDirection: 'column',
-  height: '100%',
-  width: '100%'
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    height: '100%'
+  }
 }))
 
 export { BoxContainer }

@@ -6,6 +6,7 @@ import { CenterText } from '../../atoms/text'
 import { i18n } from '../../../shared/i18n'
 import { BoxContainerDetails, GridContainer } from './style'
 import { VolumeType } from '../volumeCard'
+import { i18nFormatData } from '../../../utils/formatData'
 
 const VolumeDetails = ({ data }: { data: VolumeType }) => {
   const { locale } = useRouter()
@@ -57,13 +58,9 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
               ]
             ])
             .map(([atribute, value], index) => {
-              const title =
-                i18n[locale][atribute] !== undefined
-                  ? i18n[locale][atribute]
-                  : atribute
+              const title = i18nFormatData(atribute, locale)
 
-              const labelValue =
-                i18n[locale][value] !== undefined ? i18n[locale][value] : value
+              const labelValue = i18nFormatData(value, locale)
 
               return (
                 <Grid
@@ -94,10 +91,11 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
             <CenterText fontWeight={'bold'}>{i18n[locale].synopsis}</CenterText>
             <CenterText
               style={{
-                textAlign: 'justify'
+                textAlign: 'justify',
+                padding: '1em'
               }}
             >
-              {data.synopsis}
+              {i18nFormatData(data.synopsis, locale)}
             </CenterText>
           </Grid>
         </Grid>
