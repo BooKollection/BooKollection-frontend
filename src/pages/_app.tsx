@@ -6,9 +6,9 @@ import VLibras from '@djpfs/react-vlibras'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { theme } from '../styles/theme'
 import { store } from '../store'
-import { Navbar } from '../components/molecules/navbar'
+import { Navbar } from '../components/molecules'
 import '../styles/globals.css'
-import { Backdrop } from '../components/atoms/backdrop'
+import { Backdrop } from '../components/atoms/a-backdrop'
 import { Provider } from 'react-redux'
 
 function MyApp({ Component, pageProps }) {

@@ -10,9 +10,9 @@ import {
 } from '../../atoms'
 import { i18n } from '../../../shared/i18n'
 import { Box } from '@mui/material'
-import { DialogDetails } from '../../molecules/dialogDetails'
-import { Edition } from '../edition'
-import { EditionDetailsType } from '../edition/details'
+import { DialogDetails } from '../../molecules'
+import { Edition } from '../o-edition'
+import { EditionDetailsType } from '../o-edition/details'
 
 export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
   const { locale } = useRouter()

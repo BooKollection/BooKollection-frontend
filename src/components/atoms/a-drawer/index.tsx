@@ -18,7 +18,7 @@ import { DrawerHeader, DrawerUI } from './style'
 import { i18n } from '../../../shared/i18n'
 import { useSelector } from 'react-redux'
 import { IRootState } from '../../../store/reducers'
-import { CenterText } from '../text'
+import { CenterText } from '../a-text'
 import {
   MenuBook as MenuBookIcon,
   Home as HomeIcon,

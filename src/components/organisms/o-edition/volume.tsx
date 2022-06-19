@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import { CardGrid } from '../cardItens'
+import { CardGrid } from '../o-card-itens'
 
 const EditionVolume = ({ data }) => {
   return (

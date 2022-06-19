@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Box, Tooltip, Fade } from '@mui/material'
 import { Search as SearchIcon, Close } from '@mui/icons-material'
 import { i18n } from '../../../shared/i18n'
-import { StyledButton } from '../../atoms/button'
+import { StyledButton } from '../../atoms/a-button'
 
 import {
   Search,
@@ -11,7 +11,7 @@ import {
   SearchIconWrapper,
   StyledInputBase
 } from './style'
-import { SelectionDropdown } from '../../atoms/selectionDropdown'
+import { SelectionDropdown } from '../../atoms/a-selection-dropdown'
 
 export const SearchBar = ({
   drawerOpen,

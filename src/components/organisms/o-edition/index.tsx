@@ -4,7 +4,7 @@ import { Tabs } from '@mui/material'
 import { EditionDetails } from './details'
 import { EditionVolume } from './volume'
 import { i18n } from '../../../shared/i18n'
-import { CustomTab } from '../../atoms/tabItem'
+import { CustomTab } from '../../atoms/a-tab-item'
 import { StyledBox, StyledBoxContainer } from './style'
 
 function a11yProps(index: number) {

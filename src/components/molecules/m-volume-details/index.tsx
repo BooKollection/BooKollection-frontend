@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Grid, Rating } from '@mui/material'
 import Image from 'next/image'
-import { CenterText } from '../../atoms/text'
+import { CenterText } from '../../atoms/a-text'
 import { i18n } from '../../../shared/i18n'
 import { BoxContainerDetails, GridContainer } from './style'
-import { VolumeType } from '../volumeCard'
+import { VolumeType } from '../m-volume-card'
 import { i18nFormatData } from '../../../utils/formatData'
 
 const VolumeDetails = ({ data }: { data: VolumeType }) => {

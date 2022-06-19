@@ -4,8 +4,8 @@ import { Grid } from '@mui/material'
 import moment from 'moment'
 import 'moment/locale/en-au'
 import 'moment/locale/pt'
-import { i18n } from '../../shared/i18n'
-import { CenterText } from '../../components/atoms/text'
+import { i18n } from '../../../shared/i18n'
+import { CenterText } from '../../atoms/a-text'
 
 type details = {
   totalLiteraryWorks: number

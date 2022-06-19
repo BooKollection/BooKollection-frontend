@@ -13,9 +13,9 @@ import {
   AppBar,
   ChildrenBox
 } from './style'
-import { GoogleButton } from '../../atoms/googleButton'
-import { SearchBar } from '../searchBar'
-import { Drawer } from '../../atoms/drawer'
+import { GoogleButton } from '../../atoms/a-google-button'
+import { SearchBar } from '../m-search-bar'
+import { Drawer } from '../../atoms/a-drawer'
 import { IRootState } from '../../../store/reducers'
 import { USER_UPDATE } from '../../../store/actions'
 import { debounce } from '../../../utils/bounce'

@@ -9,9 +9,9 @@ import {
   CustomText,
   Card
 } from '../../atoms'
-import VolumeDetails from '../volumeDetails'
+import VolumeDetails from '../m-volume-details'
 import { CustomButtonBox } from './style'
-import { DialogDetails } from '../dialogDetails'
+import { DialogDetails } from '../m-dialog-details'
 
 export type VolumeType = {
   id: string
