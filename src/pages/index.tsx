@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { editionVolumesMock } from '../shared/mocks'
-import { clientGraphql } from '../config/client-graphql'
+import { clientGraphql } from '../graphql/client-graphql'
 import { GET_ALL_LITERARY_WORK_QUERY } from '../graphql'
 import { Homepage } from '../templates'
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MY_COLLECTION_QUERY } from '../../graphql'
-import { clientGraphql } from '../../config/client-graphql'
+import { clientGraphql } from '../../graphql/client-graphql'
 import { Collection } from '../../templates'
 
 const MyCollection = () => {
