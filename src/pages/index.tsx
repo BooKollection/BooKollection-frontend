@@ -1,33 +1,29 @@
-import React from 'react'
-import { styled } from '@mui/material/styles'
-import { Box } from '@mui/material'
-import { CardGrid } from '../components/molecules/cardItens'
-import { CustomText } from '../components/atoms/text'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { i18n } from '../shared/i18n'
-import { editionMock, editionVolumesMock } from '../shared/mocks'
-
-const BoxContainer = styled(Box)(({}) => ({
-  height: '100%',
-  width: '100%',
-  padding: '1em'
-}))
+import { editionVolumesMock } from '../shared/mocks'
+import { clientGraphql } from '../graphql/client-graphql'
+import { GET_ALL_LITERARY_WORK_QUERY } from '../graphql'
+import { Homepage } from '../templates'
 
 const Index = () => {
+  const [editions, setEditions] = useState([])
   const { locale } = useRouter()
-  const { addVolumes, literaryWorksAdd } = i18n[locale]
-  return (
-    <BoxContainer>
-      <CustomText variant="h6" margin="15px 0px">
-        {addVolumes}
-      </CustomText>
-      <CardGrid volumes={editionVolumesMock} />
-      <CustomText variant="h6" margin="25px 0px 15px 0px">
-        {literaryWorksAdd}
-      </CustomText>
-      <CardGrid editions={editionMock} />
-    </BoxContainer>
-  )
+
+  useEffect(() => {
+    clientGraphql
+      .query({
+        query: GET_ALL_LITERARY_WORK_QUERY,
+        variables: {
+          offset: 0,
+          limit: 0,
+          language: locale.replace('-', '')
+        }
+      })
+      .then(res => {
+        setEditions(res.data.getAllLiteraryWorks)
+      })
+  }, [])
+  return <Homepage editions={editions} volumes={editionVolumesMock} />
 }
 
 export default Index

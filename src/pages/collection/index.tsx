@@ -1,21 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { Tabs } from '@mui/material'
-import { MyCollectionDetails } from './details'
-import { MyCollectionEditions } from './literaryWork'
-import { BoxContainer } from '../../components/atoms/boxContainer'
-import { i18n } from '../../shared/i18n'
-import { CustomTab } from '../../components/atoms/tabItem'
-import { StyledBox } from './style'
 import { MY_COLLECTION_QUERY } from '../../graphql'
-import { clientGraphql } from '../../config/client-graphql'
+import { clientGraphql } from '../../graphql/client-graphql'
+import { Collection } from '../../templates'
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  }
-}
 const MyCollection = () => {
   const [tabSelected, setTabSelected] = useState(0)
   const [
@@ -23,7 +10,7 @@ const MyCollection = () => {
       totalLiteraryWorks,
       totalVolumes,
       collectionValue,
-      completeLiteraryWork,
+      completeLiteraryWorks,
       memberSince,
       literaryWorks
     },
@@ -32,12 +19,11 @@ const MyCollection = () => {
     totalLiteraryWorks: 0,
     totalVolumes: 0,
     collectionValue: 0,
-    completeLiteraryWork: 0,
+    completeLiteraryWorks: 0,
     memberSince: null,
     literaryWorks: []
   })
-  const { locale } = useRouter()
-  const { details, literaryWorksLabel } = i18n[locale]
+
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
@@ -71,61 +57,32 @@ const MyCollection = () => {
         }
       ]
     }
+
     clientGraphql
       .mutate({
         mutation: MY_COLLECTION_QUERY
       })
       .then(res => {
-
         setCollectionData({
           ...response,
-          ...res.data.myCollection
+          ...res.data.myCollection,
+          memberSince: res.data.myCollection.createdAt
         })
       })
   }, [])
   return (
-    <>
-      {memberSince && (
-        <BoxContainer padding={2}>
-          <Tabs
-            value={tabSelected}
-            style={{ marginLeft: '0.6em' }}
-            onChange={handleChange}
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: 'transparent'
-              }
-            }}
-          >
-            <CustomTab
-              isSelected={tabSelected === 0}
-              label={details}
-              {...a11yProps(0)}
-            />
-            <CustomTab
-              isSelected={tabSelected === 1}
-              label={literaryWorksLabel}
-              {...a11yProps(1)}
-            />
-          </Tabs>
-          <StyledBox padding={3}>
-            {tabSelected === 0 ? (
-              <MyCollectionDetails
-                details={{
-                  totalLiteraryWorks,
-                  totalVolumes,
-                  collectionValue,
-                  completeLiteraryWork,
-                  memberSince
-                }}
-              />
-            ) : (
-              <MyCollectionEditions data={literaryWorks} />
-            )}
-          </StyledBox>
-        </BoxContainer>
-      )}
-    </>
+    <Collection
+      data={{
+        tabSelected,
+        literaryWorks,
+        handleChange,
+        totalLiteraryWorks,
+        totalVolumes,
+        collectionValue,
+        completeLiteraryWorks,
+        memberSince
+      }}
+    />
   )
 }
 
