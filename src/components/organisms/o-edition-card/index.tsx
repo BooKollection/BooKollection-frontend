@@ -70,6 +70,7 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
         <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
           <Box width="10em">
             <StyledButton
+              style={{ width: '100%' }}
               onClick={() => {
                 setOpen(true)
                 setAnchorEl(null)

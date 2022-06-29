@@ -73,7 +73,7 @@ export const i18n = {
     Complete: 'Finalizado',
     InProgress: 'Em andamento',
     Hiatus: 'Hiato',
-    japaneseComicBook: 'Mangá',
+    JapaneseComicBook: 'Mangá',
     comicBook: 'História em quadrinhos',
     book: 'Livro',
     deluxe: 'Luxo',
@@ -164,7 +164,7 @@ export const i18n = {
     Complete: 'Complete',
     InProgress: 'In Progress',
     Hiatus: 'Hiatus',
-    japaneseComicBook: 'Japanese comic book',
+    JapaneseComicBook: 'Japanese comic book',
     comicBook: 'Comics',
     book: 'Book',
     deluxe: 'Deluxe',
@@ -179,8 +179,8 @@ export const i18n = {
     bimonthly: 'bimonthly',
     quarterly: 'quarterly',
     semiannual: 'semiannual',
-    originalPublisher: 'originalPublisher',
-    ptBR: 'Brazil potuguese',
-    enUs: 'north american english'
+    originalPublisher: 'Original Publisher',
+    ptBR: 'Brazilian potuguese',
+    enUs: 'North american english'
   }
 }

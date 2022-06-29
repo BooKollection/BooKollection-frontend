@@ -41,14 +41,16 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
           {Object.entries(data)
             .filter(
               ([atribute]) =>
-                atribute !== 'synopsis' &&
-                atribute !== '__typename' &&
-                atribute !== 'imageUrl' &&
-                atribute !== 'id' &&
-                atribute !== 'editionId' &&
-                atribute !== 'volumes' &&
-                atribute !== 'owned' &&
-                !atribute.includes('acquisition')
+                ![
+                  'synopsis',
+                  'coverPriceUnit',
+                  '__typename',
+                  'imageUrl',
+                  'id',
+                  'editionId',
+                  'volumes',
+                  'owned'
+                ].includes(atribute) && !atribute.includes('acquisition')
             )
             .concat([
               ['acquisitionDifficulty', data.acquisitionDifficulty],

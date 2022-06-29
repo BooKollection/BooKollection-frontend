@@ -15,7 +15,9 @@ import { DialogDetails } from '../m-dialog-details'
 
 export type VolumeType = {
   id: string
+  type: string
   coverPrice: string
+  coverPriceUnit: string
   name: string
   imageUrl: string
   edition: string
@@ -60,13 +62,16 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
         <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
           <CustomButtonBox width="12em">
             <StyledButton
+              style={{ width: '100%' }}
               onClick={() => {
                 push({ pathname: '/edition', query: { keyword: editionId } })
               }}
             >
               {addToCollection}
             </StyledButton>
-            <StyledButton onClick={handleOpen}>{details}</StyledButton>
+            <StyledButton style={{ width: '100%' }} onClick={handleOpen}>
+              {details}
+            </StyledButton>
           </CustomButtonBox>
         </CustomPopover>
       </Card>
