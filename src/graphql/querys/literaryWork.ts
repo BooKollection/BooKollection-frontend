@@ -32,3 +32,22 @@ export const GET_ALL_LITERARY_WORK_QUERY = gql`
     }
   }
 `
+export const GET_USER_LITERARY_WORK_QUERY = gql`
+  query getUserLiteraryWorks($language: Language!) {
+    getUserLiteraryWorks(language: $language) {
+      totalLiteraryWorks
+      completeLiteraryWorks
+      totalVolumes
+      memberSince
+      literaryWorks {
+        id
+        name
+        imageUrl
+        status
+        edition
+        adquiredVolumes
+        totalVolumes
+      }
+    }
+  }
+`

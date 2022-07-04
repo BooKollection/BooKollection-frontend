@@ -2,6 +2,11 @@ import { PT_BR, EN_US } from '../constants'
 
 export const i18n = {
   [PT_BR]: {
+    warning: 'Aviso',
+    priceInvalidMessage: 'Coloque um valor válido da compra',
+    purchasedDateInvalidMessage: 'A data máxima permitida é hoje',
+    purchasedPrice: 'Valor da compra',
+    purchasedDate: 'Data de aquisição',
     edition: 'Edição',
     type: 'Tipo',
     status: 'Status',
@@ -43,6 +48,10 @@ export const i18n = {
     number: 'Número',
     checkList: 'Check list',
     numberOfPages: 'Número de páginas',
+    BRL: 'R$',
+    USD: '$',
+    EUR: '€',
+    JPY: '¥',
     titles: [
       { label: 'Inicio', link: '/' },
       {
@@ -54,7 +63,7 @@ export const i18n = {
         link: '/literaryWorks'
       }
     ],
-    literaryWorksLabel: 'Obras literárias',
+    literaryWork: 'Obras literárias',
     addVolumes: 'Volumes adicionados',
     literaryWorksAdd: 'Obras Adicionadas',
     search: 'Buscar',
@@ -93,6 +102,11 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    warning: 'Warning',
+    purchasedDateInvalidMessage: 'The maximum date allowed is today',
+    priceInvalidMessage: 'Put valid price',
+    purchasedPrice: 'purchasedPrice',
+    purchasedDate: 'Data de aquisição',
     edition: 'Edition',
     type: 'Type',
     status: 'Status',
@@ -126,7 +140,7 @@ export const i18n = {
     chamois: 'Chamois',
     couche: 'CouchE',
     pollen: 'Pollen',
-    literaryWorksLabel: 'Literary Works',
+    literaryWork: 'Literary Works',
     addToCollection: 'Add to collection',
     dimensions: 'Dimensions',
     name: 'Name',
@@ -181,6 +195,10 @@ export const i18n = {
     semiannual: 'semiannual',
     originalPublisher: 'Original Publisher',
     ptBR: 'Brazilian potuguese',
-    enUs: 'North american english'
+    enUs: 'North american english',
+    BRL: 'R$',
+    USD: '$',
+    EUR: '€',
+    JPY: '¥'
   }
 }

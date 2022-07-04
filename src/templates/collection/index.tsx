@@ -27,7 +27,7 @@ const Collection = ({ data }) => {
     memberSince
   } = data
   const { locale } = useRouter()
-  const { details, literaryWorksLabel } = i18n[locale]
+  const { details, literaryWork } = i18n[locale]
 
   return (
     <BoxContainer padding={2}>
@@ -48,7 +48,7 @@ const Collection = ({ data }) => {
         />
         <CustomTab
           isSelected={tabSelected === 1}
-          label={literaryWorksLabel}
+          label={literaryWork}
           {...a11yProps(1)}
         />
       </Tabs>

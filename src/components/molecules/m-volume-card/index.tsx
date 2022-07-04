@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { MobileDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { Box, TextField, Typography, useTheme } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
 import {
   StyledButton,
   CustomPopover,
   CenterText,
   CustomText,
-  Card
+  Card,
+  SelectionDropdown
 } from '../../atoms'
 import VolumeDetails from '../m-volume-details'
-import { CustomButtonBox } from './style'
+import { CustomButtonBox, CustomTextField } from './style'
 import { DialogDetails } from '../m-dialog-details'
+import { CREATE_USER_VOLUME_MUTATION } from '../../../graphql'
+import { clientGraphql } from '../../../graphql/client-graphql'
+import { CustomModal } from '../m-modal'
+import { useDispatch } from 'react-redux'
+import { snackbarUpdate } from '../../../store/actions/snackbar'
 
 export type VolumeType = {
   id: string
@@ -35,18 +44,168 @@ export type VolumeType = {
   isbn13: string
 }
 export const VolumeCard = ({ data }: { data: VolumeType }) => {
-  const { locale, push } = useRouter()
+  const { locale } = useRouter()
+  const [openModal, setOpenModal] = useState(false)
   const { addToCollection, details } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
-  const { name, imageUrl, edition, publisher, number, owned, editionId } = data
+  const {
+    id,
+    name,
+    imageUrl,
+    edition,
+    publisher,
+    number,
+    owned,
+    coverPrice,
+    coverPriceUnit
+  } = data
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
-  const handleOpen = () => setOpen(true)
+  const dispatch = useDispatch()
 
+  const handleSnackbarOpen = (message: string) => {
+    dispatch(
+      snackbarUpdate({ open: true, message: message, severity: 'error' })
+    )
+  }
+  const theme = useTheme()
+  const [userVolume, setUserVolume] = useState({
+    purchasedPrice: coverPrice.split(' ')[0],
+    purchasedDate: new Date(),
+    purchasedPriceUnit: i18n[locale][coverPriceUnit],
+    volume: id
+  })
+  const coins = [
+    { value: 'BRL', label: i18n[locale].BRL },
+    { value: 'USD', label: i18n[locale].USD },
+    { value: 'EUR', label: i18n[locale].EUR },
+    { value: 'JPY', label: i18n[locale].JPY }
+  ]
+  const i18nOptions = coins.map(({ label }) => label)
+  const handlerUserVolume = (event, prop: string) => {
+    setUserVolume({
+      ...userVolume,
+      [prop]: event.target.value
+    })
+  }
+  const setDropdown = event => {
+    const value = event.target.value
+    const filteredValue = coins.filter(opt => value === opt.label)[0].value
+    setUserVolume({
+      ...userVolume,
+      purchasedPriceUnit: filteredValue
+    })
+  }
+
+  const handleOpen = () => setOpen(true)
+  const addToCollectionHandler = () => {
+    let message = ''
+
+    if (userVolume.purchasedDate > new Date()) {
+      message += i18n[locale].purchasedDateInvalidMessage + '. '
+    }
+    if (!Number(userVolume.purchasedPrice)) {
+      message += i18n[locale].priceInvalidMessage
+    }
+
+    if (message !== '') {
+      handleSnackbarOpen(message)
+    } else {
+      const userVolumeVerified = userVolume
+
+      userVolumeVerified.purchasedPrice = userVolume.purchasedPrice.replace(
+        ',',
+        '-'
+      )
+
+      clientGraphql
+        .mutate({
+          mutation: CREATE_USER_VOLUME_MUTATION,
+          variables: userVolume
+        })
+        .then(() => {
+          setOpenModal(false)
+        })
+    }
+  }
   return (
     <>
+      <CustomModal
+        bgColor={theme.palette.primary.darkContrast}
+        border="none"
+        open={openModal}
+        setOpen={setOpenModal}
+      >
+        <Box
+          justifyContent={'center'}
+          justifyItems={'center'}
+          alignItems={'center'}
+          display="flex"
+          flexDirection={'column'}
+        >
+          <Typography color={theme.palette.primary.contrastText} align="center">
+            {i18n[locale].purchasedPrice}
+          </Typography>
+          <Box
+            display={'flex'}
+            flexDirection={'row'}
+            marginBottom={2}
+            sx={{ flexWrap: 'nowrap' }}
+          >
+            <SelectionDropdown
+              options={i18nOptions}
+              value={userVolume.purchasedPriceUnit}
+              setValue={setDropdown}
+            />
+            <CustomTextField
+              required
+              size="small"
+              value={userVolume.purchasedPrice}
+              onChange={e => handlerUserVolume(e, 'purchasedPrice')}
+            />
+          </Box>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <MobileDatePicker
+              label={i18n[locale].purchasedDate}
+              inputFormat="dd/MM/yyyy"
+              value={userVolume.purchasedDate}
+              onChange={event => {
+                setUserVolume({
+                  ...userVolume,
+                  purchasedDate: event
+                })
+              }}
+              renderInput={params => (
+                <TextField
+                  fullWidth={true}
+                  {...params}
+                  sx={{
+                    color: theme.palette.primary.contrastText,
+                    svg: { color: theme.palette.primary.contrastText },
+                    input: {
+                      color: theme.palette.primary.contrastText
+                    }
+                  }}
+                />
+              )}
+            />
+          </LocalizationProvider>
+          <StyledButton
+            size="medium"
+            sx={{
+              background: theme.palette.primary.light,
+              width: '100%',
+              maxWidth: '240px',
+              marginTop: 2
+            }}
+            onClick={addToCollectionHandler}
+          >
+            {addToCollection}
+          </StyledButton>
+        </Box>
+      </CustomModal>
       <Card open={Boolean(anchorEl)} owned={owned} onClick={handleClick}>
         <Image
           unoptimized={true}
@@ -64,7 +223,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
             <StyledButton
               style={{ width: '100%' }}
               onClick={() => {
-                push({ pathname: '/edition', query: { keyword: editionId } })
+                setOpenModal(true)
               }}
             >
               {addToCollection}

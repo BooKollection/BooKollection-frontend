@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Tooltip, Fade } from '@mui/material'
 import { Search as SearchIcon, Close } from '@mui/icons-material'
@@ -20,24 +20,40 @@ export const SearchBar = ({
   drawerOpen: boolean
   handleDrawerClose: () => void
 }) => {
+  const { locale } = useRouter()
+  const { search } = i18n[locale]
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
     handleDrawerClose()
     setOpen(true)
   }
+  const options = [
+    { value: 'literaryWork', label: i18n[locale].literaryWork },
+    { value: 'author', label: i18n[locale].author },
+    { value: 'volume', label: i18n[locale].volume }
+  ]
+  const [dropdownValue, setDropdownValue] = useState(options[0].label)
+  const i18nOptions = options.map(({ label }) => label)
+  const setDropdown = (value: string) => {
+    const filteredValue = options.filter(opt => value === opt.label)[0].value
+    setDropdownValue(filteredValue)
+  }
   const handleClose = () => setOpen(false)
-  const { locale } = useRouter()
-  const { search } = i18n[locale]
-
   useEffect(() => {
     drawerOpen && open && handleClose()
   }, [drawerOpen, open])
+  console.log(dropdownValue)
 
   return (
     <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
       {open && (
         <SearchContainer>
-          <SelectionDropdown />
+          <SelectionDropdown
+            width={200}
+            options={i18nOptions}
+            setValue={setDropdown}
+            value={dropdownValue}
+          />
           <Search sx={{ display: 'flex' }}>
             <SearchIconWrapper>
               <SearchIcon />

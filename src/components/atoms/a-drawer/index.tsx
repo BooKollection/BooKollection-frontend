@@ -37,9 +37,27 @@ export const Drawer = ({
   const { locale, push } = useRouter()
   const { titles, cttVersion } = i18n[locale]
   const iconList = [
-    <HomeIcon key="iconList1" color="primary" />,
-    <MenuBookIcon key="iconList2" color="primary" />,
-    <LibraryBooksIcon key="iconList2" color="primary" />
+    <HomeIcon
+      key="iconList1"
+      color="primary"
+      sx={{
+        fill: theme.palette.primary.contrastText
+      }}
+    />,
+    <MenuBookIcon
+      key="iconList2"
+      color="primary"
+      sx={{
+        fill: theme.palette.primary.contrastText
+      }}
+    />,
+    <LibraryBooksIcon
+      key="iconList2"
+      color="primary"
+      sx={{
+        fill: theme.palette.primary.contrastText
+      }}
+    />
   ]
 
   const { token } = useSelector((state: IRootState) => state.user)
