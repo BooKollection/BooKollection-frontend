@@ -24,3 +24,20 @@ export const CustomTextField = styled(InputBase)(({ theme }) => ({
     minWidth: '10rem'
   }
 }))
+
+export const NotAdquired = styled(Box)(() => ({
+  position: 'absolute',
+  bottom: '0%',
+  left: '50%',
+  transform: 'translate(-50%,-50%)',
+  width: '7.5rem',
+  height: '7.5rem',
+  borderRadius: '3.75rem',
+  backgroundColor: 'rgba(0,0,0,.7)',
+  fontSize: '1.25rem',
+  color: '#fff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textTransform: 'capitalize'
+}))

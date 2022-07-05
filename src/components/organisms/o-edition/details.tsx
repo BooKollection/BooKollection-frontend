@@ -4,6 +4,9 @@ import { Grid, useTheme } from '@mui/material'
 import { InfoGrid } from '../../molecules'
 import { filterObject } from '../../../utils/filterObject'
 import { ImgGridItem } from './style'
+import { i18n } from '../../../shared/i18n'
+import { useRouter } from 'next/router'
+import { i18nFormatData } from '../../../utils/formatData'
 
 export type EditionDetailsType = {
   id: string
@@ -27,7 +30,9 @@ export type EditionDetailsType = {
 }
 const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
   const theme = useTheme()
-  const { synopsis } = details
+  const { locale } = useRouter()
+  const synopsis = i18nFormatData(details.synopsis, locale)
+
   return (
     <Grid
       container
@@ -64,7 +69,8 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
           xs={13}
           columns={13}
           labelStyle={{
-            textAlign: synopsis === 'notRegistered' ? 'center' : 'justify',
+            textAlign:
+              synopsis === i18n[locale].notRegistered ? 'center' : 'justify',
             padding: '1em'
           }}
         />

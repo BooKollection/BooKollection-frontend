@@ -70,9 +70,17 @@ export const Drawer = ({
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'rtl' ? (
-            <ChevronRightIcon />
+            <ChevronRightIcon
+              sx={{
+                fill: theme.palette.primary.contrastText
+              }}
+            />
           ) : (
-            <ChevronLeftIcon />
+            <ChevronLeftIcon
+              sx={{
+                fill: theme.palette.primary.contrastText
+              }}
+            />
           )}
         </IconButton>
       </DrawerHeader>

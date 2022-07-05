@@ -14,7 +14,7 @@ import {
   SelectionDropdown
 } from '../../atoms'
 import VolumeDetails from '../m-volume-details'
-import { CustomButtonBox, CustomTextField } from './style'
+import { CustomButtonBox, CustomTextField, NotAdquired } from './style'
 import { DialogDetails } from '../m-dialog-details'
 import {
   CREATE_USER_VOLUME_MUTATION,
@@ -163,11 +163,13 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
         })
         .then(() => {
           setOpenModal(false)
-          snackbarUpdate({
-            open: true,
-            message: i18n[locale].sucessAddVolumeMessage,
-            severity: 'success'
-          })
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].sucessAddVolumeMessage,
+              severity: 'success'
+            })
+          )
           setVolume({
             ...data,
             haveVolume: true
@@ -266,14 +268,17 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           </StyledButton>
         </Box>
       </CustomModal>
-      <Card open={Boolean(anchorEl)} owned={haveVolume} onClick={handleClick}>
-        <Image
-          unoptimized={true}
-          src={imageUrl}
-          alt="Picture of the author"
-          width={150}
-          height={200}
-        />
+      <Card open={Boolean(anchorEl)} onClick={handleClick}>
+        <Box style={{ position: 'relative' }}>
+          <Image
+            unoptimized={true}
+            src={imageUrl}
+            alt="Picture of the author"
+            width={150}
+            height={200}
+          />
+          {!haveVolume && <NotAdquired />}
+        </Box>
         <CenterText>{name}</CenterText>
         <CenterText>{edition}</CenterText>
         <CustomText>{publisher}</CustomText>

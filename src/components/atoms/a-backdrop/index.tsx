@@ -10,7 +10,7 @@ export const Backdrop = () => {
   return (
     <div>
       <MuiBackdrop
-        sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 2 }}
+        sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1000 }}
         open={open}
       >
         <CircularProgress color="inherit" />

@@ -14,6 +14,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
     data.acquisitionDifficulty
   )
   const theme = useTheme()
+  const synopsis = i18nFormatData(data.synopsis, locale)
 
   return (
     <BoxContainerDetails>
@@ -105,11 +106,14 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
             <CenterText fontWeight={'bold'}>{i18n[locale].synopsis}</CenterText>
             <CenterText
               style={{
-                textAlign: 'justify',
+                textAlign:
+                  synopsis === i18n[locale].notRegistered
+                    ? 'center'
+                    : 'justify',
                 padding: '1em'
               }}
             >
-              {i18nFormatData(data.synopsis, locale)}
+              {synopsis}
             </CenterText>
           </Grid>
           {data.purchasedDate && (

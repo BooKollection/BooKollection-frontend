@@ -2,6 +2,9 @@ import { PT_BR, EN_US } from '../constants'
 
 export const i18n = {
   [PT_BR]: {
+    notRegistered: 'Não informado',
+    errorToGetVolumes: 'Erro ao carregar os volumes',
+    japaneseComicBook: 'Mangá',
     removeVolume: 'Remover volume',
     deleteVolumeMessage: 'Volume removido da coleção',
     errorDeleteVolumeMessage: 'Erro ao deletar o volume da coleção',
@@ -94,8 +97,6 @@ export const i18n = {
     deluxe: 'Luxo',
     registeredBy: 'Cadastrado por',
     updatedBy: 'Atualizado por',
-    notRegistered: 'Não cadastrado',
-    null: '???',
     startOfPublication: 'inicio da publicação',
     endOfPublication: 'fim da publicação',
     releaseFrequency: 'periodicidade',
@@ -108,6 +109,9 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    japaneseComicBook: 'Mangá',
+    notRegistered: 'Not registered',
+    errorToGetVolumes: 'Error To get volumes',
     removeVolume: 'Remove Volume',
     deleteVolumeMessage: 'Volume removed from collection',
     errorDeleteVolumeMessage: 'Error to remove volume from collection',
@@ -196,8 +200,6 @@ export const i18n = {
     deluxe: 'Deluxe',
     registeredBy: 'Registered by',
     updatedBy: 'Updated by',
-    notRegistered: 'Not registered',
-    null: '???',
     startOfPublication: 'start of publication',
     endOfPublication: 'end of publication',
     releaseFrequency: 'release frequency',
