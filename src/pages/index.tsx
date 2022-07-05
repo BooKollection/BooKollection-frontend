@@ -4,6 +4,7 @@ import { clientGraphql } from '../graphql/client-graphql'
 import { GET_ALL_LITERARY_WORK_QUERY, GET_ALL_VOLUMES_QUERY } from '../graphql'
 import { Homepage } from '../templates'
 import { VolumeType } from '../components/molecules'
+import { i18n } from '../shared/i18n'
 
 const Index = () => {
   const [editions, setEditions] = useState([])
@@ -44,7 +45,7 @@ const Index = () => {
             }
             return {
               ...volume,
-              coverPrice: coverPrice + ' ' + volume.coverPriceUnit
+              coverPrice: i18n[locale][volume.coverPriceUnit] + ' ' + coverPrice
             }
           })
         )

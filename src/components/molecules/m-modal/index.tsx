@@ -15,8 +15,6 @@ const CustomModal = ({
   children,
   ...otherProps
 }: CustomModalProps) => {
-  console.log(bgColor)
-
   return (
     <Modal {...otherProps} open={open} onClose={() => setOpen(false)}>
       <Box sx={{ ...style, background: bgColor, border: border }}>

@@ -17,8 +17,7 @@ export const ImgGridItem = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  maxWidth: '200px',
-  height: '100%',
+  height: 'auto',
   [theme.breakpoints.down('sm')]: {
     maxWidth: '100%'
   }

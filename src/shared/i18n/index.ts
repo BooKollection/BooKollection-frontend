@@ -2,6 +2,12 @@ import { PT_BR, EN_US } from '../constants'
 
 export const i18n = {
   [PT_BR]: {
+    removeVolume: 'Remover volume',
+    deleteVolumeMessage: 'Volume removido da coleção',
+    errorDeleteVolumeMessage: 'Erro ao deletar o volume da coleção',
+    sucessAddVolumeMessage: 'Volume adicionado a coleção',
+    publication: 'Checklist',
+    erroAddVolumeMessage: 'Erro ao adicionar o volume',
     warning: 'Aviso',
     priceInvalidMessage: 'Coloque um valor válido da compra',
     purchasedDateInvalidMessage: 'A data máxima permitida é hoje',
@@ -102,11 +108,17 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    removeVolume: 'Remove Volume',
+    deleteVolumeMessage: 'Volume removed from collection',
+    errorDeleteVolumeMessage: 'Error to remove volume from collection',
+    sucessAddVolumeMessage: 'Volume added from collection',
+    erroAddVolumeMessage: 'Error to add volume',
+    publication: 'Checklist',
     warning: 'Warning',
     purchasedDateInvalidMessage: 'The maximum date allowed is today',
     priceInvalidMessage: 'Put valid price',
-    purchasedPrice: 'purchasedPrice',
-    purchasedDate: 'Data de aquisição',
+    purchasedPrice: 'Purchased Price',
+    purchasedDate: 'Purchased Date',
     edition: 'Edition',
     type: 'Type',
     status: 'Status',

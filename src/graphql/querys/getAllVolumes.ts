@@ -30,6 +30,9 @@ export const GET_ALL_VOLUMES_QUERY = gql`
       edition
       country
       categories
+      haveVolume
+      purchasedDate
+      purchasedPrice
     }
   }
 `

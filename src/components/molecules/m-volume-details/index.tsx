@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Grid, Rating } from '@mui/material'
+import { Box, Grid, Rating, useTheme } from '@mui/material'
 import Image from 'next/image'
 import { CenterText } from '../../atoms/a-text'
 import { i18n } from '../../../shared/i18n'
@@ -13,6 +13,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
   const [userAcquisitionDifficulty, setUserAcquisitionDifficulty] = useState(
     data.acquisitionDifficulty
   )
+  const theme = useTheme()
 
   return (
     <BoxContainerDetails>
@@ -49,7 +50,9 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                   'id',
                   'editionId',
                   'volumes',
-                  'owned'
+                  'haveVolume',
+                  'purchasedPrice',
+                  'purchasedDate'
                 ].includes(atribute) && !atribute.includes('acquisition')
             )
             .concat([
@@ -81,6 +84,15 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                         name="half-rating"
                         precision={0.5}
                         value={Number(labelValue)}
+                        sx={{
+                          '& .MuiRating-iconEmpty': {
+                            color: theme.palette.primary.light
+                          },
+                          opacity:
+                            atribute === 'acquisitionDifficultyAverage'
+                              ? 0.6
+                              : 1
+                        }}
                       />
                     </Box>
                   ) : (
@@ -89,7 +101,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                 </Grid>
               )
             })}
-          <Grid item xs={12}>
+          <Grid item xs={data.purchasedDate && data.purchasedPrice ? 8 : 12}>
             <CenterText fontWeight={'bold'}>{i18n[locale].synopsis}</CenterText>
             <CenterText
               style={{
@@ -100,6 +112,26 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
               {i18nFormatData(data.synopsis, locale)}
             </CenterText>
           </Grid>
+          {data.purchasedDate && (
+            <Grid item xs={2}>
+              <CenterText fontWeight={'bold'}>
+                {i18n[locale].purchasedDate}
+              </CenterText>
+              <CenterText>
+                {i18nFormatData(data.purchasedDate, locale)}
+              </CenterText>
+            </Grid>
+          )}
+          {data.purchasedPrice && (
+            <Grid item xs={2}>
+              <CenterText fontWeight={'bold'}>
+                {i18n[locale].purchasedPrice}
+              </CenterText>
+              <CenterText>
+                {i18nFormatData(data.purchasedPrice, locale, 'purchasedPrice')}
+              </CenterText>
+            </Grid>
+          )}
         </Grid>
       </GridContainer>
     </BoxContainerDetails>

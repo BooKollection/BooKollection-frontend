@@ -37,13 +37,14 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
       width={'100%'}
       rowSpacing={1}
     >
-      <ImgGridItem item xs={12} sm={3} md={3} lg={3}>
+      <ImgGridItem item xs={12} sm={3} md={3} lg={3} display={'block'}>
         <Image
           unoptimized={true}
           src={details.imageUrl}
           alt="Picture of the author"
-          width={250}
-          height={350}
+          width={200}
+          height={300}
+          layout={'responsive'}
         />
       </ImgGridItem>
 

@@ -27,7 +27,6 @@ export const SelectionDropdown = ({
     borderRadius: '10px 0px 0px 10px',
     height: '39px'
   }))
-  console.log(options[0])
 
   return (
     <FormControlWrapper>

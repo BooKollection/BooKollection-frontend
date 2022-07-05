@@ -24,3 +24,8 @@ export const CREATE_USER_VOLUME_MUTATION = gql`
     }
   }
 `
+export const DELETE_USER_VOLUME_MUTATION = gql`
+  mutation deleteUserVolume($volumeId: String!) {
+    deleteUserVolume(volumeId: $volumeId)
+  }
+`
