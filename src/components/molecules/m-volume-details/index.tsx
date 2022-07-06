@@ -68,7 +68,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
 
               const labelValue =
                 atribute === 'categories'
-                  ? formatCategories(value, locale)
+                  ? formatCategories(value + '', locale)
                   : i18nFormatData(
                       value,
                       locale,

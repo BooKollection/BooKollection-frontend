@@ -1,31 +1,52 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import {
-  GET_USER_LITERARY_WORK_QUERY,
-  MY_COLLECTION_QUERY
+  GET_MY_COLLECTION_VOLUME_QUERY,
+  GET_USER_LITERARY_WORK_QUERY
 } from '../../graphql'
 import { clientGraphql } from '../../graphql/client-graphql'
 import { Collection } from '../../templates'
+import { i18nFormatData } from '../../utils/formatData'
 
+interface ICollectionData {
+  totalLiteraryWorks: number
+  totalVolumes: number
+  collectionValue: string
+  completeLiteraryWorks: number
+  memberSince: Date
+}
 const MyCollection = () => {
   const [tabSelected, setTabSelected] = useState(0)
-  const [collectionData, setCollectionData] = useState(null)
+  const [collectionData, setCollectionData] = useState<ICollectionData>(null)
   const { locale } = useRouter()
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabSelected(newValue)
   }
   useEffect(() => {
-    clientGraphql
-      .mutate({
+    Promise.all([
+      clientGraphql.mutate({
         mutation: GET_USER_LITERARY_WORK_QUERY,
         variables: {
           language: locale.replace('-', '')
         }
+      }),
+      clientGraphql.mutate({
+        mutation: GET_MY_COLLECTION_VOLUME_QUERY,
+        variables: {
+          coin: 'BRL'
+        }
       })
-      .then(literaryWork => {
-        setCollectionData(literaryWork.data.getUserLiteraryWorks)
+    ]).then(([literaryWork, collectionVolume]) => {
+      setCollectionData({
+        ...literaryWork.data.getUserLiteraryWorks,
+        collectionValue: i18nFormatData(
+          collectionVolume.data.getCollectionValue,
+          locale,
+          'Price'
+        )
       })
+    })
   }, [])
 
   return (
