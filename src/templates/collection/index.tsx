@@ -15,17 +15,7 @@ function a11yProps(index: number) {
   }
 }
 
-const Collection = ({ data }) => {
-  const {
-    tabSelected,
-    literaryWorks,
-    handleChange,
-    totalLiteraryWorks,
-    totalVolumes,
-    collectionValue,
-    completeLiteraryWorks,
-    memberSince
-  } = data
+const Collection = ({ tabSelected, data, handleChange }) => {
   const { locale } = useRouter()
   const { details, literaryWork } = i18n[locale]
 
@@ -54,17 +44,9 @@ const Collection = ({ data }) => {
       </Tabs>
       <StyledBox padding={3}>
         {tabSelected === 0 ? (
-          <MyCollectionDetails
-            details={{
-              totalLiteraryWorks,
-              totalVolumes,
-              collectionValue,
-              completeLiteraryWorks,
-              memberSince
-            }}
-          />
+          <MyCollectionDetails details={data} />
         ) : (
-          <MyCollectionEditions data={literaryWorks} />
+          data && <MyCollectionEditions data={data.literaryWorks} />
         )}
       </StyledBox>
     </BoxContainer>

@@ -10,6 +10,7 @@ import { Navbar } from '../components/molecules'
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
 import { MuiSnackBar } from '../components/atoms/a-snackbar'
+import { Backdrop } from '../components/atoms/a-backdrop'
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <MuiSnackBar />
+          <Backdrop />
           <Navbar>
             <VLibras forceOnload={true} />
             <Component {...pageProps} />

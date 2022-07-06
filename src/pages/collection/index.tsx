@@ -9,14 +9,7 @@ import { Collection } from '../../templates'
 
 const MyCollection = () => {
   const [tabSelected, setTabSelected] = useState(0)
-  const [collectionData, setCollectionData] = useState({
-    totalLiteraryWorks: 0,
-    totalVolumes: 0,
-    collectionValue: 0,
-    completeLiteraryWorks: 0,
-    memberSince: null,
-    literaryWorks: []
-  })
+  const [collectionData, setCollectionData] = useState(null)
   const { locale } = useRouter()
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -37,11 +30,9 @@ const MyCollection = () => {
 
   return (
     <Collection
-      data={{
-        tabSelected,
-        ...collectionData,
-        handleChange
-      }}
+      tabSelected={tabSelected}
+      data={collectionData}
+      handleChange={handleChange}
     />
   )
 }

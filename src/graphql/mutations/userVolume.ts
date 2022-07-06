@@ -29,3 +29,20 @@ export const DELETE_USER_VOLUME_MUTATION = gql`
     deleteUserVolume(volumeId: $volumeId)
   }
 `
+export const UPDATE_USER_VOLUME_MUTATION = gql`
+  mutation updateUserVolume(
+    $purchasedPrice: Float!
+    $purchasedDate: DateTime!
+    $purchasedPriceUnit: Coin!
+    $volume: String!
+  ) {
+    updateUserVolume(
+      input: {
+        purchasedPrice: $purchasedPrice
+        purchasedDate: $purchasedDate
+        purchasedPriceUnit: $purchasedPriceUnit
+        volume: $volume
+      }
+    )
+  }
+`

@@ -3,8 +3,6 @@ import { EditionDetailsType } from '../o-edition/details'
 import { EditionCard } from '../o-edition-card'
 import { VolumeCard, VolumeType } from '../../molecules'
 import { CardGridBox } from './style'
-import { useSelector } from 'react-redux'
-import { IRootState } from '../../../store/reducers'
 import { Skeleton, useTheme } from '@mui/material'
 import { Card } from '../../atoms'
 
@@ -15,11 +13,10 @@ const CardGrid = ({
   volumes?: VolumeType[]
   editions?: EditionDetailsType[]
 }) => {
-  const { open } = useSelector((state: IRootState) => state.loading)
   const theme = useTheme()
   return (
     <CardGridBox container>
-      {open
+      {!volumes && !editions
         ? Array(5)
             .fill('')
             .map((_, index) => {

@@ -1,30 +1,18 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { MobileDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { Box, TextField, Typography, useTheme } from '@mui/material'
+import { useTheme } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
 import {
-  StyledButton,
-  CustomPopover,
-  CenterText,
-  CustomText,
-  Card,
-  SelectionDropdown
-} from '../../atoms'
-import VolumeDetails from '../m-volume-details'
-import { CustomButtonBox, CustomTextField, NotAdquired } from './style'
-import { DialogDetails } from '../m-dialog-details'
-import {
   CREATE_USER_VOLUME_MUTATION,
-  DELETE_USER_VOLUME_MUTATION
+  DELETE_USER_VOLUME_MUTATION,
+  UPDATE_USER_VOLUME_MUTATION
 } from '../../../graphql'
 import { clientGraphql } from '../../../graphql/client-graphql'
-import { CustomModal } from '../m-modal'
 import { useDispatch } from 'react-redux'
 import { snackbarUpdate } from '../../../store/actions/snackbar'
 import { COINS } from '../../../shared/constants'
+import { VolumeModal } from './modal'
+import { VolumeCardTemplate } from './volumeTemplate'
 
 export type VolumeType = {
   id: string
@@ -53,30 +41,29 @@ export type VolumeType = {
 export const VolumeCard = ({ data }: { data: VolumeType }) => {
   const { locale } = useRouter()
   const [openModal, setOpenModal] = useState(false)
-  const { addToCollection, details, removeVolume } = i18n[locale]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
-  const [
-    {
-      id,
-      name,
-      imageUrl,
-      edition,
-      publisher,
-      number,
-      coverPrice,
-      coverPriceUnit,
-      haveVolume
-    },
-    setVolume
-  ] = useState(data)
+  const [volume, setVolume] = useState(null)
   const [userVolume, setUserVolume] = useState({
-    purchasedPrice: coverPrice.split(' ')[1],
+    purchasedPrice: '',
     purchasedDate: new Date(),
-    purchasedPriceUnit: i18n[locale][coverPriceUnit],
-    volume: id
+    purchasedPriceUnit: '',
+    volume: ''
   })
+  useEffect(() => {
+    const value = data.coverPrice.split(' ')[1]
+    const purchasedPrice = data.purchasedPrice
+      ? data.purchasedPrice
+      : data.coverPrice
+    setVolume({ ...data, coverPrice: value.replace('.', ',') })
+    setUserVolume({
+      purchasedPrice: purchasedPrice.split(' ')[1].replace('.', ','),
+      purchasedDate: data.purchasedDate ? data.purchasedDate : new Date(),
+      purchasedPriceUnit: i18n[locale][data.coverPriceUnit],
+      volume: data.id
+    })
+  }, [data, locale])
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
@@ -108,7 +95,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
       .mutate({
         mutation: DELETE_USER_VOLUME_MUTATION,
         variables: {
-          volumeId: id
+          volumeId: volume.id
         }
       })
       .then(() => {
@@ -133,7 +120,7 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
         )
       })
   }
-  const addToCollectionHandler = () => {
+  const formatUserVolume = () => {
     let message = ''
     const userVolumeVerified = Object.assign({}, userVolume)
     userVolumeVerified.purchasedPrice = userVolume.purchasedPrice.replace(
@@ -152,7 +139,53 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
     }
     if (message !== '') {
       handleSnackbarOpen(message)
-    } else {
+      return null
+    }
+    return userVolumeVerified
+  }
+  const updateUserVolumeHandler = () => {
+    const userVolumeVerified = formatUserVolume()
+    if (userVolumeVerified) {
+      clientGraphql
+        .mutate({
+          mutation: UPDATE_USER_VOLUME_MUTATION,
+          variables: {
+            ...userVolumeVerified,
+            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
+          }
+        })
+        .then(() => {
+          setOpenModal(false)
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].updatedUserVolume,
+              severity: 'success'
+            })
+          )
+          setVolume({
+            ...data,
+            haveVolume: true,
+            puchasedPrice:
+              userVolume.purchasedPriceUnit +
+              ' ' +
+              userVolumeVerified.purchasedPrice
+          })
+        })
+        .catch(() => {
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].errorToUpdateUserVolume,
+              severity: 'error'
+            })
+          )
+        })
+    }
+  }
+  const addToCollectionHandler = () => {
+    const userVolumeVerified = formatUserVolume()
+    if (userVolumeVerified) {
       clientGraphql
         .mutate({
           mutation: CREATE_USER_VOLUME_MUTATION,
@@ -188,129 +221,36 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
   }
 
   return (
-    <>
-      <CustomModal
-        bgColor={theme.palette.primary.darkContrast}
-        border="none"
-        open={openModal}
-        setOpen={setOpenModal}
-      >
-        <Box
-          justifyContent={'center'}
-          justifyItems={'center'}
-          alignItems={'center'}
-          display="flex"
-          flexDirection={'column'}
-        >
-          <Typography color={theme.palette.primary.contrastText} align="center">
-            {i18n[locale].purchasedPrice}
-          </Typography>
-          <Box
-            display={'flex'}
-            flexDirection={'row'}
-            marginBottom={2}
-            sx={{ flexWrap: 'nowrap' }}
-          >
-            <SelectionDropdown
-              options={i18nOptions}
-              value={userVolume.purchasedPriceUnit}
-              setValue={setDropdown}
-            />
-            <CustomTextField
-              required
-              size="small"
-              value={userVolume.purchasedPrice}
-              onChange={event => {
-                setUserVolume({
-                  ...userVolume,
-                  purchasedPrice: event.target.value
-                })
-              }}
-            />
-          </Box>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label={i18n[locale].purchasedDate}
-              inputFormat="dd/MM/yyyy"
-              value={userVolume.purchasedDate}
-              onChange={event => {
-                setUserVolume({
-                  ...userVolume,
-                  purchasedDate: event
-                })
-              }}
-              renderInput={params => (
-                <TextField
-                  fullWidth={true}
-                  {...params}
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                    svg: { color: theme.palette.primary.contrastText },
-                    input: {
-                      color: theme.palette.primary.contrastText
-                    }
-                  }}
-                />
-              )}
-            />
-          </LocalizationProvider>
-          <StyledButton
-            size="medium"
-            sx={{
-              background: theme.palette.primary.light,
-              width: '100%',
-              maxWidth: '240px',
-              marginTop: 2
-            }}
-            onClick={addToCollectionHandler}
-          >
-            {addToCollection}
-          </StyledButton>
-        </Box>
-      </CustomModal>
-      <Card open={Boolean(anchorEl)} onClick={handleClick}>
-        <Box style={{ position: 'relative' }}>
-          <Image
-            unoptimized={true}
-            src={imageUrl}
-            alt="Picture of the author"
-            width={150}
-            height={200}
-          />
-          {!haveVolume && <NotAdquired />}
-        </Box>
-        <CenterText>{name}</CenterText>
-        <CenterText>{edition}</CenterText>
-        <CustomText>{publisher}</CustomText>
-        <CustomText> Volume {number}</CustomText>
-        <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
-          <CustomButtonBox width="12em">
-            {haveVolume ? (
-              <StyledButton
-                style={{ width: '100%' }}
-                onClick={deleteUserVolume}
-              >
-                {removeVolume}
-              </StyledButton>
-            ) : (
-              <StyledButton
-                style={{ width: '100%' }}
-                onClick={() => {
-                  setOpenModal(true)
-                }}
-              >
-                {addToCollection}
-              </StyledButton>
-            )}
-            <StyledButton style={{ width: '100%' }} onClick={handleOpen}>
-              {details}
-            </StyledButton>
-          </CustomButtonBox>
-        </CustomPopover>
-      </Card>
-      <DialogDetails open={open} setOpen={setOpen} title={details}>
-        <VolumeDetails data={data} />
-      </DialogDetails>
-    </>
+    volume && (
+      <>
+        <VolumeModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          i18nOptions={i18nOptions}
+          theme={theme}
+          locale={locale}
+          userVolume={userVolume}
+          setDropdown={setDropdown}
+          setUserVolume={setUserVolume}
+          addToCollectionHandler={addToCollectionHandler}
+          updateUserVolumeHandler={updateUserVolumeHandler}
+          haveVolume={volume.haveVolume}
+        />
+
+        <VolumeCardTemplate
+          anchorEl={anchorEl}
+          openPopover={Boolean(anchorEl)}
+          open={open}
+          handleClick={handleClick}
+          volume={volume}
+          locale={locale}
+          deleteUserVolume={deleteUserVolume}
+          setOpenModal={setOpenModal}
+          handleOpen={handleOpen}
+          setOpen={setOpen}
+          data={data}
+        />
+      </>
+    )
   )
 }

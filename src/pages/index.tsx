@@ -3,12 +3,10 @@ import { useRouter } from 'next/router'
 import { clientGraphql } from '../graphql/client-graphql'
 import { GET_ALL_LITERARY_WORK_QUERY, GET_ALL_VOLUMES_QUERY } from '../graphql'
 import { Homepage } from '../templates'
-import { VolumeType } from '../components/molecules'
-import { i18n } from '../shared/i18n'
 
 const Index = () => {
-  const [editions, setEditions] = useState([])
-  const [volumes, setVolumes] = useState([])
+  const [editions, setEditions] = useState(null)
+  const [volumes, setVolumes] = useState(null)
 
   const { locale } = useRouter()
 
@@ -37,18 +35,7 @@ const Index = () => {
     Promise.all([getAllLiteraryWorks(), getAllVolumes()]).then(
       ([res, res2]) => {
         setEditions(res.data.getAllLiteraryWorks)
-        setVolumes(
-          res2.data.getAllVolumes.map((volume: VolumeType) => {
-            let coverPrice = String(Number(volume.coverPrice).toFixed(2))
-            if (locale === 'pt-BR') {
-              coverPrice = coverPrice.replace('.', ',')
-            }
-            return {
-              ...volume,
-              coverPrice: i18n[locale][volume.coverPriceUnit] + ' ' + coverPrice
-            }
-          })
-        )
+        setVolumes(res2.data.getAllVolumes)
       }
     )
   }, [])

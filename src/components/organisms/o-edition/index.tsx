@@ -21,7 +21,7 @@ function a11yProps(index: number) {
 const Edition = ({ editionDetails }) => {
   const [tabSelected, setTabSelected] = useState(0)
   const [edition] = useState(editionDetails)
-  const [editionVolumes, setEditionVolumes] = useState([])
+  const [editionVolumes, setEditionVolumes] = useState(null)
   const [getVolumes, setGetVolumes] = useState(false)
   const { locale } = useRouter()
   const { details, volumes } = i18n[locale]

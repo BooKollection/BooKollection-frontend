@@ -5,6 +5,9 @@ import { CardGrid } from '../o-card-itens'
 const EditionVolume = ({ data }) => {
   const theme = useTheme()
 
+  const orderedList = data
+    ? [...data].sort((a, b) => a.number - b.number)
+    : null
   return (
     <Grid
       bgcolor={theme.palette.primary.darkContrastText}
@@ -15,7 +18,7 @@ const EditionVolume = ({ data }) => {
       gap="0.8em"
       paddingX={1}
     >
-      <CardGrid volumes={data} />
+      <CardGrid volumes={orderedList} />
     </Grid>
   )
 }

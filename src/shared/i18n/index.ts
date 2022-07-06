@@ -2,6 +2,10 @@ import { PT_BR, EN_US } from '../constants'
 
 export const i18n = {
   [PT_BR]: {
+    updatedUserVolume: 'Aquisição atualizada',
+    errorToUpdateUserVolume: 'Erro ao atualizar a aquisição',
+    updateUserVolume: 'Atualizar aquisição',
+    notAdquired: 'Não adquirido',
     notRegistered: 'Não informado',
     errorToGetVolumes: 'Erro ao carregar os volumes',
     japaneseComicBook: 'Mangá',
@@ -109,6 +113,10 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    errorToUpdateUserVolume: 'Error to update aquisition',
+    updatedUserVolume: 'Aquisition updated',
+    updateUserVolume: 'Update aquisition',
+    notAdquired: 'Not Adquired',
     japaneseComicBook: 'Mangá',
     notRegistered: 'Not registered',
     errorToGetVolumes: 'Error To get volumes',
