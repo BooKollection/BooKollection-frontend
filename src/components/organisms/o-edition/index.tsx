@@ -29,6 +29,19 @@ const Edition = ({ editionDetails }) => {
     setTabSelected(newValue)
   }
   const dispatch = useDispatch()
+  const setVolumeEdition = volume => {
+    const newEditionVolumes = editionVolumes.map(editionVolume => {
+      if (volume.id === editionVolume.id) {
+        return {
+          ...editionVolume,
+          purchasedPrice: volume.purchasedPrice,
+          purchasedDate: volume.purchasedDate
+        }
+      }
+      return editionVolume
+    })
+    setEditionVolumes(newEditionVolumes)
+  }
   useEffect(() => {
     if (tabSelected === 1 && !getVolumes) {
       clientGraphql
@@ -89,7 +102,10 @@ const Edition = ({ editionDetails }) => {
           {tabSelected === 0 ? (
             <EditionDetails details={edition} />
           ) : (
-            <EditionVolume data={editionVolumes} />
+            <EditionVolume
+              setVolumeEdition={setVolumeEdition}
+              data={editionVolumes}
+            />
           )}
         </StyledBox>
       </StyledBoxContainer>

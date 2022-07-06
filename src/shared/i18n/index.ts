@@ -1,7 +1,15 @@
 import { PT_BR, EN_US } from '../constants'
+import { categories } from './categories'
+import { coins } from './coins'
+import { paperType } from './paperType'
+import { status } from './status'
 
 export const i18n = {
   [PT_BR]: {
+    ...categories[PT_BR],
+    ...paperType[PT_BR],
+    ...coins[PT_BR],
+    ...status[PT_BR],
     updatedUserVolume: 'Aquisição atualizada',
     errorToUpdateUserVolume: 'Erro ao atualizar a aquisição',
     updateUserVolume: 'Atualizar aquisição',
@@ -42,29 +50,19 @@ export const i18n = {
     createdAt: 'Cadastrado',
     updatedAt: 'Atualizado',
     statusComplete: 'Completo',
-    statusInProgress: 'Em andamento',
     details: 'Detalhes',
     volumes: 'Volumes',
     authorInformationLabel: 'Informações do autor',
     literaryWorkInformationLabel: 'Informações da obra literária',
     colletion: 'Coleção',
-    newsPrint: 'Papel jornal',
-    offset: 'Offset',
-    chamois: 'Chamois',
-    couche: 'Couché',
-    pollen: 'Polén',
     addToCollection: 'Adicionar a coleção',
     dimensions: 'Dimensões',
     name: 'Nome',
     gifts: 'Brindes',
     volume: 'Volume',
     number: 'Número',
-    checkList: 'Check list',
+    checkList: 'Checklist',
     numberOfPages: 'Número de páginas',
-    BRL: 'R$',
-    USD: '$',
-    EUR: '€',
-    JPY: '¥',
     titles: [
       { label: 'Inicio', link: '/' },
       {
@@ -92,9 +90,6 @@ export const i18n = {
     illustratorBy: 'Arte',
     writterBy: 'Roteiro por',
     ilustratorBy: 'Ilustrado por',
-    Complete: 'Finalizado',
-    InProgress: 'Em andamento',
-    Hiatus: 'Hiato',
     JapaneseComicBook: 'Mangá',
     comicBook: 'História em quadrinhos',
     book: 'Livro',
@@ -113,6 +108,10 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    ...categories[EN_US],
+    ...paperType[EN_US],
+    ...coins[EN_US],
+    ...status[EN_US],
     errorToUpdateUserVolume: 'Error to update aquisition',
     updatedUserVolume: 'Aquisition updated',
     updateUserVolume: 'Update aquisition',
@@ -153,17 +152,11 @@ export const i18n = {
     createdAt: 'Created At',
     updatedAt: 'Updated At',
     statusComplete: 'Complete',
-    statusInProgress: 'In Progress',
     details: 'Details',
     volumes: 'Volumes',
     authorInformationLabel: 'Author Information',
     literaryWorkInformationLabel: 'Literary Work Information',
     colletion: 'Colletion',
-    newsPrint: 'News Print',
-    offset: 'Offset',
-    chamois: 'Chamois',
-    couche: 'CouchE',
-    pollen: 'Pollen',
     literaryWork: 'Literary Works',
     addToCollection: 'Add to collection',
     dimensions: 'Dimensions',
@@ -199,9 +192,6 @@ export const i18n = {
     illustratorBy: 'Art',
     writterBy: 'Script by',
     ilustratorBy: 'Ilustrator By',
-    Complete: 'Complete',
-    InProgress: 'In Progress',
-    Hiatus: 'Hiatus',
     JapaneseComicBook: 'Japanese comic book',
     comicBook: 'Comics',
     book: 'Book',
@@ -217,10 +207,6 @@ export const i18n = {
     semiannual: 'semiannual',
     originalPublisher: 'Original Publisher',
     ptBR: 'Brazilian potuguese',
-    enUs: 'North american english',
-    BRL: 'R$',
-    USD: '$',
-    EUR: '€',
-    JPY: '¥'
+    enUs: 'North american english'
   }
 }

@@ -6,13 +6,12 @@ import { CardGridBox } from './style'
 import { Skeleton, useTheme } from '@mui/material'
 import { Card } from '../../atoms'
 
-const CardGrid = ({
-  volumes,
-  editions
-}: {
+const CardGrid = (props: {
   volumes?: VolumeType[]
   editions?: EditionDetailsType[]
+  setVolumeEdition?: (value: unknown) => void
 }) => {
+  const { setVolumeEdition, volumes, editions } = props
   const theme = useTheme()
   return (
     <CardGridBox container>
@@ -50,7 +49,11 @@ const CardGrid = ({
             })
         : volumes
         ? volumes.map((data: VolumeType, index) => (
-            <VolumeCard key={index} data={data} />
+            <VolumeCard
+              setVolumeEdition={setVolumeEdition}
+              key={index}
+              data={data}
+            />
           ))
         : editions.map((data, index) => (
             <EditionCard key={index} data={data} />

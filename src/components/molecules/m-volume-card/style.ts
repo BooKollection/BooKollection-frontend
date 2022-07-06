@@ -29,7 +29,7 @@ export const NotAdquired = styled(Box)(() => ({
   position: 'absolute',
   bottom: '0%',
   width: '9.39rem',
-  height: '3rem',
+  height: '2rem',
   backgroundColor: 'rgba(0,0,0,.7)',
   fontSize: '1.25rem',
   color: '#fff',

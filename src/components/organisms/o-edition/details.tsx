@@ -6,7 +6,7 @@ import { filterObject } from '../../../utils/filterObject'
 import { ImgGridItem } from './style'
 import { i18n } from '../../../shared/i18n'
 import { useRouter } from 'next/router'
-import { i18nFormatData } from '../../../utils/formatData'
+import { formatCategories, i18nFormatData } from '../../../utils/formatData'
 
 export type EditionDetailsType = {
   id: string
@@ -32,6 +32,7 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
   const theme = useTheme()
   const { locale } = useRouter()
   const synopsis = i18nFormatData(details.synopsis, locale)
+  const categories = formatCategories(details.categories, locale)
 
   return (
     <Grid
@@ -76,7 +77,7 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
         />
 
         <InfoGrid
-          data={filterObject(details, [
+          data={filterObject({ ...details, categories: categories }, [
             'publisher',
             'country',
             'language',

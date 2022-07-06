@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, useTheme } from '@mui/material'
 import { CardGrid } from '../o-card-itens'
 
-const EditionVolume = ({ data }) => {
+const EditionVolume = ({ data, setVolumeEdition }) => {
   const theme = useTheme()
 
   const orderedList = data
@@ -18,7 +18,7 @@ const EditionVolume = ({ data }) => {
       gap="0.8em"
       paddingX={1}
     >
-      <CardGrid volumes={orderedList} />
+      <CardGrid setVolumeEdition={setVolumeEdition} volumes={orderedList} />
     </Grid>
   )
 }

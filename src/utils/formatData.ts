@@ -19,14 +19,15 @@ export const i18nFormatData = (
     const momentDate = moment(value)
 
     if (propName) {
-      const splitValue = value.split(' ')
+      const splitValue: string[] = value.split(' ')
       if (propName.includes('Price') && splitValue.length === 2) {
         const [unit, value] = splitValue
         let formatedValue = value
         if (locale === PT_BR) {
-          formatedValue = value.replace('.', ',')
+          formatedValue = Number(value).toFixed(2).replace('.', ',')
         }
-        formatedData = i18n[locale][unit] + ' ' + formatedValue
+        const unit18n = i18n[locale][unit] ? i18n[locale][unit] : unit
+        formatedData = unit18n + ' ' + formatedValue
       }
     } else if (isNaN(value) && momentDate.isValid()) {
       formatedData = momentDate.format('MMMM  YYYY')
@@ -38,3 +39,10 @@ export const i18nFormatData = (
   }
   return i18n[locale].notRegistered
 }
+
+export const formatCategories = (categories, locale) =>
+  categories.split(',').reduce((acc, value, index) => {
+    const i18nValue = i18nFormatData(value, locale)
+    acc += index > 0 ? ', ' + i18nValue : i18nValue
+    return acc
+  }, '')

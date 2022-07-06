@@ -38,7 +38,13 @@ export type VolumeType = {
   purchasedPrice?: string
   purchasedDate?: Date
 }
-export const VolumeCard = ({ data }: { data: VolumeType }) => {
+export const VolumeCard = ({
+  data,
+  setVolumeEdition
+}: {
+  data: VolumeType
+  setVolumeEdition: (value: unknown) => void
+}) => {
   const { locale } = useRouter()
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -155,7 +161,18 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
           }
         })
         .then(() => {
-          setOpenModal(false)
+          console.log(userVolume.purchasedPriceUnit)
+
+          const newData = {
+            ...data,
+            haveVolume: true,
+            purchasedPrice:
+              userVolume.purchasedPriceUnit +
+              ' ' +
+              userVolumeVerified.purchasedPrice
+          }
+          setVolume(newData)
+          setVolumeEdition(newData)
           dispatch(
             snackbarUpdate({
               open: true,
@@ -163,16 +180,11 @@ export const VolumeCard = ({ data }: { data: VolumeType }) => {
               severity: 'success'
             })
           )
-          setVolume({
-            ...data,
-            haveVolume: true,
-            puchasedPrice:
-              userVolume.purchasedPriceUnit +
-              ' ' +
-              userVolumeVerified.purchasedPrice
-          })
+          setOpenModal(false)
         })
-        .catch(() => {
+        .catch(e => {
+          console.log(e)
+
           dispatch(
             snackbarUpdate({
               open: true,
