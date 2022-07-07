@@ -30,7 +30,6 @@ const Index = () => {
         literaryWork: ''
       }
     })
-
   useEffect(() => {
     Promise.all([getAllLiteraryWorks(), getAllVolumes()]).then(
       ([res, res2]) => {
@@ -38,7 +37,7 @@ const Index = () => {
         setVolumes(res2.data.getAllVolumes)
       }
     )
-  }, [])
+  })
 
   return <Homepage editions={editions} volumes={volumes} />
 }

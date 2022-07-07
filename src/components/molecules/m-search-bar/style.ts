@@ -1,4 +1,4 @@
-import { alpha, InputBase, styled, keyframes } from '@mui/material'
+import { alpha, InputBase, styled, keyframes, Box } from '@mui/material'
 
 const expandWidthSearch = keyframes`
   0% {
@@ -48,7 +48,8 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
-  pointerEvents: 'none',
+  zIndex: 1,
+  cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center'

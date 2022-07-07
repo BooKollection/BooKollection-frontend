@@ -1,9 +1,19 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_LITERARY_WORK_QUERY = gql`
-  query getAllLiteraryWorks($offset: Int!, $limit: Int!, $language: Language!) {
+  query getAllLiteraryWorks(
+    $offset: Int!
+    $limit: Int!
+    $language: Language!
+    $name: String
+  ) {
     getAllLiteraryWorks(
-      input: { offset: $offset, limit: $limit, language: $language }
+      input: {
+        offset: $offset
+        limit: $limit
+        language: $language
+        name: $name
+      }
     ) {
       id
       name
