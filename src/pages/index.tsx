@@ -1,29 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { editionVolumesMock } from '../shared/mocks'
 import { clientGraphql } from '../graphql/client-graphql'
-import { GET_ALL_LITERARY_WORK_QUERY } from '../graphql'
+import { GET_ALL_LITERARY_WORK_QUERY, GET_ALL_VOLUMES_QUERY } from '../graphql'
 import { Homepage } from '../templates'
 
 const Index = () => {
-  const [editions, setEditions] = useState([])
+  const [editions, setEditions] = useState(null)
+  const [volumes, setVolumes] = useState(null)
+
   const { locale } = useRouter()
 
+  const getAllLiteraryWorks = () =>
+    clientGraphql.query({
+      query: GET_ALL_LITERARY_WORK_QUERY,
+      variables: {
+        offset: 0,
+        limit: 0,
+        language: locale.replace('-', '')
+      }
+    })
+
+  const getAllVolumes = () =>
+    clientGraphql.query({
+      query: GET_ALL_VOLUMES_QUERY,
+      variables: {
+        offset: 0,
+        limit: 0,
+        language: locale.replace('-', ''),
+        literaryWork: ''
+      }
+    })
   useEffect(() => {
-    clientGraphql
-      .query({
-        query: GET_ALL_LITERARY_WORK_QUERY,
-        variables: {
-          offset: 0,
-          limit: 0,
-          language: locale.replace('-', '')
-        }
-      })
-      .then(res => {
+    Promise.all([getAllLiteraryWorks(), getAllVolumes()]).then(
+      ([res, res2]) => {
         setEditions(res.data.getAllLiteraryWorks)
-      })
-  }, [])
-  return <Homepage editions={editions} volumes={editionVolumesMock} />
+        setVolumes(res2.data.getAllVolumes)
+      }
+    )
+  })
+
+  return <Homepage editions={editions} volumes={volumes} />
 }
 
 export default Index

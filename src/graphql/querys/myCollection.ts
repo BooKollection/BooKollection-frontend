@@ -12,3 +12,9 @@ export const MY_COLLECTION_QUERY = gql`
     }
   }
 `
+
+export const GET_MY_COLLECTION_VOLUME_QUERY = gql`
+  query getCollectionValue($coin: Coin!) {
+    getCollectionValue(coin: $coin)
+  }
+`

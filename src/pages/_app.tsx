@@ -8,8 +8,9 @@ import { theme } from '../styles/theme'
 import { store } from '../store'
 import { Navbar } from '../components/molecules'
 import '../styles/globals.css'
-import { Backdrop } from '../components/atoms/a-backdrop'
 import { Provider } from 'react-redux'
+import { MuiSnackBar } from '../components/atoms/a-snackbar'
+import { Backdrop } from '../components/atoms/a-backdrop'
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
@@ -19,9 +20,10 @@ function MyApp({ Component, pageProps }) {
     <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <MuiSnackBar />
           <Backdrop />
           <Navbar>
-            <VLibras />
+            <VLibras forceOnload={true} />
             <Component {...pageProps} />
           </Navbar>
         </ThemeProvider>

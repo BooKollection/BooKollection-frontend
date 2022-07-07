@@ -3,19 +3,30 @@ import { alpha, styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { useTheme } from '@mui/material'
 
-const FormControlWrapper = styled(FormControl)(({ theme }) => ({
-  background: alpha(theme.palette.common.white, 0.15),
-  width: 120,
-  borderRadius: '10px 0px 0px 10px',
-  height: '39px'
-}))
-
-export const SelectionDropdown = () => {
-  const [age, setAge] = React.useState('10')
+interface SelectionDropdownProps {
+  options: string[]
+  width?: number
+  value: string
+  setValue: (value: string) => void
+}
+export const SelectionDropdown = ({
+  options,
+  width,
+  value,
+  setValue
+}: SelectionDropdownProps) => {
+  const theme = useTheme()
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value)
+    setValue(event.target.value)
   }
+  const FormControlWrapper = styled(FormControl)(({ theme }) => ({
+    background: alpha(theme.palette.common.white, 0.15),
+    width: width ? width : 120,
+    borderRadius: '10px 0px 0px 10px',
+    height: '39px'
+  }))
 
   return (
     <FormControlWrapper>
@@ -23,14 +34,24 @@ export const SelectionDropdown = () => {
         variant="standard"
         disableUnderline
         size="small"
-        value={age}
+        value={value}
         onChange={handleChange}
-        inputProps={{ 'aria-label': 'Without label' }}
         style={{ border: 'none', padding: '6px 5px 5px 10px' }}
+        sx={{
+          '.MuiSelect-icon': {
+            color: theme.palette.primary.contrastText
+          },
+          '.MuiSelect-outlined': {
+            color: theme.palette.primary.contrastText
+          },
+          '.MuiSelect-select ': { color: theme.palette.primary.contrastText }
+        }}
       >
-        <MenuItem value={10}>Autor</MenuItem>
-        <MenuItem value={20}>Obra</MenuItem>
-        <MenuItem value={30}>Volume</MenuItem>
+        {options.map((option: string, index: number) => (
+          <MenuItem key={'dropdown' + index} value={option}>
+            {option}
+          </MenuItem>
+        ))}
       </Select>
     </FormControlWrapper>
   )
