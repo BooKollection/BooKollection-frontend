@@ -4,6 +4,9 @@ import { Grid, useTheme } from '@mui/material'
 import { InfoGrid } from '../../molecules'
 import { filterObject } from '../../../utils/filterObject'
 import { ImgGridItem } from './style'
+import { i18n } from '../../../shared/i18n'
+import { useRouter } from 'next/router'
+import { formatCategories, i18nFormatData } from '../../../utils/formatData'
 
 export type EditionDetailsType = {
   id: string
@@ -27,7 +30,10 @@ export type EditionDetailsType = {
 }
 const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
   const theme = useTheme()
-  const { synopsis } = details
+  const { locale } = useRouter()
+  const synopsis = i18nFormatData(details.synopsis, locale)
+  const categories = formatCategories(details.categories, locale)
+
   return (
     <Grid
       container
@@ -37,13 +43,14 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
       width={'100%'}
       rowSpacing={1}
     >
-      <ImgGridItem item xs={12} sm={3} md={3} lg={3}>
+      <ImgGridItem item xs={12} sm={3} md={3} lg={3} display={'block'}>
         <Image
           unoptimized={true}
           src={details.imageUrl}
           alt="Picture of the author"
-          width={250}
-          height={350}
+          width={200}
+          height={300}
+          layout={'responsive'}
         />
       </ImgGridItem>
 
@@ -63,13 +70,14 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
           xs={13}
           columns={13}
           labelStyle={{
-            textAlign: synopsis === 'notRegistered' ? 'center' : 'justify',
+            textAlign:
+              synopsis === i18n[locale].notRegistered ? 'center' : 'justify',
             padding: '1em'
           }}
         />
 
         <InfoGrid
-          data={filterObject(details, [
+          data={filterObject({ ...details, categories: categories }, [
             'publisher',
             'country',
             'language',

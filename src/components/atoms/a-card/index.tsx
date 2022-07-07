@@ -17,5 +17,5 @@ export const Card = styled('div', {
   backdropFilter: 'blur(40px)',
   borderRadius: open ? '10px 0px 10px 10px' : '10px',
   cursor: 'pointer',
-  ...(owned !== undefined && owned !== null && !owned && { opacity: 0.8 })
+  ...(owned !== undefined && owned !== null && !owned && { opacity: 0.7 })
 }))

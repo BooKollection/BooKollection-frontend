@@ -22,7 +22,7 @@ export const theme = createTheme({
     drawer: 1200
   },
   components: {
-    MuiSvgIcon: {
+    MuiInputLabel: {
       styleOverrides: {
         root: {
           color: '#FFFFFF'

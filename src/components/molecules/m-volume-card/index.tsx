@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useTheme } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
 import {
-  StyledButton,
-  CustomPopover,
-  CenterText,
-  CustomText,
-  Card
-} from '../../atoms'
-import VolumeDetails from '../m-volume-details'
-import { CustomButtonBox } from './style'
-import { DialogDetails } from '../m-dialog-details'
+  CREATE_USER_VOLUME_MUTATION,
+  DELETE_USER_VOLUME_MUTATION,
+  UPDATE_USER_VOLUME_MUTATION
+} from '../../../graphql'
+import { clientGraphql } from '../../../graphql/client-graphql'
+import { useDispatch } from 'react-redux'
+import { snackbarUpdate } from '../../../store/actions/snackbar'
+import { COINS } from '../../../shared/constants'
+import { VolumeModal } from './modal'
+import { VolumeCardTemplate } from './volumeTemplate'
 
 export type VolumeType = {
   id: string
+  type: string
   coverPrice: string
+  coverPriceUnit: string
   name: string
   imageUrl: string
   edition: string
@@ -31,48 +34,235 @@ export type VolumeType = {
   paperBack: number
   isbn10: string
   isbn13: string
+  haveVolume: boolean
+  purchasedPrice?: string
+  purchasedDate?: Date
 }
-export const VolumeCard = ({ data }: { data: VolumeType }) => {
-  const { locale, push } = useRouter()
-  const { addToCollection, details } = i18n[locale]
+export const VolumeCard = ({
+  data,
+  setVolumeEdition
+}: {
+  data: VolumeType
+  setVolumeEdition: (value: unknown) => void
+}) => {
+  const { locale } = useRouter()
+  const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
-  const { name, imageUrl, edition, publisher, number, owned, editionId } = data
+  const dispatch = useDispatch()
+  const [volume, setVolume] = useState(null)
+  const [userVolume, setUserVolume] = useState({
+    purchasedPrice: '',
+    purchasedDate: new Date(),
+    purchasedPriceUnit: '',
+    volume: ''
+  })
+  useEffect(() => {
+    const value = data.coverPrice.split(' ')[1]
+    const purchasedPrice = data.purchasedPrice
+      ? data.purchasedPrice
+      : data.coverPrice
+    setVolume({ ...data, coverPrice: value.replace('.', ',') })
+    setUserVolume({
+      purchasedPrice: purchasedPrice.split(' ')[1].replace('.', ','),
+      purchasedDate: data.purchasedDate ? data.purchasedDate : new Date(),
+      purchasedPriceUnit: i18n[locale][data.coverPriceUnit],
+      volume: data.id
+    })
+  }, [data, locale])
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
+  const handleSnackbarOpen = (message: string) => {
+    dispatch(
+      snackbarUpdate({ open: true, message: message, severity: 'error' })
+    )
+  }
+  const theme = useTheme()
+
+  const coins = COINS.reduce((acc, coin: string) => {
+    const i18nValue = i18n[locale][coin]
+    acc[i18nValue] = coin
+    return acc
+  }, {})
+
+  const i18nOptions = Object.keys(coins)
+  const setDropdown = (value: string) => {
+    setUserVolume({
+      ...userVolume,
+      purchasedPriceUnit: value
+    })
+  }
+
   const handleOpen = () => setOpen(true)
 
+  const deleteUserVolume = () => {
+    clientGraphql
+      .mutate({
+        mutation: DELETE_USER_VOLUME_MUTATION,
+        variables: {
+          volumeId: volume.id
+        }
+      })
+      .then(() => {
+        setOpenModal(false)
+        snackbarUpdate({
+          open: true,
+          message: i18n[locale].deleteVolumeMessage,
+          severity: 'success'
+        })
+        setVolume({
+          ...data,
+          haveVolume: false
+        })
+      })
+      .catch(() => {
+        dispatch(
+          snackbarUpdate({
+            open: true,
+            message: i18n[locale].errorDeleteVolumeMessage,
+            severity: 'error'
+          })
+        )
+      })
+  }
+  const formatUserVolume = () => {
+    let message = ''
+    const userVolumeVerified = Object.assign({}, userVolume)
+    userVolumeVerified.purchasedPrice = userVolume.purchasedPrice.replace(
+      ',',
+      '.'
+    )
+
+    userVolumeVerified.purchasedPriceUnit =
+      coins[userVolumeVerified.purchasedPriceUnit]
+
+    if (userVolume.purchasedDate > new Date()) {
+      message += i18n[locale].purchasedDateInvalidMessage + '. '
+    }
+    if (!Number(userVolumeVerified.purchasedPrice)) {
+      message += i18n[locale].priceInvalidMessage
+    }
+    if (message !== '') {
+      handleSnackbarOpen(message)
+      return null
+    }
+    return userVolumeVerified
+  }
+  const updateUserVolumeHandler = () => {
+    const userVolumeVerified = formatUserVolume()
+    if (userVolumeVerified) {
+      clientGraphql
+        .mutate({
+          mutation: UPDATE_USER_VOLUME_MUTATION,
+          variables: {
+            ...userVolumeVerified,
+            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
+          }
+        })
+        .then(() => {
+          console.log(userVolume.purchasedPriceUnit)
+
+          const newData = {
+            ...data,
+            haveVolume: true,
+            purchasedPrice:
+              userVolume.purchasedPriceUnit +
+              ' ' +
+              userVolumeVerified.purchasedPrice
+          }
+          setVolume(newData)
+          setVolumeEdition(newData)
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].updatedUserVolume,
+              severity: 'success'
+            })
+          )
+          setOpenModal(false)
+        })
+        .catch(e => {
+          console.log(e)
+
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].errorToUpdateUserVolume,
+              severity: 'error'
+            })
+          )
+        })
+    }
+  }
+  const addToCollectionHandler = () => {
+    const userVolumeVerified = formatUserVolume()
+    if (userVolumeVerified) {
+      clientGraphql
+        .mutate({
+          mutation: CREATE_USER_VOLUME_MUTATION,
+          variables: {
+            ...userVolumeVerified,
+            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
+          }
+        })
+        .then(() => {
+          setOpenModal(false)
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].sucessAddVolumeMessage,
+              severity: 'success'
+            })
+          )
+          setVolume({
+            ...data,
+            haveVolume: true
+          })
+        })
+        .catch(() => {
+          dispatch(
+            snackbarUpdate({
+              open: true,
+              message: i18n[locale].erroAddVolumeMessage,
+              severity: 'error'
+            })
+          )
+        })
+    }
+  }
+
   return (
-    <>
-      <Card open={Boolean(anchorEl)} owned={owned} onClick={handleClick}>
-        <Image
-          unoptimized={true}
-          src={imageUrl}
-          alt="Picture of the author"
-          width={150}
-          height={200}
+    volume && (
+      <>
+        <VolumeModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          i18nOptions={i18nOptions}
+          theme={theme}
+          locale={locale}
+          userVolume={userVolume}
+          setDropdown={setDropdown}
+          setUserVolume={setUserVolume}
+          addToCollectionHandler={addToCollectionHandler}
+          updateUserVolumeHandler={updateUserVolumeHandler}
+          haveVolume={volume.haveVolume}
         />
-        <CenterText>{name}</CenterText>
-        <CenterText>{edition}</CenterText>
-        <CustomText>{publisher}</CustomText>
-        <CustomText> Volume {number}</CustomText>
-        <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
-          <CustomButtonBox width="12em">
-            <StyledButton
-              onClick={() => {
-                push({ pathname: '/edition', query: { keyword: editionId } })
-              }}
-            >
-              {addToCollection}
-            </StyledButton>
-            <StyledButton onClick={handleOpen}>{details}</StyledButton>
-          </CustomButtonBox>
-        </CustomPopover>
-      </Card>
-      <DialogDetails open={open} setOpen={setOpen} title={details}>
-        <VolumeDetails data={data} />
-      </DialogDetails>
-    </>
+
+        <VolumeCardTemplate
+          anchorEl={anchorEl}
+          openPopover={Boolean(anchorEl)}
+          open={open}
+          handleClick={handleClick}
+          volume={volume}
+          locale={locale}
+          deleteUserVolume={deleteUserVolume}
+          setOpenModal={setOpenModal}
+          handleOpen={handleOpen}
+          setOpen={setOpen}
+          data={data}
+        />
+      </>
+    )
   )
 }

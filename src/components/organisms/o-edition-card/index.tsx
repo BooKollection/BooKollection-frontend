@@ -64,12 +64,13 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
         )}
         {totalVolumes && adquiredVolumes && (
           <CustomText>
-            {adquiredVolumes}/{status !== 'Complete' ? '???' : totalVolumes}
+            {adquiredVolumes}/{totalVolumes}
           </CustomText>
         )}
         <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>
           <Box width="10em">
             <StyledButton
+              style={{ width: '100%' }}
               onClick={() => {
                 setOpen(true)
                 setAnchorEl(null)

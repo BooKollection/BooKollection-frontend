@@ -39,7 +39,7 @@ const formatDateLink = new ApolloLink((operation, forward) => {
   return forward(operation).map(response => {
     store.dispatch(loadingUpdate({ open: false }))
 
-    if (response.data.date) {
+    if (response.data && response.data.date) {
       response.data.date = new Date(response.data.date)
     }
 

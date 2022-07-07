@@ -15,19 +15,9 @@ function a11yProps(index: number) {
   }
 }
 
-const Collection = ({ data }) => {
-  const {
-    tabSelected,
-    literaryWorks,
-    handleChange,
-    totalLiteraryWorks,
-    totalVolumes,
-    collectionValue,
-    completeLiteraryWorks,
-    memberSince
-  } = data
+const Collection = ({ tabSelected, data, handleChange }) => {
   const { locale } = useRouter()
-  const { details, literaryWorksLabel } = i18n[locale]
+  const { details, literaryWork } = i18n[locale]
 
   return (
     <BoxContainer padding={2}>
@@ -48,23 +38,15 @@ const Collection = ({ data }) => {
         />
         <CustomTab
           isSelected={tabSelected === 1}
-          label={literaryWorksLabel}
+          label={literaryWork}
           {...a11yProps(1)}
         />
       </Tabs>
       <StyledBox padding={3}>
         {tabSelected === 0 ? (
-          <MyCollectionDetails
-            details={{
-              totalLiteraryWorks,
-              totalVolumes,
-              collectionValue,
-              completeLiteraryWorks,
-              memberSince
-            }}
-          />
+          <MyCollectionDetails details={data} />
         ) : (
-          <MyCollectionEditions data={literaryWorks} />
+          data && <MyCollectionEditions data={data.literaryWorks} />
         )}
       </StyledBox>
     </BoxContainer>
