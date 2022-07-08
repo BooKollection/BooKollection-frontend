@@ -41,7 +41,9 @@ export const VolumeCardTemplate = ({
             height={200}
             style={{ position: 'absolute' }}
           />
-          {!haveVolume && <NotAdquired>{i18n[locale].notAdquired}</NotAdquired>}
+          {haveVolume !== null && !haveVolume && (
+            <NotAdquired>{i18n[locale].notAdquired}</NotAdquired>
+          )}
         </Box>
         <CenterText>{name}</CenterText>
         <CenterText>{edition}</CenterText>

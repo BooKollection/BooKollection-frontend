@@ -6,6 +6,7 @@ import { status } from './status'
 
 export const i18n = {
   [PT_BR]: {
+    '': 'Não informado',
     ...categories[PT_BR],
     ...paperType[PT_BR],
     ...coins[PT_BR],
@@ -72,7 +73,7 @@ export const i18n = {
       },
       {
         label: 'Obras literárias',
-        link: '/literaryWorks'
+        link: '/search/?type=literaryWorks'
       }
     ],
     literaryWork: 'Obras literárias',
@@ -109,6 +110,7 @@ export const i18n = {
     enUs: 'inglês norte americano'
   },
   [EN_US]: {
+    '': 'Not registered',
     ...categories[EN_US],
     ...paperType[EN_US],
     ...coins[EN_US],
