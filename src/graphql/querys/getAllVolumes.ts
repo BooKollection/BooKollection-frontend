@@ -33,6 +33,10 @@ export const GET_ALL_VOLUMES_QUERY = gql`
       haveVolume
       purchasedDate
       purchasedPrice
+      classification
+      acquisitionDifficulty
+      userClassification
+      userAcquisitionDifficulty
     }
   }
 `

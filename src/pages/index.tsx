@@ -7,39 +7,52 @@ import { Homepage } from '../templates'
 const Index = () => {
   const [editions, setEditions] = useState(null)
   const [volumes, setVolumes] = useState(null)
-
   const { locale } = useRouter()
 
-  const getAllLiteraryWorks = () =>
-    clientGraphql.query({
-      query: GET_ALL_LITERARY_WORK_QUERY,
-      variables: {
-        offset: 0,
-        limit: 0,
-        language: locale.replace('-', '')
-      }
-    })
-
-  const getAllVolumes = () =>
-    clientGraphql.query({
-      query: GET_ALL_VOLUMES_QUERY,
-      variables: {
-        offset: 0,
-        limit: 0,
-        language: locale.replace('-', ''),
-        literaryWork: ''
-      }
-    })
+  const getAllLiteraryWorks = () => {
+    clientGraphql
+      .query({
+        query: GET_ALL_LITERARY_WORK_QUERY,
+        variables: {
+          offset: 0,
+          limit: 10,
+          language: locale.replace('-', '')
+        }
+      })
+      .then(res => setEditions(res.data.getAllLiteraryWorks))
+  }
+  const getAllVolumes = () => {
+    clientGraphql
+      .query({
+        query: GET_ALL_VOLUMES_QUERY,
+        variables: {
+          offset: 0,
+          limit: 10,
+          language: locale.replace('-', ''),
+          literaryWork: ''
+        }
+      })
+      .then(res => setVolumes(res.data.getAllVolumes))
+  }
   useEffect(() => {
-    Promise.all([getAllLiteraryWorks(), getAllVolumes()]).then(
-      ([res, res2]) => {
-        setEditions(res.data.getAllLiteraryWorks)
-        setVolumes(res2.data.getAllVolumes)
-      }
-    )
+    getAllLiteraryWorks()
+    getAllVolumes()
   })
 
-  return <Homepage editions={editions} volumes={volumes} />
+  const setVolumeEdition = () => {
+    setVolumes(null)
+    clientGraphql.cache.reset().then(() => {
+      getAllVolumes()
+    })
+  }
+
+  return (
+    <Homepage
+      editions={editions}
+      volumes={volumes}
+      setVolumeEdition={setVolumeEdition}
+    />
+  )
 }
 
 export default Index

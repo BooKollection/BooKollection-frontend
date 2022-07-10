@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
-import { Grid, useTheme } from '@mui/material'
+import { Box, Grid, Rating, useTheme } from '@mui/material'
 import { InfoGrid } from '../../molecules'
 import { filterObject } from '../../../utils/filterObject'
 import { ImgGridItem } from './style'
 import { i18n } from '../../../shared/i18n'
 import { useRouter } from 'next/router'
 import { formatCategories, i18nFormatData } from '../../../utils/formatData'
+import { CenterText } from '../../atoms'
 
 export type EditionDetailsType = {
   id: string
@@ -27,6 +28,8 @@ export type EditionDetailsType = {
   country: string
   synopsis: string
   paperType: string
+  acquisitionDifficulty: number
+  classification: number
 }
 const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
   const theme = useTheme()
@@ -100,6 +103,57 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
             'updatedAt'
           ])}
         />
+        <Grid
+          container
+          width="100%"
+          gap="1rem"
+          alignItems={'center'}
+          justifyContent={'center'}
+        >
+          <Grid item width={'15em'}>
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              flexDirection={'column'}
+            >
+              {' '}
+              <CenterText>
+                {i18n[locale].userAcquisitionDifficultyAverage}
+              </CenterText>
+              <Rating
+                readOnly
+                name="half-rating"
+                precision={0.5}
+                value={details.acquisitionDifficulty}
+                sx={{
+                  '& .MuiRating-iconEmpty': {
+                    color: theme.palette.primary.light
+                  }
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={3} width={'15em'}>
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              flexDirection={'column'}
+            >
+              <CenterText>{i18n[locale].classification}</CenterText>
+              <Rating
+                readOnly
+                name="half-rating"
+                precision={0.5}
+                value={details.classification}
+                sx={{
+                  '& .MuiRating-iconEmpty': {
+                    color: theme.palette.primary.light
+                  }
+                }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   )

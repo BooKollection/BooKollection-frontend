@@ -25,6 +25,7 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
+    store.dispatch(loadingUpdate({ open: false }))
     const filter = graphQLErrors.filter(
       ({ message }) => message === 'Unauthorized'
     )

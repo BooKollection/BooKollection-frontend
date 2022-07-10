@@ -13,6 +13,7 @@ import VolumeDetails from '../m-volume-details'
 import { NotAdquired, CustomButtonBox } from './style'
 
 export const VolumeCardTemplate = ({
+  isLogged,
   anchorEl,
   open,
   openPopover,
@@ -71,6 +72,7 @@ export const VolumeCardTemplate = ({
             ) : (
               <StyledButton
                 style={{ width: '100%' }}
+                disabled={!isLogged}
                 onClick={() => {
                   setOpenModal(true)
                 }}

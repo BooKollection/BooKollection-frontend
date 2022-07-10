@@ -6,18 +6,24 @@ export const CREATE_USER_VOLUME_MUTATION = gql`
     $purchasedDate: DateTime!
     $purchasedPriceUnit: Coin!
     $volume: String!
+    $userAcquisitionDifficulty: Float
+    $userClassification: Float
   ) {
     createUserVolume(
       input: {
         purchasedPrice: $purchasedPrice
         purchasedDate: $purchasedDate
         purchasedPriceUnit: $purchasedPriceUnit
+        userAcquisitionDifficulty: $userAcquisitionDifficulty
+        userClassification: $userClassification
         volume: $volume
       }
     ) {
       id
       purchasedPrice
       purchasedDate
+      userAcquisitionDifficulty
+      userClassification
       purchasedPriceUnit
       createdAt
       updatedAt
@@ -34,6 +40,8 @@ export const UPDATE_USER_VOLUME_MUTATION = gql`
     $purchasedPrice: Float!
     $purchasedDate: DateTime!
     $purchasedPriceUnit: Coin!
+    $userAcquisitionDifficulty: Float
+    $userClassification: Float
     $volume: String!
   ) {
     updateUserVolume(
@@ -41,6 +49,8 @@ export const UPDATE_USER_VOLUME_MUTATION = gql`
         purchasedPrice: $purchasedPrice
         purchasedDate: $purchasedDate
         purchasedPriceUnit: $purchasedPriceUnit
+        userAcquisitionDifficulty: $userAcquisitionDifficulty
+        userClassification: $userClassification
         volume: $volume
       }
     )

@@ -29,8 +29,10 @@ export type VolumeType = {
   language: string
   synopsis: string
   releaseDate: string
+  userAcquisitionDifficulty: number
   acquisitionDifficulty: number
-  acquisitionDifficultyAverage: number
+  classification: number
+  userClassification: number
   paperBack: number
   isbn10: string
   isbn13: string
@@ -43,18 +45,21 @@ export const VolumeCard = ({
   setVolumeEdition
 }: {
   data: VolumeType
-  setVolumeEdition: (value: unknown) => void
+  setVolumeEdition: (value?: unknown) => void
 }) => {
   const { locale } = useRouter()
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
+  const isLogged = localStorage.getItem(process.env.tokenName) !== null
   const dispatch = useDispatch()
   const [volume, setVolume] = useState(null)
   const [userVolume, setUserVolume] = useState({
     purchasedPrice: '',
     purchasedDate: new Date(),
     purchasedPriceUnit: '',
+    userClassification: null,
+    userAcquisitionDifficulty: null,
     volume: ''
   })
   useEffect(() => {
@@ -67,6 +72,8 @@ export const VolumeCard = ({
       purchasedPrice: purchasedPrice.split(' ')[1].replace('.', ','),
       purchasedDate: data.purchasedDate ? data.purchasedDate : new Date(),
       purchasedPriceUnit: i18n[locale][data.coverPriceUnit],
+      userClassification: data.userClassification,
+      userAcquisitionDifficulty: data.userAcquisitionDifficulty,
       volume: data.id
     })
   }, [data, locale])
@@ -133,7 +140,12 @@ export const VolumeCard = ({
       ',',
       '.'
     )
-
+    userVolume.userAcquisitionDifficulty = Number.parseFloat(
+      userVolume.userAcquisitionDifficulty + ''
+    ).toFixed(2)
+    userVolume.userClassification = Number.parseFloat(
+      userVolume.userClassification
+    ).toFixed(2)
     userVolumeVerified.purchasedPriceUnit =
       coins[userVolumeVerified.purchasedPriceUnit]
 
@@ -147,6 +159,7 @@ export const VolumeCard = ({
       handleSnackbarOpen(message)
       return null
     }
+
     return userVolumeVerified
   }
   const updateUserVolumeHandler = () => {
@@ -160,9 +173,7 @@ export const VolumeCard = ({
             purchasedPrice: Number(userVolumeVerified.purchasedPrice)
           }
         })
-        .then(() => {
-          console.log(userVolume.purchasedPriceUnit)
-
+        .then(async () => {
           const newData = {
             ...data,
             haveVolume: true,
@@ -172,7 +183,7 @@ export const VolumeCard = ({
               userVolumeVerified.purchasedPrice
           }
           setVolume(newData)
-          setVolumeEdition(newData)
+          await setVolumeEdition()
           dispatch(
             snackbarUpdate({
               open: true,
@@ -182,9 +193,7 @@ export const VolumeCard = ({
           )
           setOpenModal(false)
         })
-        .catch(e => {
-          console.log(e)
-
+        .catch(() => {
           dispatch(
             snackbarUpdate({
               open: true,
@@ -250,6 +259,7 @@ export const VolumeCard = ({
         />
 
         <VolumeCardTemplate
+          isLogged={isLogged}
           anchorEl={anchorEl}
           openPopover={Boolean(anchorEl)}
           open={open}

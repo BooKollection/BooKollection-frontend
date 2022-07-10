@@ -1,8 +1,8 @@
-import { Box, Typography, TextField } from '@mui/material'
+import { Box, Typography, TextField, Rating } from '@mui/material'
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { i18n } from '../../../shared/i18n'
-import { SelectionDropdown, StyledButton } from '../../atoms'
+import { SelectionDropdown, StyledButton, StyledTypograph } from '../../atoms'
 import { CustomModal } from '../m-modal'
 import { CustomTextField } from './style'
 
@@ -38,9 +38,9 @@ export const VolumeModal = ({
         display="flex"
         flexDirection={'column'}
       >
-        <Typography color={theme.palette.primary.contrastText} align="center">
+        <StyledTypograph align="center">
           {i18n[locale].purchasedPrice}
-        </Typography>
+        </StyledTypograph>
         <Box
           display={'flex'}
           flexDirection={'row'}
@@ -90,6 +90,60 @@ export const VolumeModal = ({
             )}
           />
         </LocalizationProvider>
+
+        <Box
+          display={'flex'}
+          paddingTop={1}
+          alignItems={'center'}
+          flexDirection={'column'}
+        >
+          <StyledTypograph align="center">
+            {i18n[locale].userAcquisitionDifficulty}
+          </StyledTypograph>
+
+          <Rating
+            name="half-rating"
+            precision={0.5}
+            value={userVolume.userAcquisitionDifficulty}
+            sx={{
+              '& .MuiRating-iconEmpty': {
+                color: theme.palette.primary.light
+              }
+            }}
+            onChange={(_, value) => {
+              setUserVolume({
+                ...userVolume,
+                userAcquisitionDifficulty: value
+              })
+            }}
+          />
+        </Box>
+        <Box
+          display={'flex'}
+          paddingTop={1}
+          alignItems={'center'}
+          flexDirection={'column'}
+        >
+          <StyledTypograph align="center">
+            {i18n[locale].userClassification}
+          </StyledTypograph>
+          <Rating
+            name="half-rating"
+            precision={0.5}
+            value={userVolume.userClassification}
+            sx={{
+              '& .MuiRating-iconEmpty': {
+                color: theme.palette.primary.light
+              }
+            }}
+            onChange={(_, value) => {
+              setUserVolume({
+                ...userVolume,
+                userClassification: value
+              })
+            }}
+          />
+        </Box>
         <StyledButton
           size="medium"
           sx={{

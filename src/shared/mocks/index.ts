@@ -9,8 +9,8 @@ export const editionMock = [
     publisher: 'Panini',
     synopsis:
       'Ichigo Kurosaki, 15 anos. Ocupação: Colegial. E então... O ataque violento de um espírito maligno chamado "Hollow" faz suas irmãs caírem uma após a outra... A única forma de salvá-las é se tornar um Shinigami e lutar! Diante da morte iminente, o colegial Ichigo Kurosaki precisará tomar uma decisão que poderá mudar seu destino...!!',
-    acquisitionDifficulty: 5,
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficulty: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm',
     language: 'PT-BR',
     bagShape: '15 x 25 cm',
@@ -35,8 +35,8 @@ export const editionMock = [
     number: 1,
     editionId: '3',
     releaseDate: '',
-    acquisitionDifficulty: 5,
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficulty: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm',
     language: 'PT-BR',
     numberOfPages: 200,
@@ -64,8 +64,8 @@ export const editionMock = [
     number: 1,
     editionId: '3',
     releaseDate: '',
-    acquisitionDifficulty: 5,
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficulty: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm',
     ageRange: '12+',
     language: 'PT-BR',
@@ -96,7 +96,7 @@ export const editionVolumesMock = [
     number: 1,
     editionId: '3',
     releaseDate: '',
-    acquisitionDifficulty: 5,
+    userAcquisitionDifficulty: 5,
     owned: true,
     isbn10: 'xxxxxxxxxxxxxxxx',
     isbn13: 'xxxxxxxxxxxxxxxx',
@@ -106,7 +106,7 @@ export const editionVolumesMock = [
     paperType: 'offset',
     gifts: 'xxxxx',
     synopsis: '',
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm'
   },
   {
@@ -119,7 +119,7 @@ export const editionVolumesMock = [
     publisher: 'Panini',
     number: 2,
     editionId: '3',
-    acquisitionDifficulty: 5,
+    userAcquisitionDifficulty: 5,
     releaseDate: '',
     language: 'PT-BR',
     owned: true,
@@ -130,7 +130,7 @@ export const editionVolumesMock = [
     paperBack: 225,
     paperType: 'offset',
     synopsis: '',
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm'
   },
   {
@@ -145,7 +145,7 @@ export const editionVolumesMock = [
     editionId: '3',
     releaseDate: '',
     language: 'PT-BR',
-    acquisitionDifficulty: 5,
+    userAcquisitionDifficulty: 5,
     owned: true,
     isbn10: 'xxxxxxxxxxxxxxxx',
     isbn13: 'xxxxxxxxxxxxxxxx',
@@ -154,7 +154,7 @@ export const editionVolumesMock = [
     paperBack: 225,
     paperType: 'offset',
     synopsis: '',
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm'
   },
   {
@@ -168,7 +168,7 @@ export const editionVolumesMock = [
     number: 4,
     editionId: '3',
     releaseDate: '',
-    acquisitionDifficulty: 5,
+    userAcquisitionDifficulty: 5,
     language: '',
     owned: false,
     isbn10: 'xxxxxxxxxxxxxxxx',
@@ -178,7 +178,7 @@ export const editionVolumesMock = [
     paperBack: 225,
     paperType: 'offset',
     synopsis: '',
-    acquisitionDifficultyAverage: 5,
+    userAcquisitionDifficultyAverage: 5,
     format: '13 x 2 x 20 cm'
   }
 ]

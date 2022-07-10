@@ -39,6 +39,8 @@ export const GET_ALL_LITERARY_WORK_QUERY = gql`
       endOfPublication
       originalPublisher
       releaseFrequency
+      acquisitionDifficulty
+      classification
     }
   }
 `
