@@ -17,7 +17,6 @@ export const i18nFormatData = (
   if (value !== null && value !== undefined) {
     let formatedData = value
     const momentDate = moment(value)
-    console.log(momentDate.isValid())
 
     if (propName) {
       const splitValue: string[] = value.split(' ')
@@ -36,8 +35,6 @@ export const i18nFormatData = (
         formatedData = unit18n + ' ' + formatedValue
       }
     } else if (momentDate.isValid()) {
-      console.log('pops')
-
       formatedData = momentDate.format('MMMM  YYYY')
     } else if (i18n[locale][value] !== undefined) {
       formatedData = i18n[locale][value]
