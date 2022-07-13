@@ -11,6 +11,7 @@ export const i18n = {
     ...paperType[PT_BR],
     ...coins[PT_BR],
     ...status[PT_BR],
+    noItemRegistered: 'nenhum item cadastrado',
     updatedUserVolume: 'Aquisição atualizada',
     errorToUpdateUserVolume: 'Erro ao atualizar a aquisição',
     updateUserVolume: 'Atualizar aquisição',
@@ -80,6 +81,7 @@ export const i18n = {
     ],
     literaryWork: 'Obras literárias',
     addVolumes: 'Volumes adicionados',
+    addAuthors: 'Autores Adicionados',
     literaryWorksAdd: 'Obras Adicionadas',
     search: 'Buscar',
     signIn: 'Entrar',
@@ -117,6 +119,7 @@ export const i18n = {
     ...paperType[EN_US],
     ...coins[EN_US],
     ...status[EN_US],
+    noItemRegistered: 'no item registered',
     literaryWorks: 'Literary Works',
     errorToUpdateUserVolume: 'Error to update aquisition',
     updatedUserVolume: 'Aquisition updated',
@@ -182,10 +185,11 @@ export const i18n = {
       },
       {
         label: 'literary works',
-        link: '/literaryWorks'
+        link: '/search/?type=literaryWorks'
       }
     ],
     addVolumes: 'Added Volumes',
+    addAuthors: 'Added Authors',
     literaryWorksAdd: 'Added literary works',
     search: 'Search',
     signIn: 'Sign In',

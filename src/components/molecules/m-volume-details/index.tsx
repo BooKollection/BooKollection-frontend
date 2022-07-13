@@ -23,19 +23,16 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
   return (
     <BoxContainerDetails>
       <GridContainer>
-        <ImgGridItem item>
+        <ImgGridItem>
           <Image
             src={data.imageUrl}
             alt="Picture of the author"
-            width={100}
-            height={100}
-            layout="responsive"
+            layout="fill"
             objectFit="contain"
-            unoptimized={true}
           />
         </ImgGridItem>
 
-        <Box height={'100%'} flex={1}>
+        <Box height={'100%'} flex={2}>
           <Grid
             height={'100%'}
             container
@@ -81,7 +78,7 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                     sm={2}
                     md={3}
                     xs={4}
-                    minWidth={180}
+                    minWidth={150}
                     key={'details' + index}
                   >
                     <CenterText fontWeight={'bold'}>{title}</CenterText>
