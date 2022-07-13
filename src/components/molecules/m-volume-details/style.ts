@@ -20,8 +20,8 @@ export const BoxContainerDetails = styled('div')(({ theme }) => ({
 }))
 
 export const ImgGridItem = styled(Grid)(({}) => ({
-  width: '100%',
+  display: 'block',
   flex: 1,
-  height: '100%',
-  position: 'relative'
+  position: 'relative',
+  minHeight: '200px'
 }))

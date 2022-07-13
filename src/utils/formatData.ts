@@ -34,7 +34,7 @@ export const i18nFormatData = (
         const unit18n = i18n[locale][unit] ? i18n[locale][unit] : unit
         formatedData = unit18n + ' ' + formatedValue
       }
-    } else if (isNaN(value) && momentDate.isValid()) {
+    } else if (momentDate.isValid()) {
       formatedData = momentDate.format('MMMM  YYYY')
     } else if (i18n[locale][value] !== undefined) {
       formatedData = i18n[locale][value]
