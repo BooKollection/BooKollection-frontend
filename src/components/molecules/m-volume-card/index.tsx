@@ -140,12 +140,12 @@ export const VolumeCard = ({
       ',',
       '.'
     )
-    userVolume.userAcquisitionDifficulty = Number.parseFloat(
-      userVolume.userAcquisitionDifficulty + ''
-    ).toFixed(2)
-    userVolume.userClassification = Number.parseFloat(
-      userVolume.userClassification
-    ).toFixed(2)
+    userVolume.userAcquisitionDifficulty = userVolume.userAcquisitionDifficulty
+      ? Number.parseFloat(userVolume.userAcquisitionDifficulty + '').toFixed(2)
+      : null
+    userVolume.userClassification = userVolume.userClassification
+      ? Number.parseFloat(userVolume.userClassification).toFixed(2)
+      : null
     userVolumeVerified.purchasedPriceUnit =
       coins[userVolumeVerified.purchasedPriceUnit]
 
