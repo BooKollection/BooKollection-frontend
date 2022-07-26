@@ -16,7 +16,6 @@ export const i18nFormatData = (
 ): string | null => {
   if (value !== null && value !== undefined) {
     let formatedData = value
-    const momentDate = moment(value)
 
     if (propName) {
       const splitValue: string[] = value.split(' ')
@@ -34,8 +33,8 @@ export const i18nFormatData = (
         const unit18n = i18n[locale][unit] ? i18n[locale][unit] : unit
         formatedData = unit18n + ' ' + formatedValue
       }
-    } else if (momentDate.isValid()) {
-      formatedData = momentDate.format('MMMM  YYYY')
+    } else if (verifyIsDate(value)) {
+      formatedData = moment(value).format('MMMM  YYYY')
     } else if (i18n[locale][value] !== undefined) {
       formatedData = i18n[locale][value]
     }
@@ -45,6 +44,16 @@ export const i18nFormatData = (
   return i18n[locale].notRegistered
 }
 
+const verifyIsString = value => {
+  return typeof value === 'string'
+}
+const verifyIsDate = (value: unknown) =>
+  verifyIsString(value) &&
+  moment(
+    value.toString().replaceAll('Z', ''),
+    'YYYY-MM-DDTHH:mm:ss.SSS',
+    true
+  ).isValid()
 export const formatCategories = (categories: string, locale: string) =>
   categories.split(',').reduce((acc, value, index) => {
     const i18nValue = i18nFormatData(value, locale)
