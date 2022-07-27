@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const { parsed: myEnv } = require('dotenv').config({
   path: '.env'
 })
-
+console.log(myEnv.dev)
 module.exports = {
   images: {
     domains: ['images-na.ssl-images-amazon.com', 'i.imgur.com']

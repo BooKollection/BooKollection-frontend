@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 const CardGrid = (props: {
   volumes?: VolumeType[]
   editions?: EditionDetailsType[]
-  authors?: any[]
+  authors?: unknown[]
   setVolumeEdition?: (value: unknown) => void
 }) => {
   const { setVolumeEdition, volumes, editions, authors } = props

@@ -51,7 +51,9 @@ export const categories = {
     MEDICAL: 'medico',
     COMPUTER_SCIENCE: 'ciência da computação',
     AGRICULTURE: 'agricultura',
-    BIOGRAPHY: 'biografia'
+    BIOGRAPHY: 'biografia',
+    FINANCIAL_EDUCATION: 'educação financeira',
+    MANAGEMENT_AND_LEADERSHIP: 'Gestão e Liderança'
   },
   [EN_US]: {
     ACTION: 'Action',
@@ -103,6 +105,8 @@ export const categories = {
     MEDICAL: 'medical',
     COMPUTER_SCIENCE: 'computer science',
     AGRICULTURE: 'agriculture',
-    BIOGRAPHY: 'biography'
+    BIOGRAPHY: 'biography',
+    FINANCIAL_EDUCATION: 'Financial education',
+    MANAGEMENT_AND_LEADERSHIP: 'Management and Leadership'
   }
 }
