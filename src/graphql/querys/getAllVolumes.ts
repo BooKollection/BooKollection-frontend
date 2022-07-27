@@ -36,6 +36,7 @@ export const GET_ALL_VOLUMES_QUERY = gql`
       classification
       acquisitionDifficulty
       userClassification
+      pagesNumber
       userAcquisitionDifficulty
     }
   }

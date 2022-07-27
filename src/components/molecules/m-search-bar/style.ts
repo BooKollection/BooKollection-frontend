@@ -1,4 +1,4 @@
-import { alpha, InputBase, styled, keyframes, Box } from '@mui/material'
+import { alpha, InputBase, styled, keyframes } from '@mui/material'
 
 const expandWidthSearch = keyframes`
   0% {

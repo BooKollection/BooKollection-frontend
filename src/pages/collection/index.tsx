@@ -47,7 +47,7 @@ const MyCollection = () => {
         )
       })
     })
-  }, [])
+  }, [locale])
 
   return (
     <Collection

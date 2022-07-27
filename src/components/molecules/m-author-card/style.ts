@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material'
 
-export const FlexBox = styled('div')(({ theme }) => ({
+export const FlexBox = styled('div')(() => ({
   flex: 1
 }))
 export const BoxContainerDetails = styled('div')(({ theme }) => ({

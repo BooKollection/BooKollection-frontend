@@ -63,7 +63,6 @@ const Index = () => {
       getAllVolumes()
     })
   }
-  console.log(authors)
 
   return (
     <Homepage

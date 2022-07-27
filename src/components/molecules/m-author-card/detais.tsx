@@ -1,8 +1,7 @@
-import { Box, Grid } from '@mui/material'
+import { Box } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
 import { i18nFormatData } from '../../../utils/formatData'
 import { CenterText } from '../../atoms'
-import { ImgGridItem } from '../m-volume-details/style'
 import { BoxContainerDetails, GridContainer, LiteraryWorksBox } from './style'
 import Image from 'next/image'
 import { CardGrid } from '../../organisms'
@@ -14,7 +13,13 @@ export const AuthorDetails = ({ data, locale }) => {
     <BoxContainerDetails>
       <GridContainer>
         <Box flex={1} marginBottom={5}>
-          <Box position={'relative'} display={'block'} minHeight="400px">
+          <Box
+            position={'relative'}
+            display={'block'}
+            minHeight="400px"
+            maxHeight={'600px'}
+            marginRight={'1em'}
+          >
             <Image
               src={imageUrl}
               alt="Picture of the author"

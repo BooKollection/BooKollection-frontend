@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, Rating } from '@mui/material'
+import { Box, TextField, Rating } from '@mui/material'
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { i18n } from '../../../shared/i18n'
