@@ -20,6 +20,7 @@ import { IRootState } from '../../../store/reducers'
 import { USER_UPDATE } from '../../../store/actions'
 import { debounce } from '../../../utils/bounce'
 import { MenuI } from '../../atoms'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 export const Navbar = ({ children }) => {
   const theme = useTheme()
@@ -27,6 +28,7 @@ export const Navbar = ({ children }) => {
   const { token } = useSelector((state: IRootState) => state.user)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const dispatch = useDispatch()
+  console.log(process.env.OAUTH_GOOGLE_ID)
 
   useEffect(() => {
     const lsToken = localStorage.getItem(process.env.tokenName)
@@ -66,66 +68,68 @@ export const Navbar = ({ children }) => {
   }
 
   return (
-    <MainBox>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        sx={{ background: theme.palette.primary.dark }}
-      >
-        <Toolbar
-          style={{
-            display: 'flex',
-            width: '100%',
-            paddingRight: '10px !important'
-          }}
+    <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
+      <MainBox>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          open={open}
+          sx={{ background: theme.palette.primary.dark }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              ...(open && { display: 'none' })
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography minWidth={150} variant="h6" noWrap component="div">
-            BooKollection
-          </Typography>
-          <div
+          <Toolbar
             style={{
-              width: '100%',
               display: 'flex',
-              flexDirection: 'row-reverse',
-              alignItems: 'center',
-              marginLeft: '10px'
+              width: '100%',
+              paddingRight: '10px !important'
             }}
           >
-            {token ? <MenuI /> : <GoogleButton />}
-            <SearchBar
-              drawerOpen={open}
-              handleDrawerClose={handleDrawerClose}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-      <ChildrenBox>
-        {children}
-        <BackToTopButton
-          showBackToTop={showBackToTop}
-          onClick={() => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            })
-          }}
-        >
-          <CustomKeyboardArrowUpIcon showBackToTop={showBackToTop} />
-        </BackToTopButton>
-      </ChildrenBox>
-    </MainBox>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                ...(open && { display: 'none' })
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography minWidth={150} variant="h6" noWrap component="div">
+              BooKollection
+            </Typography>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'row-reverse',
+                alignItems: 'center',
+                marginLeft: '10px'
+              }}
+            >
+              {token ? <MenuI /> : <GoogleButton />}
+              <SearchBar
+                drawerOpen={open}
+                handleDrawerClose={handleDrawerClose}
+              />
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Drawer open={open} handleDrawerClose={handleDrawerClose} />
+        <ChildrenBox>
+          {children}
+          <BackToTopButton
+            showBackToTop={showBackToTop}
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              })
+            }}
+          >
+            <CustomKeyboardArrowUpIcon showBackToTop={showBackToTop} />
+          </BackToTopButton>
+        </ChildrenBox>
+      </MainBox>
+    </GoogleOAuthProvider>
   )
 }
