@@ -25,7 +25,7 @@ export const MenuI = () => {
     setAnchorEl(null)
   }
   const logout = () => {
-    localStorage.removeItem(process.env.tokenName)
+    localStorage.removeItem(process.env.TOKEN_NAME)
     dispatch(userDelete())
   }
   return (

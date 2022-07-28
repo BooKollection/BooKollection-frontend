@@ -11,7 +11,7 @@ export const userUpdate = (user: {
 })
 
 export const userDelete = () => {
-  localStorage.removeItem(process.env.tokenName)
+  localStorage.removeItem(process.env.TOKEN_NAME)
 
   return {
     type: USER_DELETE

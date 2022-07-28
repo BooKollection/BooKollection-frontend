@@ -31,7 +31,7 @@ export const Navbar = ({ children }) => {
   console.log(process.env.OAUTH_GOOGLE_ID)
 
   useEffect(() => {
-    const lsToken = localStorage.getItem(process.env.tokenName)
+    const lsToken = localStorage.getItem(process.env.TOKEN_NAME)
     const name = localStorage.getItem('BK_NAME')
     if (lsToken) {
       dispatch({

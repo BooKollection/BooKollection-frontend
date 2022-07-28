@@ -14,7 +14,7 @@ import { loadingUpdate } from '../store/actions/loading'
 const authLink = setContext((_, { headers }) => {
   store.dispatch(loadingUpdate({ open: true }))
 
-  const token = localStorage.getItem(process.env.tokenName)
+  const token = localStorage.getItem(process.env.TOKEN_NAME)
   return {
     headers: {
       ...headers,

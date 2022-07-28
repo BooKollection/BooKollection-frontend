@@ -51,7 +51,7 @@ export const VolumeCard = ({
   const [openModal, setOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
-  const isLogged = localStorage.getItem(process.env.tokenName) !== null
+  const isLogged = localStorage.getItem(process.env.TOKEN_NAME) !== null
   const dispatch = useDispatch()
   const [volume, setVolume] = useState(null)
   const [userVolume, setUserVolume] = useState({

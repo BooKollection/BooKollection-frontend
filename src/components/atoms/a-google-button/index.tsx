@@ -18,6 +18,8 @@ export const GoogleButton = () => {
 
   const onSuccess = async res => {
     const { access_token } = res
+    console.log(process.env.TOKEN_NAME)
+    console.log('pops')
 
     clientGraphql
       .mutate({
@@ -28,7 +30,7 @@ export const GoogleButton = () => {
       })
       .then(res => {
         const { token, name } = res.data.loginUser
-        localStorage.setItem(process.env.tokenName, token)
+        localStorage.setItem(process.env.TOKEN_NAME, token)
         localStorage.setItem('BK_NAME', name)
         dispatch(loadingUpdate({ open: false }))
 
