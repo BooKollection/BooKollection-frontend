@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
 
-const result = require('dotenv').config()
+const { parsed: myEnv } = require('dotenv').config({
+  path: '.env'
+})
+
 module.exports = {
-  env: result.parsed,
   images: {
     domains: ['images-na.ssl-images-amazon.com', 'i.imgur.com']
   },
@@ -12,8 +14,11 @@ module.exports = {
     locales: ['pt-BR', 'en-US'],
     defaultLocale: 'en-US'
   },
+  env: {
+    OAUTH_GOOGLE_ID: process.env.OAUTH_GOOGLE_ID
+  },
   webpack(config) {
-    config.plugins.push(new webpack.EnvironmentPlugin(result.parsed))
+    config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
     return config
   }
 }
