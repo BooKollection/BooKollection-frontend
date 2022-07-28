@@ -1,4 +1,4 @@
-import { styled, Theme } from '@mui/material'
+import { styled } from '@mui/material'
 import MuiCard, { CardProps } from '@mui/material/Card'
 interface ExtendedCardProps extends CardProps {
   open: boolean
