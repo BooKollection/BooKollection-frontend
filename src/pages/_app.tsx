@@ -15,7 +15,7 @@ import { Backdrop } from '../components/atoms/a-backdrop'
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
   moment.locale(locale.toLowerCase())
-
+  console.log(process.env.OAUTH_GOOGLE_ID)
   return (
     <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
       <Provider store={store}>
