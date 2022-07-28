@@ -28,7 +28,6 @@ export const Navbar = ({ children }) => {
   const { token } = useSelector((state: IRootState) => state.user)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const dispatch = useDispatch()
-  console.log(process.env.OAUTH_GOOGLE_ID)
 
   useEffect(() => {
     const lsToken = localStorage.getItem(process.env.TOKEN_NAME)

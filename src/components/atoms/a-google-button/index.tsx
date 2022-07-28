@@ -18,8 +18,6 @@ export const GoogleButton = () => {
 
   const onSuccess = async res => {
     const { access_token } = res
-    console.log(process.env.TOKEN_NAME)
-    console.log('pops')
 
     clientGraphql
       .mutate({
