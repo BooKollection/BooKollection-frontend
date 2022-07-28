@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack')
 
-const { parsed: myEnv } = require('dotenv').config({
-  path: '.env'
-})
+const result = require('dotenv').config()
 
 module.exports = {
   images: {
@@ -18,7 +16,7 @@ module.exports = {
     OAUTH_GOOGLE_ID: process.env.OAUTH_GOOGLE_ID
   },
   webpack(config) {
-    config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
+    config.plugins.push(new webpack.EnvironmentPlugin(result.parsed))
     return config
   }
 }
