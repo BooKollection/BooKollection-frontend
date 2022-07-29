@@ -35,14 +35,20 @@ export const SearchBar = ({
     // { value: 'volume', label: i18n[locale].volume }
   ]
   const [dropdownValue, setDropdownValue] = useState(options[0].label)
+
   const i18nOptions = options.map(({ label }) => label)
+
+  const getDropdownServerData = (label: string, type: string) =>
+    options.filter(opt => label === opt.label)[0][type]
+
   const setDropdown = (value: string) => {
-    const filteredValue = getDropdownServerData(value)
+    const filteredValue = getDropdownServerData(value, 'label')
+
     setDropdownValue(filteredValue)
   }
-  const getDropdownServerData = label =>
-    options.filter(opt => label === opt.label)[0].value
+
   const handleClose = () => setOpen(false)
+
   useEffect(() => {
     drawerOpen && open && handleClose()
   }, [drawerOpen, open])
@@ -52,7 +58,7 @@ export const SearchBar = ({
       pathname: 'search',
       query: {
         text: searchInput,
-        type: getDropdownServerData(dropdownValue)
+        type: getDropdownServerData(dropdownValue, 'value')
       }
     })
   }

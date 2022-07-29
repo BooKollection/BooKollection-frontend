@@ -1,6 +1,7 @@
 import { PT_BR, EN_US } from '../constants'
 import { categories } from './categories'
 import { coins } from './coins'
+import { edition } from './edition'
 import { paperType } from './paperType'
 import { status } from './status'
 
@@ -11,6 +12,8 @@ export const i18n = {
     ...paperType[PT_BR],
     ...coins[PT_BR],
     ...status[PT_BR],
+    ...edition[PT_BR],
+    tankobon: 'tankobon',
     hardcover: 'capadura',
     pagesNumber: 'Número de paginas',
     noItemRegistered: 'nenhum item cadastrado',
@@ -121,6 +124,8 @@ export const i18n = {
     ...paperType[EN_US],
     ...coins[EN_US],
     ...status[EN_US],
+    ...edition[EN_US],
+    tankobon: 'tankobon',
     hardcover: 'hardcover',
     pagesNumber: 'Pages number',
     noItemRegistered: 'no item registered',

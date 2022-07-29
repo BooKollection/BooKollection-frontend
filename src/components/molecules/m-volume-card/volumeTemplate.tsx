@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import Image from 'next/image'
 import { i18n } from '../../../shared/i18n'
+import { i18nFormatData } from '../../../utils/formatData'
 import {
   CenterText,
   CustomText,
@@ -47,7 +48,7 @@ export const VolumeCardTemplate = ({
           )}
         </Box>
         <CenterText>{name}</CenterText>
-        <CenterText>{edition}</CenterText>
+        <CenterText>{i18nFormatData(edition, locale)}</CenterText>
         <CustomText>{publisher}</CustomText>
         <CustomText> Volume {number}</CustomText>
         <CustomPopover open={openPopover} anchorEl={anchorEl}>

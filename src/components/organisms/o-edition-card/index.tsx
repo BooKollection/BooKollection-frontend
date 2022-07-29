@@ -13,6 +13,7 @@ import { Box } from '@mui/material'
 import { DialogDetails } from '../../molecules'
 import { Edition } from '../o-edition'
 import { EditionDetailsType } from '../o-edition/details'
+import { i18nFormatData } from '../../../utils/formatData'
 
 export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
   const { locale } = useRouter()
@@ -44,7 +45,7 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
           unoptimized={true}
         />
         <CenterText fontWeight={'bold'}>{name}</CenterText>
-        <CenterText>{edition}</CenterText>
+        <CenterText>{i18nFormatData(edition, locale)}</CenterText>
         <CustomText>{publisher}</CustomText>
         {status && (
           <CustomText
