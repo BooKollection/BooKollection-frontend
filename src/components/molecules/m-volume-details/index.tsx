@@ -8,6 +8,7 @@ import { BoxContainerDetails, GridContainer } from './style'
 import { VolumeType } from '../m-volume-card'
 import { formatCategories, i18nFormatData } from '../../../utils/formatData'
 import { ImgGridItem } from './style'
+import { ContentEdit } from '../../atoms/a-contentEditable'
 
 const VolumeDetails = ({ data }: { data: VolumeType }) => {
   const { locale } = useRouter()
@@ -93,17 +94,11 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
               <CenterText fontWeight={'bold'}>
                 {i18n[locale].synopsis}
               </CenterText>
-              <CenterText
-                style={{
-                  textAlign:
-                    synopsis === i18n[locale].notRegistered
-                      ? 'center'
-                      : 'justify',
-                  padding: '1em'
-                }}
-              >
-                {synopsis}
-              </CenterText>
+              <ContentEdit
+                text={synopsis}
+                setText={undefined}
+                disabled={true}
+              />
             </Grid>
           </Grid>
           <Grid
