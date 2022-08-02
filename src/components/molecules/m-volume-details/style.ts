@@ -23,5 +23,6 @@ export const ImgGridItem = styled(Grid)(({}) => ({
   display: 'block',
   flex: 1,
   position: 'relative',
-  minHeight: '200px'
+  minHeight: '200px',
+  marginRight: '15px'
 }))

@@ -10,5 +10,9 @@ export const StyledContentEditable = styled(ContentEditable)(({ theme }) => ({
   '& div': {
     color: theme.palette.primary.contrastText + ' !important',
     textAlign: 'justify'
+  },
+  '& font': {
+    color: theme.palette.primary.contrastText + ' !important',
+    textAlign: 'justify'
   }
 }))
