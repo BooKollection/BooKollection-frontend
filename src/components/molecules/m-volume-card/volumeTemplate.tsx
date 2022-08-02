@@ -89,9 +89,9 @@ export const VolumeCardTemplate = ({
             <StyledButton style={{ width: '100%' }} onClick={handleOpen}>
               {details}
             </StyledButton>
-            <StyledButton style={{ width: '100%' }} onClick={handleOpenAdm}>
+            {/* <StyledButton style={{ width: '100%' }} onClick={handleOpenAdm}>
               edit
-            </StyledButton>
+            </StyledButton> */}
           </CustomButtonBox>
         </CustomPopover>
       </Card>
