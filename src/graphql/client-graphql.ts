@@ -53,7 +53,7 @@ export const clientGraphql = new ApolloClient({
     authLink,
     formatDateLink,
     new HttpLink({
-      uri: process.env.BACKEND_URI
+      uri: process.env.BACKEND_URI + '/graphql'
     })
   ]),
   cache: new InMemoryCache(),

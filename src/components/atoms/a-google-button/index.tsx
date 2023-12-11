@@ -5,11 +5,10 @@ import { useGoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
 import PersonIcon from '@mui/icons-material/Person'
 import Tooltip from '@mui/material/Tooltip'
-import { LOGIN_MUTATION } from '../../../graphql/mutations/login'
-import { clientGraphql } from '../../../graphql/client-graphql'
 import { i18n } from '../../../shared/i18n'
 import { userUpdate } from '../../../store/actions/user'
 import { loadingUpdate } from '../../../store/actions/loading'
+import { login } from '../../../rest/user'
 
 export const GoogleButton = () => {
   const { locale } = useRouter()
@@ -19,26 +18,19 @@ export const GoogleButton = () => {
   const onSuccess = async res => {
     const { access_token } = res
 
-    clientGraphql
-      .mutate({
-        mutation: LOGIN_MUTATION,
-        variables: {
-          reqTokenId: access_token
-        }
-      })
-      .then(res => {
-        const { token, name } = res.data.loginUser
-        localStorage.setItem(process.env.tokenName, token)
-        localStorage.setItem('BK_NAME', name)
-        dispatch(loadingUpdate({ open: false }))
+    login(access_token).then(res => {
+      const { token, name } = res.data
+      localStorage.setItem(process.env.tokenName, token)
+      localStorage.setItem('BK_NAME', name)
+      dispatch(loadingUpdate({ open: false }))
 
-        dispatch(
-          userUpdate({
-            token: token,
-            name: name
-          })
-        )
-      })
+      dispatch(
+        userUpdate({
+          token: token,
+          name: name
+        })
+      )
+    })
     // refreshTokenSetup(res);
   }
 
