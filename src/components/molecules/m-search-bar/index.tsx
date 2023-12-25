@@ -12,7 +12,6 @@ import {
   StyledInputBase
 } from './style'
 import { SelectionDropdown } from '../../atoms/a-selection-dropdown'
-import Link from 'next/link'
 
 export const SearchBar = ({
   drawerOpen,
