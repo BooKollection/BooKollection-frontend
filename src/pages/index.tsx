@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { clientGraphql } from '../graphql/client-graphql'
 import { Homepage } from '../templates'
 import { getAllLiteraryWork, getLastAddedVolumes } from '../rest'
-import { GET_ALL_VOLUMES_QUERY } from '../graphql'
 
 const Index = () => {
   const [editions, setEditions] = useState(null)

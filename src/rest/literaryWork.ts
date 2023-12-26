@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { axiosInstance } from './endpoint'
 
 const getAllLiteraryWork = async ({
   offset,
@@ -12,14 +12,28 @@ const getAllLiteraryWork = async ({
   name?: string
 }) => {
   try {
-    const response = await axios.get(
-      `${process.env.BACKEND_URI}/literaryWork/getAll`,
+    const response = await axiosInstance.get('literaryWork/getAll', {
+      params: {
+        offset,
+        limit,
+        language,
+        name
+      }
+    })
+
+    return response
+  } catch (error) {
+    console.error('Erro na solicitação:', error)
+  }
+}
+
+const getAllUserLiteraryWork = async ({ language }: { language: string }) => {
+  try {
+    const response = await axiosInstance.get(
+      '/literaryWork/getUserLiteraryWorks',
       {
         params: {
-          offset,
-          limit,
-          language,
-          name
+          language
         }
       }
     )
@@ -30,4 +44,4 @@ const getAllLiteraryWork = async ({
   }
 }
 
-export { getAllLiteraryWork }
+export { getAllLiteraryWork, getAllUserLiteraryWork }

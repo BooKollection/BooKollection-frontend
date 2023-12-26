@@ -1,12 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import {
-  GET_MY_COLLECTION_VOLUME_QUERY,
-  GET_USER_LITERARY_WORK_QUERY
-} from '../../graphql'
-import { clientGraphql } from '../../graphql/client-graphql'
 import { Collection } from '../../templates'
 import { i18nFormatData } from '../../utils/formatData'
+import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
 
 interface ICollectionData {
   totalLiteraryWorks: number
@@ -25,26 +21,16 @@ const MyCollection = () => {
   }
   useEffect(() => {
     Promise.all([
-      clientGraphql.mutate({
-        mutation: GET_USER_LITERARY_WORK_QUERY,
-        variables: {
-          language: locale.replace('-', '')
-        }
+      getAllUserLiteraryWork({
+        language: locale.replace('-', '')
       }),
-      clientGraphql.mutate({
-        mutation: GET_MY_COLLECTION_VOLUME_QUERY,
-        variables: {
-          coin: 'BRL'
-        }
+      getCollectionValue({
+        coin: 'BRL'
       })
     ]).then(([literaryWork, collectionVolume]) => {
       setCollectionData({
-        ...literaryWork.data.getUserLiteraryWorks,
-        collectionValue: i18nFormatData(
-          collectionVolume.data.getCollectionValue,
-          locale,
-          'Price'
-        )
+        ...literaryWork.data,
+        collectionValue: i18nFormatData(collectionVolume.data, locale, 'Price')
       })
     })
   }, [locale])

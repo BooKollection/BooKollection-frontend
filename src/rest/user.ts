@@ -1,8 +1,8 @@
-import axios from 'axios'
+import { axiosInstance } from './endpoint'
 
 const login = async (reqTokenId: string) => {
   try {
-    const response = await axios.post(`${process.env.BACKEND_URI}/auth`, {
+    const response = await axiosInstance.post('/auth', {
       reqTokenId
     })
 
