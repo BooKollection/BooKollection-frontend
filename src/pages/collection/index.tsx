@@ -22,10 +22,11 @@ const MyCollection = () => {
   useEffect(() => {
     Promise.all([
       getAllUserLiteraryWork({
-        language: locale.replace('-', '')
+        language: locale
       }),
       getCollectionValue({
-        coin: 'BRL'
+        coin: 'BRL',
+        locale
       })
     ]).then(([literaryWork, collectionVolume]) => {
       setCollectionData({

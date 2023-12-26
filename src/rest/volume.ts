@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { throwErrorMessage } from '../shared/error'
 
 const getLastAddedVolumes = async ({ language }: { language: string }) => {
   try {
@@ -10,7 +11,8 @@ const getLastAddedVolumes = async ({ language }: { language: string }) => {
 
     return response
   } catch (error) {
-    console.error('Erro na solicitação:', error)
+    throwErrorMessage(language)
+    throw error
   }
 }
 

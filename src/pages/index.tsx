@@ -14,20 +14,28 @@ const Index = () => {
       getAllLiteraryWork({
         offset: 0,
         limit: 0,
-        language: locale.replace('-', '')
+        language: locale
       })
 
     if (!loaded) {
       Promise.all([
         getAllLiteraryWorks(),
         getLastAddedVolumes({
-          language: locale.replace('-', '')
+          language: locale
         })
-      ]).then(([literaryWorks, getAllVolumes]) => {
-        setEditions(literaryWorks.data)
-        setVolumes(getAllVolumes.data)
-        setLoaded(true)
-      })
+      ])
+        .then(([literaryWorks, getAllVolumes]) => {
+          setVolumes(getAllVolumes.data)
+
+          setEditions(literaryWorks.data)
+
+          setLoaded(true)
+        })
+        .catch(() => {
+          setEditions([])
+          setVolumes([])
+          setLoaded(true)
+        })
     }
   }, [loaded, locale])
 

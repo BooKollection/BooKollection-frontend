@@ -1,6 +1,13 @@
+import { throwErrorMessage } from '../shared/error'
 import { axiosInstance } from './endpoint'
 
-const getCollectionValue = async ({ coin }: { coin: string }) => {
+const getCollectionValue = async ({
+  coin,
+  locale
+}: {
+  coin: string
+  locale: string
+}) => {
   try {
     const response = await axiosInstance.get('/userVolume/getCollectionValue', {
       params: {
@@ -10,7 +17,7 @@ const getCollectionValue = async ({ coin }: { coin: string }) => {
 
     return response
   } catch (error) {
-    console.error('Erro na solicitação:', error)
+    throwErrorMessage(locale)
   }
 }
 

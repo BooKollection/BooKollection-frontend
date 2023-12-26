@@ -1,6 +1,7 @@
+import { throwErrorMessage } from '../shared/error'
 import { axiosInstance } from './endpoint'
 
-const login = async (reqTokenId: string) => {
+const login = async (reqTokenId: string, locale: string) => {
   try {
     const response = await axiosInstance.post('/auth', {
       reqTokenId
@@ -8,7 +9,7 @@ const login = async (reqTokenId: string) => {
 
     return response
   } catch (error) {
-    console.error('Erro na solicitação:', error)
+    throwErrorMessage(locale)
   }
 }
 

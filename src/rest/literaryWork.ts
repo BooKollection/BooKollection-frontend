@@ -1,3 +1,4 @@
+import { throwErrorMessage } from '../shared/error'
 import { axiosInstance } from './endpoint'
 
 const getAllLiteraryWork = async ({
@@ -23,7 +24,8 @@ const getAllLiteraryWork = async ({
 
     return response
   } catch (error) {
-    console.error('Erro na solicitação:', error)
+    throwErrorMessage(language)
+    throw error
   }
 }
 
@@ -40,7 +42,8 @@ const getAllUserLiteraryWork = async ({ language }: { language: string }) => {
 
     return response
   } catch (error) {
-    console.error('Erro na solicitação:', error)
+    throwErrorMessage(language)
+    throw error
   }
 }
 

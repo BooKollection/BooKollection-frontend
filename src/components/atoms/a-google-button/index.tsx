@@ -18,7 +18,7 @@ export const GoogleButton = () => {
   const onSuccess = async res => {
     const { access_token } = res
 
-    login(access_token).then(res => {
+    login(access_token, locale).then(res => {
       const { token, name } = res.data
       localStorage.setItem(process.env.tokenName, token)
       localStorage.setItem('BK_NAME', name)

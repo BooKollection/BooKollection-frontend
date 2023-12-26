@@ -8,16 +8,15 @@ const SearchPage = () => {
   const { type = 'literaryWorks' } = router.query
   const [itens, setItens] = useState(null)
 
-  const getAllLiteraryWorks = () =>
-    getAllLiteraryWork({
-      offset: 0,
-      limit: 0,
-      language: router.locale.replace('-', '')
-    }).then(res => setItens(res.data))
-
   useEffect(() => {
     if (type === 'literaryWorks') {
-      getAllLiteraryWorks()
+      getAllLiteraryWork({
+        offset: 0,
+        limit: 0,
+        language: router.locale
+      })
+        .then(res => setItens(res.data))
+        .catch(() => setItens([]))
     }
   })
 
