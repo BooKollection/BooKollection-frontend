@@ -1,9 +1,9 @@
-import axios from 'axios'
+import { axiosInstance } from './endpoint'
 import { throwErrorMessage } from '../shared/error'
 
 const getLastAddedVolumes = async ({ language }: { language: string }) => {
   try {
-    const response = await axios.get('/volume/getLastAddedVolumes', {
+    const response = await axiosInstance.get('/volume/getLastAddedVolumes', {
       params: {
         language
       }

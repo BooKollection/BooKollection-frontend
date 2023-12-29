@@ -2,24 +2,29 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Homepage } from '../templates'
 import { getAllLiteraryWork, getLastAddedVolumes } from '../rest'
+import { toast } from 'react-toastify'
+import { errorMessages } from '../shared/i18n/errorServerMessage'
 
 const Index = () => {
   const [editions, setEditions] = useState(null)
   const [volumes, setVolumes] = useState(null)
   const [loaded, setLoaded] = useState(false)
-  const { locale } = useRouter()
+  const { locale, query } = useRouter()
 
   useEffect(() => {
-    const getAllLiteraryWorks = () =>
-      getAllLiteraryWork({
-        offset: 0,
-        limit: 0,
-        language: locale
-      })
-
     if (!loaded) {
+      if (query.error === 'login') {
+        toast(errorMessages[locale].UNAUTORIZED, {
+          type: 'error',
+          closeOnClick: true
+        })
+      }
       Promise.all([
-        getAllLiteraryWorks(),
+        getAllLiteraryWork({
+          offset: 0,
+          limit: 0,
+          language: locale
+        }),
         getLastAddedVolumes({
           language: locale
         })
@@ -37,7 +42,7 @@ const Index = () => {
           setLoaded(true)
         })
     }
-  }, [loaded, locale])
+  }, [loaded, locale, query])
 
   return <Homepage editions={editions} volumes={volumes} />
 }
