@@ -36,7 +36,6 @@ const Index = () => {
         .then(async ([literaryWorks, getAllVolumes]) => {
           let volumes = getAllVolumes.data
           const token = localStorage.getItem(process.env.tokenName)
-          console.log(token)
           if (token !== null && token !== '') {
             const { data } = await getAllUserVolume({
               limit: 0,
@@ -49,7 +48,7 @@ const Index = () => {
               haveVolume: volumesIds.includes(volume.id)
             }))
           }
-          console.log(volumes.map(({ haveVolume }) => haveVolume))
+
           setVolumes(volumes)
           setEditions(literaryWorks.data)
 

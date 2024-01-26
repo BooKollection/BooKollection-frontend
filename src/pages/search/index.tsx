@@ -24,7 +24,7 @@ const SearchPage = () => {
           setItens([])
         })
     }
-  })
+  }, [dispatch, router.locale, type])
 
   return <SearchTemplate locale={router.locale} itens={itens} type={type} />
 }

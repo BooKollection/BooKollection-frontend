@@ -13,6 +13,7 @@ const EditionVolume = ({ volumes, setVolumeEdition }) => {
       padding={'1em'}
       borderRadius={2}
       width={'100%'}
+      height={'100%'}
       container
       gap="0.8em"
       paddingX={1}

@@ -17,7 +17,6 @@ const MyCollectionDetails = () => {
   const keys = [
     'totalLiteraryWorks',
     'totalVolumes',
-    'collectionValue',
     'completeLiteraryWorks',
     'memberSince'
   ]
@@ -30,25 +29,28 @@ const MyCollectionDetails = () => {
       paddingY={3}
       columns={13}
     >
-      {!collection
-        ? Array(8)
-            .fill('')
-            .map((_, index) => (
-              <div key={'Skeleton' + index}>
-                <Skeleton
-                  variant="rectangular"
-                  width={'9em'}
-                  height={'9em'}
-                  sx={{
-                    background: theme.palette.primary.darkContrast,
-                    borderRadius: '10px'
-                  }}
-                />
-              </div>
-            ))
-        : keys.map((atribute, index) => {
+      {!collection ? (
+        Array(8)
+          .fill('')
+          .map((_, index) => (
+            <div key={'Skeleton' + index}>
+              <Skeleton
+                variant="rectangular"
+                width={'9em'}
+                height={'9em'}
+                sx={{
+                  background: theme.palette.primary.darkContrast,
+                  borderRadius: '10px'
+                }}
+              />
+            </div>
+          ))
+      ) : (
+        <>
+          {keys.map((atribute, index) => {
             const title = i18n[locale][atribute]
             const value = collection[atribute]
+
             const info = i18nFormatData(value, locale)
             return (
               <Grid
@@ -66,6 +68,20 @@ const MyCollectionDetails = () => {
               </Grid>
             )
           })}
+          <Grid
+            item
+            xs={6}
+            sm={6}
+            md={2}
+            justifyContent="center"
+            alignItems="center"
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <CenterText>{i18n[locale]['collectionValue']}</CenterText>
+            <CenterText>{String(collection['collectionValue'])}</CenterText>
+          </Grid>
+        </>
+      )}
     </Grid>
   )
 }

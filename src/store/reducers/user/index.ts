@@ -11,7 +11,7 @@ const initialState = {
     totalVolumes: 0,
     completeLiteraryWorks: 0,
     totalLiteraryWorks: 0,
-    memberSince: null,
+    memberSince: new Date().toISOString(),
     collectionValue: '0'
   }
 }

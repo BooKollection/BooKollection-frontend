@@ -20,7 +20,8 @@ import { IRootState } from '../../../store/reducers'
 import { USER_UPDATE } from '../../../store/actions'
 import { debounce } from '../../../utils/bounce'
 import { MenuI } from '../../atoms'
-
+import { Link } from '@mui/material'
+ 
 export const Navbar = ({ children }) => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
@@ -92,7 +93,7 @@ export const Navbar = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography minWidth={150} variant="h6" noWrap component="div">
-            BooKollection
+            <Link href="/">BooKollection</Link> 
           </Typography>
           <div
             style={{

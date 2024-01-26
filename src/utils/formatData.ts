@@ -2,27 +2,16 @@ import moment from 'moment'
 import { PT_BR } from '../shared/constants'
 import { i18n } from '../shared/i18n'
 
-/**
- * receives value , format to date or i18n
- * @param value
- * @param locale
- * @returns formated Data
- */
-export const i18nFormatData = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any,
-  locale: string,
-  propName?: string
-): string | null => {
+export const i18nFormatPropData = (value: string, locale: string, propName: string) => {
   if (value !== null && value !== undefined) {
     let formatedData = value
-    const momentDate = moment(value)
 
-    if (propName) {
+    if (propName !== null && propName !== undefined) {
       const splitValue: string[] = value.split(' ')
 
       if (
-        propName.toLocaleLowerCase().includes('price') &&
+        (propName === 'collectionValue' ||
+          propName.toLocaleLowerCase().includes('price')) &&
         splitValue.length === 2
       ) {
         const [unit, value] = splitValue
@@ -34,8 +23,19 @@ export const i18nFormatData = (
         const unit18n = i18n[locale][unit] ? i18n[locale][unit] : unit
         formatedData = unit18n + ' ' + formatedValue
       }
-    } else if (isNaN(value) && momentDate.isValid()) {
-      formatedData = momentDate.format('MMMM  YYYY')
+    }
+    return formatedData
+  }
+
+  return i18n[locale].notRegistered
+}
+
+export const i18nFormatData = (value, locale: string): string | null => {
+  if (value !== null && value !== undefined) {
+    let formatedData = value
+
+    if (isNaN(value) && moment(value).isValid()) {
+      formatedData = moment(value).format('MMMM  YYYY')
     } else if (i18n[locale][value] !== undefined) {
       formatedData = i18n[locale][value]
     }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { Collection } from '../../templates'
-import { i18nFormatData } from '../../utils/formatData'
+import { i18nFormatPropData } from '../../utils/formatData'
 import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
 import { useDispatch } from 'react-redux'
 import { userUpdate } from '../../store/actions/user'
@@ -24,7 +24,7 @@ const MyCollection = () => {
         userUpdate({
           collection: {
             ...literaryWork.data,
-            collectionValue: i18nFormatData(
+            collectionValue: i18nFormatPropData(
               collectionVolume.data,
               locale,
               'Price'

@@ -50,6 +50,17 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: globalTheme.palette.primary.contrastText,
+          '&:hover': {
+            textDecoration: 'underline'
+          }
+        }
+      }
     }
   }
 })

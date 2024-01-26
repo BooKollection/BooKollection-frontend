@@ -31,7 +31,7 @@ export const VolumeCardTemplate = ({
 
   return (
     <>
-      <Card open={open} onClick={handleClick}>
+      <Card open={open} onClick={handleClick} sx={{ maxHeight: '340px' }}>
         <Box display="flex" position="relative">
           <Image
             unoptimized={true}

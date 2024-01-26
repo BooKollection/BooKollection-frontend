@@ -29,7 +29,6 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
     adquiredVolumes
   } = data
   const [open, setOpen] = useState(false)
-  console.log(status)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
@@ -65,7 +64,7 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
         )}
         {totalVolumes && adquiredVolumes && (
           <CustomText>
-            {adquiredVolumes}/ {status !== Status.Complete ? '?' : totalVolumes}
+            {adquiredVolumes} / {status !== Status.Complete ? ' ???' : totalVolumes}
           </CustomText>
         )}
         <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>

@@ -84,7 +84,7 @@ export const VolumeCard = ({
       snackbarUpdate,
       volume
     })
-    console.log(oldVolume)
+
     const userLiteraryWorks: LiteraryWork[] = collection.literaryWorks.filter(
       (literaryWork: LiteraryWork) =>
         literaryWork.id === oldVolume.literaryWork.id

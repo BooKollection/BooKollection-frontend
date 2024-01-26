@@ -68,7 +68,7 @@ const Edition = ({ editionDetails }) => {
   }, [dispatch, editionDetails.id, getVolumes, locale, tabSelected])
   return (
     edition && (
-      <StyledBoxContainer padding={2}>
+      <StyledBoxContainer padding={2} height={'100%'}>
         <Tabs
           value={tabSelected}
           style={{ marginLeft: '0.6em' }}
