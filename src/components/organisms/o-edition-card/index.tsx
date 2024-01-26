@@ -54,8 +54,8 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
               status === 'Complete'
                 ? '#04C900'
                 : status === 'Hiatus'
-                ? '#838269'
-                : '#faf324be'
+                  ? '#838269'
+                  : '#faf324be'
             }
             textAlign="center"
           >

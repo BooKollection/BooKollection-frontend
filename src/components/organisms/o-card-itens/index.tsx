@@ -48,16 +48,16 @@ const CardGrid = (props: {
               )
             })
         : volumes
-        ? volumes.map((data: VolumeType, index) => (
-            <VolumeCard
-              setVolumeEdition={setVolumeEdition}
-              key={index}
-              data={data}
-            />
-          ))
-        : editions.map((data, index) => (
-            <EditionCard key={index} data={data} />
-          ))}
+          ? volumes.map((data: VolumeType, index) => (
+              <VolumeCard
+                setVolumeEdition={setVolumeEdition}
+                key={index}
+                data={data}
+              />
+            ))
+          : editions.map((data, index) => (
+              <EditionCard key={index} data={data} />
+            ))}
     </CardGridBox>
   )
 }

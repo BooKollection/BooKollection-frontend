@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
-import {
-  Divider,
-  IconButton} from '@mui/material'
+import { Divider, IconButton } from '@mui/material'
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon

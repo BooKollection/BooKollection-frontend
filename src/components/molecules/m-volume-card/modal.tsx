@@ -81,7 +81,6 @@ export const VolumeModal = ({
                 color: theme.palette.primary.contrastText
               }
             }}
-            
           />
         </LocalizationProvider>
         <StyledButton
