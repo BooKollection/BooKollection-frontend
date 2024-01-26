@@ -30,7 +30,7 @@ export const SearchBar = ({
     setOpen(true)
   }
   const options = [
-    { value: 'literaryWorks', label: i18n[locale].literaryWork },
+    { value: 'literaryWorks', label: i18n[locale].literaryWork }
     //{ value: 'author', label: i18n[locale].author }
     // { value: 'volume', label: i18n[locale].volume }
   ]

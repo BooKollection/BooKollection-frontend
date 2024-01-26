@@ -64,7 +64,8 @@ export const EditionCard = ({ data }: { data: EditionDetailsType }) => {
         )}
         {totalVolumes && adquiredVolumes && (
           <CustomText>
-            {adquiredVolumes} / {status !== Status.Complete ? ' ???' : totalVolumes}
+            {adquiredVolumes} /{' '}
+            {status !== Status.Complete ? ' ???' : totalVolumes}
           </CustomText>
         )}
         <CustomPopover open={Boolean(anchorEl)} anchorEl={anchorEl}>

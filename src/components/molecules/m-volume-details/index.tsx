@@ -138,7 +138,11 @@ const VolumeDetails = ({ data }: { data: VolumeType }) => {
                 {i18n[locale].purchasedPrice}
               </CenterText>
               <CenterText>
-                {i18nFormatPropData(data.purchasedPrice, locale, 'purchasedPrice')}
+                {i18nFormatPropData(
+                  data.purchasedPrice,
+                  locale,
+                  'purchasedPrice'
+                )}
               </CenterText>
             </Grid>
           )}

@@ -2,7 +2,11 @@ import moment from 'moment'
 import { PT_BR } from '../shared/constants'
 import { i18n } from '../shared/i18n'
 
-export const i18nFormatPropData = (value: string, locale: string, propName: string) => {
+export const i18nFormatPropData = (
+  value: string,
+  locale: string,
+  propName: string
+) => {
   if (value !== null && value !== undefined) {
     let formatedData = value
 
