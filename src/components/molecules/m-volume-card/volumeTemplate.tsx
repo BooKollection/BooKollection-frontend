@@ -39,7 +39,6 @@ export const VolumeCardTemplate = ({
             alt="top"
             width={150}
             height={200}
-            style={{ position: 'absolute' }}
           />
           {!haveVolume && <NotAdquired>{i18n[locale].notAdquired}</NotAdquired>}
         </Box>

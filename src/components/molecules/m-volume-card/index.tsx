@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
 import {
-  CREATE_USER_VOLUME_MUTATION,
   DELETE_USER_VOLUME_MUTATION,
   UPDATE_USER_VOLUME_MUTATION
 } from '../../../graphql'
@@ -13,6 +12,7 @@ import { snackbarUpdate } from '../../../store/actions/snackbar'
 import { COINS } from '../../../shared/constants'
 import { VolumeModal } from './modal'
 import { VolumeCardTemplate } from './volumeTemplate'
+import { createUserVolume } from '../../../rest'
 
 export type VolumeType = {
   id: string
@@ -194,37 +194,24 @@ export const VolumeCard = ({
   const addToCollectionHandler = () => {
     const userVolumeVerified = formatUserVolume()
     if (userVolumeVerified) {
-      clientGraphql
-        .mutate({
-          mutation: CREATE_USER_VOLUME_MUTATION,
-          variables: {
-            ...userVolumeVerified,
-            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
-          }
-        })
-        .then(() => {
-          setOpenModal(false)
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].sucessAddVolumeMessage,
-              severity: 'success'
-            })
-          )
-          setVolume({
-            ...data,
-            haveVolume: true
+      createUserVolume({
+        ...userVolumeVerified,
+        purchasedPrice: Number(userVolumeVerified.purchasedPrice),
+        locale
+      }).then(() => {
+        setOpenModal(false)
+        dispatch(
+          snackbarUpdate({
+            open: true,
+            message: i18n[locale].sucessAddVolumeMessage,
+            severity: 'success'
           })
+        )
+        setVolume({
+          ...data,
+          haveVolume: true
         })
-        .catch(() => {
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].erroAddVolumeMessage,
-              severity: 'error'
-            })
-          )
-        })
+      })
     }
   }
 

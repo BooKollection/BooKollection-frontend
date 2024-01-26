@@ -21,4 +21,56 @@ const getCollectionValue = async ({
   }
 }
 
-export { getCollectionValue }
+const getAllUserVolume = async ({
+  offset,
+  limit,
+  locale
+}: {
+  offset: number
+  limit: number
+  locale: string
+}) => {
+  try {
+    const response = await axiosInstance.get('/userVolume/getAllUserVolumes', {
+      params: {
+        offset,
+        limit
+      }
+    })
+
+    return response
+  } catch (error) {
+    throwErrorMessage(locale)
+  }
+}
+
+const createUserVolume = async ({
+  purchasedPrice,
+  purchasedDate,
+  purchasedPriceUnit,
+  volume,
+  locale
+}: {
+  purchasedPrice?: number
+  purchasedDate: Date
+  purchasedPriceUnit?: string
+  volume: string
+  locale: string
+}) => {
+  try {
+    const response = await axiosInstance.post('/userVolume', {
+      params: {
+        purchasedPrice,
+        purchasedDate,
+        purchasedPriceUnit,
+        volume
+      }
+    })
+
+    return response
+  } catch (error) {
+    throwErrorMessage(locale)
+  }
+}
+
+export { getCollectionValue, createUserVolume, getAllUserVolume }
