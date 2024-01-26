@@ -6,19 +6,23 @@ import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
 
 interface ICollectionData {
   totalLiteraryWorks: number
+  literaryWorks: unknown[]
   totalVolumes: number
   collectionValue: string
   completeLiteraryWorks: number
   memberSince: Date
 }
 const MyCollection = () => {
-  const [tabSelected, setTabSelected] = useState(0)
-  const [collectionData, setCollectionData] = useState<ICollectionData>(null)
+  const [collectionData, setCollectionData] = useState<ICollectionData>({
+    literaryWorks: [],
+    totalVolumes: 0,
+    completeLiteraryWorks: 0,
+    totalLiteraryWorks: 0,
+    memberSince: null,
+    collectionValue: '0'
+  })
   const { locale } = useRouter()
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setTabSelected(newValue)
-  }
   useEffect(() => {
     Promise.all([
       getAllUserLiteraryWork({
@@ -36,13 +40,7 @@ const MyCollection = () => {
     })
   }, [locale])
 
-  return (
-    <Collection
-      tabSelected={tabSelected}
-      data={collectionData}
-      handleChange={handleChange}
-    />
-  )
+  return <Collection data={collectionData} />
 }
 
 export default MyCollection

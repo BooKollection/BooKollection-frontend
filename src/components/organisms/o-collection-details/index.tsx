@@ -54,7 +54,12 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
             const value = details[atribute]
             const info = i18nFormatData(value, locale)
             return (
-              <Grid item xs={3} key={'details' + index}>
+              <Grid
+                item
+                xs={3}
+                key={'details' + index}
+                justifyContent={'center'}
+              >
                 <CenterText>{title}</CenterText>
                 <CenterText>{String(info)}</CenterText>
               </Grid>
