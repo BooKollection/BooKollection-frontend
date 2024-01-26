@@ -1,4 +1,4 @@
-import { Box, Typography, TextField } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { i18n } from '../../../shared/i18n'
@@ -67,7 +67,6 @@ export const VolumeModal = ({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <MobileDatePicker
             label={i18n[locale].purchasedDate}
-            inputFormat="dd/MM/yyyy"
             value={userVolume.purchasedDate}
             onChange={event => {
               setUserVolume({
@@ -75,19 +74,14 @@ export const VolumeModal = ({
                 purchasedDate: event
               })
             }}
-            renderInput={params => (
-              <TextField
-                fullWidth={true}
-                {...params}
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  svg: { color: theme.palette.primary.contrastText },
-                  input: {
-                    color: theme.palette.primary.contrastText
-                  }
-                }}
-              />
-            )}
+            sx={{
+              color: theme.palette.primary.contrastText,
+              svg: { color: theme.palette.primary.contrastText },
+              input: {
+                color: theme.palette.primary.contrastText
+              }
+            }}
+            
           />
         </LocalizationProvider>
         <StyledButton

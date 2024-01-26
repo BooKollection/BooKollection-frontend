@@ -10,7 +10,7 @@ import {
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { StyledButton } from '../../atoms'
-import { drawerWidth } from '../../atoms/a-drawer'
+import { drawerWidth } from '../m-drawer'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean

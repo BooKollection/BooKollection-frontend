@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
 import { Box, Grid, Rating, useTheme } from '@mui/material'
 import Image from 'next/image'
@@ -10,9 +10,6 @@ import { formatCategories, i18nFormatData } from '../../../utils/formatData'
 
 const VolumeDetails = ({ data }: { data: VolumeType }) => {
   const { locale } = useRouter()
-  const [userAcquisitionDifficulty, setUserAcquisitionDifficulty] = useState(
-    data.acquisitionDifficulty
-  )
   const theme = useTheme()
   const synopsis = i18nFormatData(data.synopsis, locale)
 

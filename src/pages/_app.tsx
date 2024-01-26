@@ -11,6 +11,8 @@ import '../styles/globals.css'
 import { Provider } from 'react-redux'
 import { MuiSnackBar } from '../components/atoms/a-snackbar'
 import { Backdrop } from '../components/atoms/a-backdrop'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function MyApp({ Component, pageProps }) {
   const { locale } = useRouter()
@@ -20,6 +22,7 @@ function MyApp({ Component, pageProps }) {
     <GoogleOAuthProvider clientId={process.env.OAUTH_GOOGLE_ID}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <ToastContainer />
           <MuiSnackBar />
           <Backdrop />
           <Navbar>

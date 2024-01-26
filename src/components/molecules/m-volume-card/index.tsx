@@ -161,8 +161,6 @@ export const VolumeCard = ({
           }
         })
         .then(() => {
-          console.log(userVolume.purchasedPriceUnit)
-
           const newData = {
             ...data,
             haveVolume: true,
@@ -182,9 +180,7 @@ export const VolumeCard = ({
           )
           setOpenModal(false)
         })
-        .catch(e => {
-          console.log(e)
-
+        .catch(() => {
           dispatch(
             snackbarUpdate({
               open: true,

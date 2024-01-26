@@ -50,7 +50,7 @@ const Edition = ({ editionDetails }) => {
           variables: {
             offset: 0,
             limit: 0,
-            language: locale.replace('-', ''),
+            language: locale,
             literaryWork: editionDetails.id
           }
         })
