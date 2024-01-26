@@ -6,16 +6,13 @@ import 'moment/locale/pt'
 import { i18n } from '../../../shared/i18n'
 import { CenterText } from '../../atoms/a-text'
 import { i18nFormatData } from '../../../utils/formatData'
+import { IRootState } from '../../../store/reducers'
+import { useSelector } from 'react-redux'
 
-type details = {
-  totalLiteraryWorks: number
-  totalVolumes: number
-  collectionValue: number
-  completeLiteraryWorks: number
-  memberSince: Date
-}
-const MyCollectionDetails = ({ details }: { details: details }) => {
+const MyCollectionDetails = () => {
   const { locale } = useRouter()
+  const { collection } = useSelector((state: IRootState) => state.user)
+
   const theme = useTheme()
   const keys = [
     'totalLiteraryWorks',
@@ -33,7 +30,7 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
       paddingY={3}
       columns={13}
     >
-      {!details
+      {!collection
         ? Array(8)
             .fill('')
             .map((_, index) => (
@@ -51,14 +48,18 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
             ))
         : keys.map((atribute, index) => {
             const title = i18n[locale][atribute]
-            const value = details[atribute]
+            const value = collection[atribute]
             const info = i18nFormatData(value, locale)
             return (
               <Grid
                 item
-                xs={3}
+                xs={6}
+                sm={6}
+                md={2}
                 key={'details' + index}
-                justifyContent={'center'}
+                justifyContent="center"
+                alignItems="center"
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
                 <CenterText>{title}</CenterText>
                 <CenterText>{String(info)}</CenterText>

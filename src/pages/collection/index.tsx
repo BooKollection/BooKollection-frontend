@@ -1,26 +1,13 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Collection } from '../../templates'
 import { i18nFormatData } from '../../utils/formatData'
 import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
+import { useDispatch } from 'react-redux'
+import { userUpdate } from '../../store/actions/user'
 
-interface ICollectionData {
-  totalLiteraryWorks: number
-  literaryWorks: unknown[]
-  totalVolumes: number
-  collectionValue: string
-  completeLiteraryWorks: number
-  memberSince: Date
-}
 const MyCollection = () => {
-  const [collectionData, setCollectionData] = useState<ICollectionData>({
-    literaryWorks: [],
-    totalVolumes: 0,
-    completeLiteraryWorks: 0,
-    totalLiteraryWorks: 0,
-    memberSince: null,
-    collectionValue: '0'
-  })
+  const dispatch = useDispatch()
   const { locale } = useRouter()
 
   useEffect(() => {
@@ -33,14 +20,22 @@ const MyCollection = () => {
         locale
       })
     ]).then(([literaryWork, collectionVolume]) => {
-      setCollectionData({
-        ...literaryWork.data,
-        collectionValue: i18nFormatData(collectionVolume.data, locale, 'Price')
-      })
+      dispatch(
+        userUpdate({
+          collection: {
+            ...literaryWork.data,
+            collectionValue: i18nFormatData(
+              collectionVolume.data,
+              locale,
+              'Price'
+            )
+          }
+        })
+      )
     })
-  }, [locale])
+  }, [dispatch, locale])
 
-  return <Collection data={collectionData} />
+  return <Collection />
 }
 
 export default MyCollection

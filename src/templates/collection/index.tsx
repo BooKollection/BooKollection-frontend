@@ -1,5 +1,5 @@
 import { Divider, useTheme } from '@mui/material'
-import { BoxContainer } from '../../components/atoms'
+import { BoxContainer, CenterText } from '../../components/atoms'
 import {
   MyCollectionDetails,
   MyCollectionEditions
@@ -8,7 +8,7 @@ import { StyledBox } from './style'
 import { i18n } from '../../shared/i18n'
 import { useRouter } from 'next/router'
 
-const Collection = ({ data }) => {
+const Collection = () => {
   const { locale } = useRouter()
   const { details, literaryWork } = i18n[locale]
   const theme = useTheme()
@@ -26,13 +26,13 @@ const Collection = ({ data }) => {
     <BoxContainer padding={2} color={theme.palette.primary.contrastText}>
       <StyledBox>
         <Divider sx={{ ...dividerStyle }} light flexItem>
-          {details}
+          <CenterText fontSize={18}>{details}</CenterText>
         </Divider>
-        <MyCollectionDetails details={data} />
+        <MyCollectionDetails />
         <Divider sx={{ ...dividerStyle }} light flexItem>
-          {literaryWork}
+          <CenterText fontSize={18}>{literaryWork}</CenterText>
         </Divider>
-        <MyCollectionEditions data={data.literaryWorks} />
+        <MyCollectionEditions />
       </StyledBox>
     </BoxContainer>
   )

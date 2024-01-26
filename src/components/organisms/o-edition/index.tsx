@@ -6,10 +6,10 @@ import { EditionVolume } from './volume'
 import { i18n } from '../../../shared/i18n'
 import { CustomTab } from '../../atoms/a-tab-item'
 import { StyledBox, StyledBoxContainer } from './style'
-import { clientGraphql } from '../../../graphql/client-graphql'
-import { GET_ALL_VOLUMES_QUERY } from '../../../graphql'
 import { useDispatch } from 'react-redux'
 import { snackbarUpdate } from '../../../store/actions/snackbar'
+import { getAllVolumes } from '../../../rest'
+import { loadingUpdate } from '../../../store/actions/loading'
 
 function a11yProps(index: number) {
   return {
@@ -21,7 +21,7 @@ function a11yProps(index: number) {
 const Edition = ({ editionDetails }) => {
   const [tabSelected, setTabSelected] = useState(0)
   const [edition] = useState(editionDetails)
-  const [editionVolumes, setEditionVolumes] = useState(null)
+  const [editionVolumes, setEditionVolumes] = useState([])
   const [getVolumes, setGetVolumes] = useState(false)
   const { locale } = useRouter()
   const { details, volumes } = i18n[locale]
@@ -44,18 +44,14 @@ const Edition = ({ editionDetails }) => {
   }
   useEffect(() => {
     if (tabSelected === 1 && !getVolumes) {
-      clientGraphql
-        .query({
-          query: GET_ALL_VOLUMES_QUERY,
-          variables: {
-            offset: 0,
-            limit: 0,
-            language: locale,
-            literaryWork: editionDetails.id
-          }
-        })
+      getAllVolumes({
+        offset: 0,
+        limit: 0,
+        language: locale,
+        literaryWork: editionDetails.id
+      })
         .then(res => {
-          setEditionVolumes(res.data.getAllVolumes)
+          setEditionVolumes(res.data)
           setGetVolumes(true)
         })
         .catch(() => {
@@ -66,6 +62,7 @@ const Edition = ({ editionDetails }) => {
               severity: 'error'
             })
           )
+          dispatch(loadingUpdate({ open: false }))
         })
     }
   }, [dispatch, editionDetails.id, getVolumes, locale, tabSelected])
@@ -104,7 +101,7 @@ const Edition = ({ editionDetails }) => {
           ) : (
             <EditionVolume
               setVolumeEdition={setVolumeEdition}
-              data={editionVolumes}
+              volumes={editionVolumes}
             />
           )}
         </StyledBox>

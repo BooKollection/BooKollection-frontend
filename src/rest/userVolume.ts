@@ -59,12 +59,10 @@ const createUserVolume = async ({
 }) => {
   try {
     const response = await axiosInstance.post('/userVolume', {
-      params: {
-        purchasedPrice,
-        purchasedDate,
-        purchasedPriceUnit,
-        volume
-      }
+      purchasedPrice,
+      purchasedDate,
+      purchasedPriceUnit,
+      volume
     })
 
     return response
@@ -73,4 +71,28 @@ const createUserVolume = async ({
   }
 }
 
-export { getCollectionValue, createUserVolume, getAllUserVolume }
+const deleteUserVolume = async ({
+  volumeId,
+  locale
+}: {
+  volumeId: string
+  locale: string
+}) => {
+  try {
+    const response = await axiosInstance.delete('/userVolume', {
+      params: {
+        volumeId
+      }
+    })
+
+    return response
+  } catch (error) {
+    throwErrorMessage(locale)
+  }
+}
+export {
+  getCollectionValue,
+  createUserVolume,
+  getAllUserVolume,
+  deleteUserVolume
+}
