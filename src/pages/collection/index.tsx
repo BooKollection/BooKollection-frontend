@@ -1,48 +1,50 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { Collection } from '../../templates'
-import { i18nFormatData } from '../../utils/formatData'
+import { i18nFormatPropData } from '../../utils/formatData'
 import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
+import { useDispatch, useSelector } from 'react-redux'
+import { userUpdate } from '../../store/actions/user'
+import { IRootState } from '../../store/reducers'
 
-interface ICollectionData {
-  totalLiteraryWorks: number
-  totalVolumes: number
-  collectionValue: string
-  completeLiteraryWorks: number
-  memberSince: Date
-}
 const MyCollection = () => {
-  const [tabSelected, setTabSelected] = useState(0)
-  const [collectionData, setCollectionData] = useState<ICollectionData>(null)
+  const dispatch = useDispatch()
   const { locale } = useRouter()
-
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setTabSelected(newValue)
-  }
-  useEffect(() => {
-    Promise.all([
-      getAllUserLiteraryWork({
-        language: locale
-      }),
-      getCollectionValue({
-        coin: 'BRL',
-        locale
-      })
-    ]).then(([literaryWork, collectionVolume]) => {
-      setCollectionData({
-        ...literaryWork.data,
-        collectionValue: i18nFormatData(collectionVolume.data, locale, 'Price')
-      })
-    })
-  }, [locale])
-
-  return (
-    <Collection
-      tabSelected={tabSelected}
-      data={collectionData}
-      handleChange={handleChange}
-    />
+  const { getCollectionInfoPage } = useSelector(
+    (state: IRootState) => state.user
   )
+  const [pageHasStarted, setPageHasStarted] = useState(false)
+
+  useEffect(() => {
+    if (pageHasStarted || getCollectionInfoPage) {
+      Promise.all([
+        getAllUserLiteraryWork({
+          language: locale
+        }),
+        getCollectionValue({
+          coin: 'BRL',
+          locale
+        })
+      ]).then(([literaryWork, collectionVolume]) => {
+        setPageHasStarted(true)
+        dispatch(
+          userUpdate({
+            collection: {
+              ...literaryWork.data,
+              collectionValue: i18nFormatPropData(
+                collectionVolume.data,
+                locale,
+                'Price'
+              )
+            },
+            getCollectionInfoPage: false
+          })
+        )
+      })
+    }
+  }, [dispatch, getCollectionInfoPage, locale, pageHasStarted])
+
+  return <Collection />
 }
 
 export default MyCollection

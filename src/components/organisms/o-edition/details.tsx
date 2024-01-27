@@ -41,6 +41,7 @@ const EditionDetails = ({ details }: { details: EditionDetailsType }) => {
       bgcolor={theme.palette.primary.darkContrast}
       padding={'1em'}
       width={'100%'}
+      height={'100%'}
       rowSpacing={1}
     >
       <ImgGridItem item xs={12} sm={3} md={3} lg={3} display={'block'}>

@@ -6,21 +6,17 @@ import 'moment/locale/pt'
 import { i18n } from '../../../shared/i18n'
 import { CenterText } from '../../atoms/a-text'
 import { i18nFormatData } from '../../../utils/formatData'
+import { IRootState } from '../../../store/reducers'
+import { useSelector } from 'react-redux'
 
-type details = {
-  totalLiteraryWorks: number
-  totalVolumes: number
-  collectionValue: number
-  completeLiteraryWorks: number
-  memberSince: Date
-}
-const MyCollectionDetails = ({ details }: { details: details }) => {
+const MyCollectionDetails = () => {
   const { locale } = useRouter()
+  const { collection } = useSelector((state: IRootState) => state.user)
+
   const theme = useTheme()
   const keys = [
     'totalLiteraryWorks',
     'totalVolumes',
-    'collectionValue',
     'completeLiteraryWorks',
     'memberSince'
   ]
@@ -33,33 +29,59 @@ const MyCollectionDetails = ({ details }: { details: details }) => {
       paddingY={3}
       columns={13}
     >
-      {!details
-        ? Array(8)
-            .fill('')
-            .map((_, index) => (
-              <div key={'Skeleton' + index}>
-                <Skeleton
-                  variant="rectangular"
-                  width={'9em'}
-                  height={'9em'}
-                  sx={{
-                    background: theme.palette.primary.darkContrast,
-                    borderRadius: '10px'
-                  }}
-                />
-              </div>
-            ))
-        : keys.map((atribute, index) => {
+      {!collection ? (
+        Array(8)
+          .fill('')
+          .map((_, index) => (
+            <div key={'Skeleton' + index}>
+              <Skeleton
+                variant="rectangular"
+                width={'9em'}
+                height={'9em'}
+                sx={{
+                  background: theme.palette.primary.darkContrast,
+                  borderRadius: '10px'
+                }}
+              />
+            </div>
+          ))
+      ) : (
+        <>
+          {keys.map((atribute, index) => {
             const title = i18n[locale][atribute]
-            const value = details[atribute]
+            const value = collection[atribute]
+
             const info = i18nFormatData(value, locale)
             return (
-              <Grid item xs={3} key={'details' + index}>
+              <Grid
+                item
+                xs={6}
+                sm={6}
+                md={2}
+                key={'details' + index}
+                justifyContent="center"
+                alignItems="center"
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
                 <CenterText>{title}</CenterText>
                 <CenterText>{String(info)}</CenterText>
               </Grid>
             )
           })}
+          <Grid
+            item
+            xs={6}
+            sm={6}
+            md={2}
+            justifyContent="center"
+            alignItems="center"
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <CenterText>{i18n[locale]['collectionValue']}</CenterText>
+            <CenterText>{String(collection['collectionValue'])}</CenterText>
+          </Grid>
+        </>
+      )}
     </Grid>
   )
 }

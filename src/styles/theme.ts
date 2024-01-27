@@ -6,12 +6,17 @@ const globalTheme = createTheme({
       light: '#9d4eff',
       main: '#251F36',
       dark: '#161123',
-      contrastText: '#FFFFFF',
+      contrastText: '#FFFF',
       darkContrastText: '#453d56',
       darkContrast: '#3f3357'
     },
     secondary: {
-      main: '#512096'
+      light: '#9d4eff',
+      main: '#512096',
+      dark: '#161123',
+      contrastText: '#FFFF',
+      darkContrastText: '#453d56',
+      darkContrast: '#3f3357'
     }
   }
 })
@@ -25,14 +30,14 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#FFFFFF'
+          color: '#FFFF'
         }
       }
     },
     MuiListItemText: {
       styleOverrides: {
         root: {
-          color: '#FFFFFF'
+          color: '#FFFF'
         }
       }
     },
@@ -42,6 +47,17 @@ export const theme = createTheme({
           margin: 0,
           '& > .MuiGrid-item': {
             padding: 0
+          }
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: globalTheme.palette.primary.contrastText,
+          '&:hover': {
+            textDecoration: 'underline'
           }
         }
       }

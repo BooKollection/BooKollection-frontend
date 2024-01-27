@@ -5,7 +5,16 @@ const initialState = {
   id: null,
   name: null,
   email: null,
-  token: null
+  token: null,
+  getCollectionInfoPage: true,
+  collection: {
+    literaryWorks: [],
+    totalVolumes: 0,
+    completeLiteraryWorks: 0,
+    totalLiteraryWorks: 0,
+    memberSince: new Date().toISOString(),
+    collectionValue: '0'
+  }
 }
 
 const reducer = (state = initialState, action) => {

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Homepage } from '../templates'
-import { getAllLiteraryWork, getLastAddedVolumes } from '../rest'
+import {
+  getAllLiteraryWork,
+  getAllUserVolume,
+  getLastAddedVolumes
+} from '../rest'
 import { toast } from 'react-toastify'
 import { errorMessages } from '../shared/i18n/errorServerMessage'
 
@@ -29,9 +33,23 @@ const Index = () => {
           language: locale
         })
       ])
-        .then(([literaryWorks, getAllVolumes]) => {
-          setVolumes(getAllVolumes.data)
+        .then(async ([literaryWorks, getAllVolumes]) => {
+          let volumes = getAllVolumes.data
+          const token = localStorage.getItem(process.env.tokenName)
+          if (token !== null && token !== '') {
+            const { data } = await getAllUserVolume({
+              limit: 0,
+              locale,
+              offset: 0
+            })
+            const volumesIds = data.map(({ volume }) => volume)
+            volumes = volumes.map(volume => ({
+              ...volume,
+              haveVolume: volumesIds.includes(volume.id)
+            }))
+          }
 
+          setVolumes(volumes)
           setEditions(literaryWorks.data)
 
           setLoaded(true)

@@ -2,42 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material'
 import { i18n } from '../../../shared/i18n'
-import {
-  CREATE_USER_VOLUME_MUTATION,
-  DELETE_USER_VOLUME_MUTATION,
-  UPDATE_USER_VOLUME_MUTATION
-} from '../../../graphql'
-import { clientGraphql } from '../../../graphql/client-graphql'
 import { useDispatch } from 'react-redux'
 import { snackbarUpdate } from '../../../store/actions/snackbar'
-import { COINS } from '../../../shared/constants'
 import { VolumeModal } from './modal'
 import { VolumeCardTemplate } from './volumeTemplate'
+import { VolumeType } from './type'
+import {
+  createUserVolumeHandler,
+  deleteUserVolumeHandler,
+  getI18nCoins,
+  updateUserVolumeAux
+} from './functions'
+import { loadingUpdate } from '../../../store/actions/loading'
+import { userUpdate } from '../../../store/actions/user'
 
-export type VolumeType = {
-  id: string
-  type: string
-  coverPrice: string
-  coverPriceUnit: string
-  name: string
-  imageUrl: string
-  edition: string
-  publisher: string
-  number: number
-  owned: boolean
-  editionId: string
-  language: string
-  synopsis: string
-  releaseDate: string
-  acquisitionDifficulty: number
-  acquisitionDifficultyAverage: number
-  paperBack: number
-  isbn10: string
-  isbn13: string
-  haveVolume: boolean
-  purchasedPrice?: string
-  purchasedDate?: Date
-}
 export const VolumeCard = ({
   data,
   setVolumeEdition
@@ -52,11 +30,13 @@ export const VolumeCard = ({
   const dispatch = useDispatch()
   const [volume, setVolume] = useState(null)
   const [userVolume, setUserVolume] = useState({
+    id: '',
     purchasedPrice: '',
     purchasedDate: new Date(),
     purchasedPriceUnit: '',
     volume: ''
   })
+  const theme = useTheme()
   useEffect(() => {
     const value = data.coverPrice.split(' ')[1]
     const purchasedPrice = data.purchasedPrice
@@ -67,7 +47,8 @@ export const VolumeCard = ({
       purchasedPrice: purchasedPrice.split(' ')[1].replace('.', ','),
       purchasedDate: data.purchasedDate ? data.purchasedDate : new Date(),
       purchasedPriceUnit: i18n[locale][data.coverPriceUnit],
-      volume: data.id
+      volume: data.id,
+      id: data.userVolumeId
     })
   }, [data, locale])
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -78,15 +59,9 @@ export const VolumeCard = ({
       snackbarUpdate({ open: true, message: message, severity: 'error' })
     )
   }
-  const theme = useTheme()
-
-  const coins = COINS.reduce((acc, coin: string) => {
-    const i18nValue = i18n[locale][coin]
-    acc[i18nValue] = coin
-    return acc
-  }, {})
-
+  const coins = getI18nCoins(locale)
   const i18nOptions = Object.keys(coins)
+
   const setDropdown = (value: string) => {
     setUserVolume({
       ...userVolume,
@@ -96,138 +71,74 @@ export const VolumeCard = ({
 
   const handleOpen = () => setOpen(true)
 
-  const deleteUserVolume = () => {
-    clientGraphql
-      .mutate({
-        mutation: DELETE_USER_VOLUME_MUTATION,
-        variables: {
-          volumeId: volume.id
-        }
+  const deleteUserVolume = async () => {
+    await deleteUserVolumeHandler({
+      dispatch,
+      locale,
+      setOpenModal,
+      setVolume,
+      snackbarUpdate,
+      volume
+    })
+
+    dispatch(
+      userUpdate({
+        getCollectionInfoPage: true
       })
-      .then(() => {
-        setOpenModal(false)
+    )
+  }
+
+  const updateUserVolumeHandler = () => {
+    return updateUserVolumeAux({
+      coins,
+      data,
+      dispatch,
+      handleSnackbarOpen,
+      locale,
+      setOpenModal,
+      setVolume,
+      setVolumeEdition,
+      snackbarUpdate,
+      userVolume
+    }).then(() =>
+      dispatch(
+        userUpdate({
+          getCollectionInfoPage: true
+        })
+      )
+    )
+  }
+  const addToCollectionHandler = async () => {
+    dispatch(loadingUpdate({ open: true }))
+    try {
+      await createUserVolumeHandler({
+        coins,
+        handleSnackbarOpen,
+        locale,
+        userVolume
+      })
+      setOpenModal(false)
+      dispatch(
         snackbarUpdate({
           open: true,
-          message: i18n[locale].deleteVolumeMessage,
+          message: i18n[locale].sucessAddVolumeMessage,
           severity: 'success'
         })
-        setVolume({
-          ...data,
-          haveVolume: false
-        })
+      )
+      setVolume({
+        ...data,
+        haveVolume: true
       })
-      .catch(() => {
-        dispatch(
-          snackbarUpdate({
-            open: true,
-            message: i18n[locale].errorDeleteVolumeMessage,
-            severity: 'error'
-          })
-        )
-      })
-  }
-  const formatUserVolume = () => {
-    let message = ''
-    const userVolumeVerified = Object.assign({}, userVolume)
-    userVolumeVerified.purchasedPrice = userVolume.purchasedPrice.replace(
-      ',',
-      '.'
-    )
-
-    userVolumeVerified.purchasedPriceUnit =
-      coins[userVolumeVerified.purchasedPriceUnit]
-
-    if (userVolume.purchasedDate > new Date()) {
-      message += i18n[locale].purchasedDateInvalidMessage + '. '
-    }
-    if (!Number(userVolumeVerified.purchasedPrice)) {
-      message += i18n[locale].priceInvalidMessage
-    }
-    if (message !== '') {
-      handleSnackbarOpen(message)
-      return null
-    }
-    return userVolumeVerified
-  }
-  const updateUserVolumeHandler = () => {
-    const userVolumeVerified = formatUserVolume()
-    if (userVolumeVerified) {
-      clientGraphql
-        .mutate({
-          mutation: UPDATE_USER_VOLUME_MUTATION,
-          variables: {
-            ...userVolumeVerified,
-            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
-          }
+      dispatch(loadingUpdate({ open: false }))
+      dispatch(
+        userUpdate({
+          getCollectionInfoPage: true
         })
-        .then(() => {
-          const newData = {
-            ...data,
-            haveVolume: true,
-            purchasedPrice:
-              userVolume.purchasedPriceUnit +
-              ' ' +
-              userVolumeVerified.purchasedPrice
-          }
-          setVolume(newData)
-          setVolumeEdition(newData)
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].updatedUserVolume,
-              severity: 'success'
-            })
-          )
-          setOpenModal(false)
-        })
-        .catch(() => {
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].errorToUpdateUserVolume,
-              severity: 'error'
-            })
-          )
-        })
+      )
+    } catch {
+      return dispatch(loadingUpdate({ open: false }))
     }
   }
-  const addToCollectionHandler = () => {
-    const userVolumeVerified = formatUserVolume()
-    if (userVolumeVerified) {
-      clientGraphql
-        .mutate({
-          mutation: CREATE_USER_VOLUME_MUTATION,
-          variables: {
-            ...userVolumeVerified,
-            purchasedPrice: Number(userVolumeVerified.purchasedPrice)
-          }
-        })
-        .then(() => {
-          setOpenModal(false)
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].sucessAddVolumeMessage,
-              severity: 'success'
-            })
-          )
-          setVolume({
-            ...data,
-            haveVolume: true
-          })
-        })
-        .catch(() => {
-          dispatch(
-            snackbarUpdate({
-              open: true,
-              message: i18n[locale].erroAddVolumeMessage,
-              severity: 'error'
-            })
-          )
-        })
-    }
-  }
-
   return (
     volume && (
       <>
@@ -262,3 +173,5 @@ export const VolumeCard = ({
     )
   )
 }
+
+export type { VolumeType }

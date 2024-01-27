@@ -30,18 +30,21 @@ export const SearchBar = ({
     setOpen(true)
   }
   const options = [
-    { value: 'literaryWorks', label: i18n[locale].literaryWork },
-    { value: 'author', label: i18n[locale].author }
+    { value: 'literaryWorks', label: i18n[locale].literaryWork }
+    //{ value: 'author', label: i18n[locale].author }
     // { value: 'volume', label: i18n[locale].volume }
   ]
   const [dropdownValue, setDropdownValue] = useState(options[0].label)
   const i18nOptions = options.map(({ label }) => label)
   const setDropdown = (value: string) => {
-    const filteredValue = getDropdownServerData(value)
+    const filteredValue = getDropdownLabel(value)
     setDropdownValue(filteredValue)
   }
-  const getDropdownServerData = label =>
+  const getDropdownLabel = label =>
+    options.filter(opt => label === opt.label)[0].label
+  const getDropdownValue = label =>
     options.filter(opt => label === opt.label)[0].value
+
   const handleClose = () => setOpen(false)
   useEffect(() => {
     drawerOpen && open && handleClose()
@@ -52,7 +55,7 @@ export const SearchBar = ({
       pathname: 'search',
       query: {
         text: searchInput,
-        type: getDropdownServerData(dropdownValue)
+        type: getDropdownValue(dropdownValue)
       }
     })
   }
@@ -77,7 +80,7 @@ export const SearchBar = ({
             </SearchIconWrapper>
             <StyledInputBase
               sx={{ width: '100%' }}
-              placeholder="Search…"
+              placeholder={i18n[locale].search}
               inputProps={{ 'aria-label': 'search' }}
               value={searchInput}
               onChange={e => {

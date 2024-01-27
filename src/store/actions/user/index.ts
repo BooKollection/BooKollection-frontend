@@ -5,6 +5,15 @@ export const userUpdate = (user: {
   name?: string
   email?: string
   token?: string
+  getCollectionInfoPage?: boolean
+  collection?: {
+    totalLiteraryWorks: number
+    literaryWorks: unknown[]
+    totalVolumes: number
+    collectionValue: string
+    completeLiteraryWorks: number
+    memberSince: Date
+  }
 }) => ({
   type: USER_UPDATE,
   payload: user

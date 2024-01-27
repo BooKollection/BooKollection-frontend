@@ -1,53 +1,38 @@
-import { Tabs } from '@mui/material'
-import { useRouter } from 'next/router'
-import { BoxContainer, CustomTab } from '../../components/atoms'
+import { Divider, useTheme } from '@mui/material'
+import { BoxContainer, CenterText } from '../../components/atoms'
 import {
   MyCollectionDetails,
   MyCollectionEditions
 } from '../../components/organisms'
 import { StyledBox } from './style'
 import { i18n } from '../../shared/i18n'
+import { useRouter } from 'next/router'
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  }
-}
-
-const Collection = ({ tabSelected, data, handleChange }) => {
+const Collection = () => {
   const { locale } = useRouter()
   const { details, literaryWork } = i18n[locale]
-
+  const theme = useTheme()
+  const dividerStyle = {
+    '::before': {
+      content: '""',
+      borderTop: `1px solid ${theme.palette.primary.contrastText}`
+    },
+    '::after': {
+      content: '""',
+      borderTop: `1px solid ${theme.palette.primary.contrastText}`
+    }
+  }
   return (
-    <BoxContainer padding={2}>
-      <Tabs
-        value={tabSelected}
-        style={{ marginLeft: '0.6em' }}
-        onChange={handleChange}
-        TabIndicatorProps={{
-          style: {
-            backgroundColor: 'transparent'
-          }
-        }}
-      >
-        <CustomTab
-          isSelected={tabSelected === 0}
-          label={details}
-          {...a11yProps(0)}
-        />
-        <CustomTab
-          isSelected={tabSelected === 1}
-          label={literaryWork}
-          {...a11yProps(1)}
-        />
-      </Tabs>
-      <StyledBox padding={3}>
-        {tabSelected === 0 ? (
-          <MyCollectionDetails details={data} />
-        ) : (
-          data && <MyCollectionEditions data={data.literaryWorks} />
-        )}
+    <BoxContainer padding={2} color={theme.palette.primary.contrastText}>
+      <StyledBox>
+        <Divider sx={{ ...dividerStyle }} light flexItem>
+          <CenterText fontSize={18}>{details}</CenterText>
+        </Divider>
+        <MyCollectionDetails />
+        <Divider sx={{ ...dividerStyle }} light flexItem>
+          <CenterText fontSize={18}>{literaryWork}</CenterText>
+        </Divider>
+        <MyCollectionEditions />
       </StyledBox>
     </BoxContainer>
   )

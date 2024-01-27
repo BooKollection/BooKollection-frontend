@@ -169,13 +169,13 @@ export const i18n = {
     checkList: 'Check list',
     numberOfPages: 'Number of pages',
     titles: [
-      { label: 'home', link: '/' },
+      { label: 'Home', link: '/' },
       {
-        label: 'your Collection',
+        label: 'Your Collection',
         link: '/collection'
       },
       {
-        label: 'literary works',
+        label: 'Literary works',
         link: '/literaryWorks'
       }
     ],
