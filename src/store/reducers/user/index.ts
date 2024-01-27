@@ -6,6 +6,7 @@ const initialState = {
   name: null,
   email: null,
   token: null,
+  getCollectionInfoPage: true,
   collection: {
     literaryWorks: [],
     totalVolumes: 0,

@@ -1,4 +1,8 @@
-import { createUserVolume, deleteUserVolume } from '../../../rest'
+import {
+  createUserVolume,
+  deleteUserVolume,
+  updateUserVolume
+} from '../../../rest'
 import { COINS } from '../../../shared/constants'
 import { i18n } from '../../../shared/i18n'
 import { VolumeType } from './type'
@@ -21,6 +25,7 @@ export const formatUserVolume = ({
     purchasedDate: Date
     purchasedPriceUnit: string
     volume: string
+    id: string
   }
   coins: unknown
   locale: string
@@ -56,6 +61,7 @@ export const createUserVolumeHandler = ({
   handleSnackbarOpen
 }: {
   userVolume: {
+    id: string
     purchasedPrice: string
     purchasedDate: Date
     purchasedPriceUnit: string
@@ -117,4 +123,77 @@ export const deleteUserVolumeHandler = ({
         })
       )
     })
+}
+
+export const updateUserVolumeAux = ({
+  locale,
+  coins,
+  setOpenModal,
+  snackbarUpdate,
+  handleSnackbarOpen,
+  setVolume,
+  dispatch,
+  data,
+  setVolumeEdition,
+  userVolume
+}: {
+  locale: string
+  setOpenModal: (value: React.SetStateAction<boolean>) => void
+  snackbarUpdate: (data: unknown) => void
+  setVolume: (data: unknown) => void
+  handleSnackbarOpen: (message: string) => void
+  coins: unknown
+  data: VolumeType
+  dispatch: (data: unknown) => void
+  setVolumeEdition: (data: unknown) => void
+  userVolume: {
+    purchasedPrice: string
+    purchasedDate: Date
+    purchasedPriceUnit: string
+    volume: string
+    id: string
+  }
+}) => {
+  const userVolumeVerified = formatUserVolume({
+    coins,
+    handleSnackbarOpen,
+    locale,
+    userVolume
+  })
+  if (userVolumeVerified) {
+    return updateUserVolume({ ...userVolumeVerified, locale })
+      .then(() => {
+        const newData = {
+          ...data,
+          haveVolume: true,
+          purchasedPrice:
+            userVolume.purchasedPriceUnit +
+            ' ' +
+            userVolumeVerified.purchasedPrice
+        }
+        setVolume(newData)
+        if(setVolumeEdition !== undefined){
+          setVolumeEdition(newData)
+        }
+        dispatch(
+          snackbarUpdate({
+            open: true,
+            message: i18n[locale].updatedUserVolume,
+            severity: 'success'
+          })
+        )
+        setOpenModal(false)
+      })
+      .catch((error) => {
+        console.log(error);
+        
+        dispatch(
+          snackbarUpdate({
+            open: true,
+            message: i18n[locale].errorToUpdateUserVolume,
+            severity: 'error'
+          })
+        )
+      })
+  }
 }

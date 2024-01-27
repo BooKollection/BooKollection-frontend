@@ -21,4 +21,5 @@ export type VolumeType = {
   haveVolume: boolean
   purchasedPrice?: string
   purchasedDate?: Date
+  userVolumeId?: string
 }

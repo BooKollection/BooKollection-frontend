@@ -1,10 +1,12 @@
 import { Box, Typography } from '@mui/material'
-import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { i18n } from '../../../shared/i18n'
 import { SelectionDropdown, StyledButton } from '../../atoms'
 import { CustomModal } from '../m-modal'
 import { CustomTextField } from './style'
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs'
+
 
 export const VolumeModal = ({
   openModal,
@@ -64,10 +66,10 @@ export const VolumeModal = ({
             }}
           />
         </Box>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <MobileDatePicker
             label={i18n[locale].purchasedDate}
-            value={userVolume.purchasedDate}
+            value={dayjs(userVolume.purchasedDate)}
             onChange={event => {
               setUserVolume({
                 ...userVolume,

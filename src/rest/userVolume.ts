@@ -44,6 +44,34 @@ const getAllUserVolume = async ({
   }
 }
 
+
+const updateUserVolume = async ({
+  purchasedPrice,
+  purchasedDate,
+  purchasedPriceUnit,
+  id,
+  locale
+}: {
+  purchasedPrice?: string
+  purchasedDate: Date
+  purchasedPriceUnit?: string
+  id: string
+  locale: string
+}) => {
+  try {
+    const response = await axiosInstance.put('/userVolume', {
+      purchasedPrice,
+      purchasedDate,
+      purchasedPriceUnit,
+      id
+    })
+
+    return response
+  } catch (error) {
+    throwErrorMessage(locale)
+  }
+}
+
 const createUserVolume = async ({
   purchasedPrice,
   purchasedDate,
@@ -94,5 +122,6 @@ export {
   getCollectionValue,
   createUserVolume,
   getAllUserVolume,
-  deleteUserVolume
+  deleteUserVolume,
+  updateUserVolume
 }

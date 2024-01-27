@@ -1,39 +1,48 @@
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Collection } from '../../templates'
 import { i18nFormatPropData } from '../../utils/formatData'
 import { getAllUserLiteraryWork, getCollectionValue } from '../../rest'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate } from '../../store/actions/user'
+import { IRootState } from '../../store/reducers'
 
 const MyCollection = () => {
   const dispatch = useDispatch()
   const { locale } = useRouter()
+  const { getCollectionInfoPage } = useSelector(
+    (state: IRootState) => state.user
+  )
+  const [pageHasStarted, setPageHasStarted] = useState(false)
 
   useEffect(() => {
-    Promise.all([
-      getAllUserLiteraryWork({
-        language: locale
-      }),
-      getCollectionValue({
-        coin: 'BRL',
-        locale
-      })
-    ]).then(([literaryWork, collectionVolume]) => {
-      dispatch(
-        userUpdate({
-          collection: {
-            ...literaryWork.data,
-            collectionValue: i18nFormatPropData(
-              collectionVolume.data,
-              locale,
-              'Price'
-            )
-          }
+    if (pageHasStarted || getCollectionInfoPage) {
+      Promise.all([
+        getAllUserLiteraryWork({
+          language: locale
+        }),
+        getCollectionValue({
+          coin: 'BRL',
+          locale
         })
-      )
-    })
-  }, [dispatch, locale])
+      ]).then(([literaryWork, collectionVolume]) => {
+        setPageHasStarted(true)
+        dispatch(
+          userUpdate({
+            collection: {
+              ...literaryWork.data,
+              collectionValue: i18nFormatPropData(
+                collectionVolume.data,
+                locale,
+                'Price'
+              )
+            },
+            getCollectionInfoPage: false
+          })
+        )
+      })
+    }
+  }, [dispatch, getCollectionInfoPage, locale, pageHasStarted])
 
   return <Collection />
 }
