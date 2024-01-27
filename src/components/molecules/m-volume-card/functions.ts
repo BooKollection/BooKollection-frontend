@@ -172,7 +172,7 @@ export const updateUserVolumeAux = ({
             userVolumeVerified.purchasedPrice
         }
         setVolume(newData)
-        if(setVolumeEdition !== undefined){
+        if (setVolumeEdition !== undefined) {
           setVolumeEdition(newData)
         }
         dispatch(
@@ -184,9 +184,9 @@ export const updateUserVolumeAux = ({
         )
         setOpenModal(false)
       })
-      .catch((error) => {
-        console.log(error);
-        
+      .catch(error => {
+        console.log(error)
+
         dispatch(
           snackbarUpdate({
             open: true,

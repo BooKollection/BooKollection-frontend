@@ -37,7 +37,7 @@ export const i18nFormatPropData = (
 export const i18nFormatData = (value, locale: string): string | null => {
   if (value !== null && value !== undefined) {
     let formatedData = value
-    
+
     if (isNaN(value) && moment(value).isValid()) {
       formatedData = moment(value).format('MMMM  YYYY')
     } else if (i18n[locale][value] !== undefined) {

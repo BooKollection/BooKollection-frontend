@@ -5,7 +5,7 @@ export const userUpdate = (user: {
   name?: string
   email?: string
   token?: string
-  getCollectionInfoPage?: boolean,
+  getCollectionInfoPage?: boolean
   collection?: {
     totalLiteraryWorks: number
     literaryWorks: unknown[]
